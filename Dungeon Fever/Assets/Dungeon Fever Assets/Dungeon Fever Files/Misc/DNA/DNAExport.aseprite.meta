@@ -1,2 +1,1679 @@
 fileFormatVersion: 2
 guid: 150e915771f341c49b9fb8fa66ec5bd8
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: DNAExport_Frame_0
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 142
+      y: 4
+      width: 16
+      height: 27
+    spriteID: 80853d2b00c38504d98e98f20bdde5c4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 142, y: 4}
+  - name: DNAExport_Frame_1
+    originalName: 
+    pivot: {x: 0.49999994, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 39
+      width: 12
+      height: 27
+    spriteID: 7ed5c71444764024197a7e2c17eefd2b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 39}
+  - name: DNAExport_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 190
+      y: 39
+      width: 10
+      height: 27
+    spriteID: 3798dbc6093f42a4b8fe7cc621028f8c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 190, y: 39}
+  - name: DNAExport_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 134
+      y: 74
+      width: 6
+      height: 27
+    spriteID: 78c66e4be680c1e4fb11964f62903434
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 134, y: 74}
+  - name: DNAExport_Frame_4
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.3913043}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 190
+      y: 74
+      width: 4
+      height: 23
+    spriteID: ae5ad55916e072b42a6469cc1c6e9872
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 190, y: 74}
+  - name: DNAExport_Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: -1.3636364}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 109
+      width: 6
+      height: 11
+    spriteID: d09ef2b453633e44b86e30938cd8e796
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 109}
+  - name: DNAExport_Frame_6
+    originalName: 
+    pivot: {x: 0.5, y: -1.3636364}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 58
+      y: 74
+      width: 20
+      height: 11
+    spriteID: 02eae7184f776e54981a6927375c414c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 58, y: 74}
+  - name: DNAExport_Frame_9
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 166
+      y: 4
+      width: 16
+      height: 27
+    spriteID: f0a31e1234308a34f85edcdc4ea3d10e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 166, y: 4}
+  - name: DNAExport_Frame_10
+    originalName: 
+    pivot: {x: 0.49999994, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 90
+      y: 39
+      width: 12
+      height: 27
+    spriteID: 80553df3c7957c0469b4f3a15dcfed5c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 90, y: 39}
+  - name: DNAExport_Frame_11
+    originalName: 
+    pivot: {x: 0.5, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 208
+      y: 39
+      width: 10
+      height: 27
+    spriteID: 6aac0830e15fa5f418491f8d5fb400cd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 208, y: 39}
+  - name: DNAExport_Frame_12
+    originalName: 
+    pivot: {x: 0.5, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 74
+      width: 6
+      height: 27
+    spriteID: 2ac82452b902d5e4c8025cd556661df0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 74}
+  - name: DNAExport_Frame_13
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.3913043}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 202
+      y: 74
+      width: 4
+      height: 23
+    spriteID: 8338ba1242f17634daf2a9e8e04de16e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 202, y: 74}
+  - name: DNAExport_Frame_14
+    originalName: 
+    pivot: {x: 0.5, y: -1.3636364}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 22
+      y: 109
+      width: 6
+      height: 11
+    spriteID: 639f06f109610c84fb2a34102ad1cd45
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 22, y: 109}
+  - name: DNAExport_Frame_15
+    originalName: 
+    pivot: {x: 0.5, y: -2.4285715}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 214
+      y: 93
+      width: 6
+      height: 7
+    spriteID: d614ec27614c972489c9f111fdd0f888
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 214, y: 93}
+  - name: DNAExport_Frame_16
+    originalName: 
+    pivot: {x: 0.5, y: -2.5714285}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 58
+      y: 93
+      width: 6
+      height: 7
+    spriteID: f371008f399251647b4d5d23e3b9707d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 58, y: 93}
+  - name: DNAExport_Frame_17
+    originalName: 
+    pivot: {x: 0.5, y: -2.4285715}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 72
+      y: 93
+      width: 6
+      height: 7
+    spriteID: e43d2f385d678a545a049be10675ebce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 72, y: 93}
+  - name: DNAExport_Frame_18
+    originalName: 
+    pivot: {x: 0.5, y: -2.4285715}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 66
+      y: 109
+      width: 6
+      height: 7
+    spriteID: 67b94e87324ff7e4ba74cfe59bc5a6d4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 66, y: 109}
+  - name: DNAExport_Frame_19
+    originalName: 
+    pivot: {x: 0.5, y: -2.7142859}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 109
+      width: 6
+      height: 7
+    spriteID: 28b036f00791850499c9514a1e0e7849
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 109}
+  - name: DNAExport_Frame_20
+    originalName: 
+    pivot: {x: 0.5, y: -1.7777779}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 40
+      y: 109
+      width: 6
+      height: 9
+    spriteID: ea4412fa8e804414ba89e51ef6cb210b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 40, y: 109}
+  - name: DNAExport_Frame_21
+    originalName: 
+    pivot: {x: 0.5, y: -2.8333333}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 94
+      y: 109
+      width: 6
+      height: 6
+    spriteID: d9000c124210b16469bac900dc68eb6a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 94, y: 109}
+  - name: DNAExport_Frame_22
+    originalName: 
+    pivot: {x: 0.5, y: -2.8333333}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 109
+      width: 6
+      height: 6
+    spriteID: c68c2cada6b26ea4c95be887e866d5fc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 109}
+  - name: DNAExport_Frame_23
+    originalName: 
+    pivot: {x: 0.5, y: -2.8333333}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 122
+      y: 109
+      width: 6
+      height: 6
+    spriteID: f4f5e1ea59091e04988d4dcd600a1928
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 122, y: 109}
+  - name: DNAExport_Frame_24
+    originalName: 
+    pivot: {x: 0.5, y: -1.7272727}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 214
+      y: 74
+      width: 6
+      height: 11
+    spriteID: 618ade48113b6d9429e1eedac9b75fb1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 214, y: 74}
+  - name: DNAExport_Frame_25
+    originalName: 
+    pivot: {x: 0.5, y: -4.1666665}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 136
+      y: 109
+      width: 6
+      height: 6
+    spriteID: 25d3790442803fa438b2c6ccc66c8d21
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 136, y: 109}
+  - name: DNAExport_Frame_26
+    originalName: 
+    pivot: {x: 0.49999997, y: -1}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 74
+      width: 4
+      height: 14
+    spriteID: c9d9791b6edb55c4fb591ffa77daaa01
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 240, y: 74}
+  - name: DNAExport_Frame_27
+    originalName: 
+    pivot: {x: 0.49999997, y: -4.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 228
+      y: 97
+      width: 4
+      height: 4
+    spriteID: 672cf6090d6742c40bebeab0c6e951fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 228, y: 97}
+  - name: DNAExport_Frame_28
+    originalName: 
+    pivot: {x: 0.49999997, y: -5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 96
+      width: 4
+      height: 4
+    spriteID: 42a8ff239303f4c468f23ffda171293c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 240, y: 96}
+  - name: DNAExport_Frame_29
+    originalName: 
+    pivot: {x: 0.49999997, y: -1.3333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 228
+      y: 74
+      width: 4
+      height: 15
+    spriteID: 330fc6903c4c17746b3e940d3a6fe2f2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 228, y: 74}
+  - name: DNAExport_Frame_30
+    originalName: 
+    pivot: {x: 0.49999997, y: -4.1428576}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 150
+      y: 109
+      width: 4
+      height: 7
+    spriteID: 673a17a583eb2324482141b86a368c78
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 150, y: 109}
+  - name: DNAExport_Frame_31
+    originalName: 
+    pivot: {x: 0.49999997, y: -1.5384616}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 109
+      width: 4
+      height: 13
+    spriteID: 7850f59b72952834ea092262ec22ecb0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 109}
+  - name: DNAExport_Frame_32
+    originalName: 
+    pivot: {x: 0.5, y: -0.14285715}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 4
+      width: 26
+      height: 21
+    spriteID: 0aed955703ede9f4ea3106e42d224fba
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 4}
+  - name: DNAExport_Frame_35
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 190
+      y: 4
+      width: 16
+      height: 27
+    spriteID: e32c2dac0e8dfb0459672849bdfe7dbf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 190, y: 4}
+  - name: DNAExport_Frame_36
+    originalName: 
+    pivot: {x: 0.5, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 238
+      y: 4
+      width: 14
+      height: 27
+    spriteID: 42ceece6446dba94886b18a0e63dfec0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 238, y: 4}
+  - name: DNAExport_Frame_37
+    originalName: 
+    pivot: {x: 0.49999994, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 39
+      width: 12
+      height: 27
+    spriteID: b545fb86b0b783d4abcf3f8294f46714
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 39}
+  - name: DNAExport_Frame_38
+    originalName: 
+    pivot: {x: 0.5, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 226
+      y: 39
+      width: 10
+      height: 27
+    spriteID: 67144dcf0562cbd4f82217a0c93a651b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 226, y: 39}
+  - name: DNAExport_Frame_39
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 244
+      y: 39
+      width: 8
+      height: 27
+    spriteID: 20b5216da145d7547a98394f3fcd026c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 244, y: 39}
+  - name: DNAExport_Frame_40
+    originalName: 
+    pivot: {x: 0.5, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 162
+      y: 74
+      width: 6
+      height: 27
+    spriteID: ed396e596242d0b4c81528a7b345a035
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 162, y: 74}
+  - name: DNAExport_Frame_41
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.2962963}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 86
+      y: 74
+      width: 8
+      height: 27
+    spriteID: 78738043f0985734b9d73c4c975f0d11
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 86, y: 74}
+  - name: DNAExport_Frame_42
+    originalName: 
+    pivot: {x: 0.5, y: -0.2962963}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 74
+      width: 10
+      height: 27
+    spriteID: 51716fbaedc8eef43a3e0b91e2910a87
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 74}
+  - name: DNAExport_Frame_43
+    originalName: 
+    pivot: {x: 0.49999994, y: -0.2962963}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 130
+      y: 39
+      width: 12
+      height: 27
+    spriteID: 1178f9990c301fb4fbd8133f179f1e6a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 130, y: 39}
+  - name: DNAExport_Frame_44
+    originalName: 
+    pivot: {x: 0.5, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 39
+      width: 14
+      height: 27
+    spriteID: ce7ccf39f537e284085281e068f39b17
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 39}
+  - name: DNAExport_Frame_45
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 214
+      y: 4
+      width: 16
+      height: 27
+    spriteID: 771c630f3c4e11a488da25012492c4c6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 214, y: 4}
+  - name: DNAExport_Frame_46
+    originalName: 
+    pivot: {x: 0.5, y: -0.25925925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 26
+      y: 39
+      width: 14
+      height: 27
+    spriteID: 1d10c70a2428d414b88e965b5ab1057b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 26, y: 39}
+  - name: DNAExport_Frame_47
+    originalName: 
+    pivot: {x: 0.49999994, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 150
+      y: 39
+      width: 12
+      height: 27
+    spriteID: b3d3112b75aadcd4ab9a0093583e4d2f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 150, y: 39}
+  - name: DNAExport_Frame_48
+    originalName: 
+    pivot: {x: 0.5, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 22
+      y: 74
+      width: 10
+      height: 27
+    spriteID: 7bf8a0bec1590ba4fbe160e8a619e54b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 22, y: 74}
+  - name: DNAExport_Frame_49
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.18518518}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 102
+      y: 74
+      width: 8
+      height: 27
+    spriteID: 9c5b62a91dfc2d741b8be0199e59a6d1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 102, y: 74}
+  - name: DNAExport_Frame_50
+    originalName: 
+    pivot: {x: 0.5, y: -0.18518518}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 176
+      y: 74
+      width: 6
+      height: 27
+    spriteID: 609f9d5860706624c8519c6d7d00af6b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 176, y: 74}
+  - name: DNAExport_Frame_51
+    originalName: 
+    pivot: {x: 0.49999997, y: -0.18518518}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 118
+      y: 74
+      width: 8
+      height: 27
+    spriteID: 1df88c5e044f6a340abd8d2097ca618d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 118, y: 74}
+  - name: DNAExport_Frame_52
+    originalName: 
+    pivot: {x: 0.5, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 40
+      y: 74
+      width: 10
+      height: 27
+    spriteID: 6aa9977b275b2b141925bff5263b6566
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 40, y: 74}
+  - name: DNAExport_Frame_53
+    originalName: 
+    pivot: {x: 0.49999994, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 170
+      y: 39
+      width: 12
+      height: 27
+    spriteID: d890d6e6ee0838641bc3519070db632a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 170, y: 39}
+  - name: DNAExport_Frame_54
+    originalName: 
+    pivot: {x: 0.5, y: -0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 48
+      y: 39
+      width: 14
+      height: 27
+    spriteID: 38bac69f332bf374180b49f921191477
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 48, y: 39}
+  - name: DNAExport_Frame_7
+    originalName: 
+    pivot: {x: 0.5, y: -0.5789474}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 4
+      width: 24
+      height: 19
+    spriteID: 5b34d21d553460f4db842f407b125f96
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 4}
+  - name: DNAExport_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: -20}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 162
+      y: 109
+      width: 24
+      height: 1
+    spriteID: 1e9d65a29f5f8b040980ce3864a3fa1a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 162, y: 109}
+  - name: DNAExport_Frame_33
+    originalName: 
+    pivot: {x: 0.5, y: -0.040000003}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 40
+      y: 4
+      width: 28
+      height: 25
+    spriteID: 6ad2cc59bb155d548875bd927d476fa8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 40, y: 4}
+  - name: DNAExport_Frame_34
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 28
+      height: 27
+    spriteID: 45e2ea520b9d09a41bb378aa9cf8211a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 1099144051
+    name: DNAExport
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: DNAExport_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 6
+        y: 6
+        width: 16
+        height: 27
+      spriteId: 80853d2b00c38504d98e98f20bdde5c4
+    - name: DNAExport_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 8
+        y: 6
+        width: 12
+        height: 27
+      spriteId: 7ed5c71444764024197a7e2c17eefd2b
+    - name: DNAExport_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 9
+        y: 7
+        width: 10
+        height: 27
+      spriteId: 3798dbc6093f42a4b8fe7cc621028f8c
+    - name: DNAExport_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 11
+        y: 7
+        width: 6
+        height: 27
+      spriteId: 78c66e4be680c1e4fb11964f62903434
+    - name: DNAExport_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 12
+        y: 9
+        width: 4
+        height: 23
+      spriteId: ae5ad55916e072b42a6469cc1c6e9872
+    - name: DNAExport_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 11
+        y: 15
+        width: 6
+        height: 11
+      spriteId: d09ef2b453633e44b86e30938cd8e796
+    - name: DNAExport_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 4
+        y: 15
+        width: 20
+        height: 11
+      spriteId: 02eae7184f776e54981a6927375c414c
+    - name: DNAExport_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 6
+        y: 6
+        width: 16
+        height: 27
+      spriteId: f0a31e1234308a34f85edcdc4ea3d10e
+    - name: DNAExport_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 8
+        y: 6
+        width: 12
+        height: 27
+      spriteId: 80553df3c7957c0469b4f3a15dcfed5c
+    - name: DNAExport_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 9
+        y: 7
+        width: 10
+        height: 27
+      spriteId: 6aac0830e15fa5f418491f8d5fb400cd
+    - name: DNAExport_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 11
+        y: 7
+        width: 6
+        height: 27
+      spriteId: 2ac82452b902d5e4c8025cd556661df0
+    - name: DNAExport_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 12
+        y: 9
+        width: 4
+        height: 23
+      spriteId: 8338ba1242f17634daf2a9e8e04de16e
+    - name: DNAExport_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 11
+        y: 15
+        width: 6
+        height: 11
+      spriteId: 639f06f109610c84fb2a34102ad1cd45
+    - name: DNAExport_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 11
+        y: 17
+        width: 6
+        height: 7
+      spriteId: d614ec27614c972489c9f111fdd0f888
+    - name: DNAExport_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 11
+        y: 18
+        width: 6
+        height: 7
+      spriteId: f371008f399251647b4d5d23e3b9707d
+    - name: DNAExport_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 11
+        y: 17
+        width: 6
+        height: 7
+      spriteId: e43d2f385d678a545a049be10675ebce
+    - name: DNAExport_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 11
+        y: 17
+        width: 6
+        height: 7
+      spriteId: 67b94e87324ff7e4ba74cfe59bc5a6d4
+    - name: DNAExport_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 11
+        y: 19
+        width: 6
+        height: 7
+      spriteId: 28b036f00791850499c9514a1e0e7849
+    - name: DNAExport_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 11
+        y: 16
+        width: 6
+        height: 9
+      spriteId: ea4412fa8e804414ba89e51ef6cb210b
+    - name: DNAExport_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 11
+        y: 17
+        width: 6
+        height: 6
+      spriteId: d9000c124210b16469bac900dc68eb6a
+    - name: DNAExport_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 11
+        y: 17
+        width: 6
+        height: 6
+      spriteId: c68c2cada6b26ea4c95be887e866d5fc
+    - name: DNAExport_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 11
+        y: 17
+        width: 6
+        height: 6
+      spriteId: f4f5e1ea59091e04988d4dcd600a1928
+    - name: DNAExport_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 11
+        y: 19
+        width: 6
+        height: 11
+      spriteId: 618ade48113b6d9429e1eedac9b75fb1
+    - name: DNAExport_Frame_25
+      frameIndex: 25
+      cellRect:
+        x: 11
+        y: 25
+        width: 6
+        height: 6
+      spriteId: 25d3790442803fa438b2c6ccc66c8d21
+    - name: DNAExport_Frame_26
+      frameIndex: 26
+      cellRect:
+        x: 12
+        y: 14
+        width: 4
+        height: 14
+      spriteId: c9d9791b6edb55c4fb591ffa77daaa01
+    - name: DNAExport_Frame_27
+      frameIndex: 27
+      cellRect:
+        x: 12
+        y: 18
+        width: 4
+        height: 4
+      spriteId: 672cf6090d6742c40bebeab0c6e951fd
+    - name: DNAExport_Frame_28
+      frameIndex: 28
+      cellRect:
+        x: 12
+        y: 20
+        width: 4
+        height: 4
+      spriteId: 42a8ff239303f4c468f23ffda171293c
+    - name: DNAExport_Frame_29
+      frameIndex: 29
+      cellRect:
+        x: 12
+        y: 20
+        width: 4
+        height: 15
+      spriteId: 330fc6903c4c17746b3e940d3a6fe2f2
+    - name: DNAExport_Frame_30
+      frameIndex: 30
+      cellRect:
+        x: 12
+        y: 29
+        width: 4
+        height: 7
+      spriteId: 673a17a583eb2324482141b86a368c78
+    - name: DNAExport_Frame_31
+      frameIndex: 31
+      cellRect:
+        x: 12
+        y: 20
+        width: 4
+        height: 13
+      spriteId: 7850f59b72952834ea092262ec22ecb0
+    - name: DNAExport_Frame_32
+      frameIndex: 32
+      cellRect:
+        x: 1
+        y: 3
+        width: 26
+        height: 21
+      spriteId: 0aed955703ede9f4ea3106e42d224fba
+    - name: DNAExport_Frame_35
+      frameIndex: 35
+      cellRect:
+        x: 6
+        y: 6
+        width: 16
+        height: 27
+      spriteId: e32c2dac0e8dfb0459672849bdfe7dbf
+    - name: DNAExport_Frame_36
+      frameIndex: 36
+      cellRect:
+        x: 7
+        y: 6
+        width: 14
+        height: 27
+      spriteId: 42ceece6446dba94886b18a0e63dfec0
+    - name: DNAExport_Frame_37
+      frameIndex: 37
+      cellRect:
+        x: 8
+        y: 6
+        width: 12
+        height: 27
+      spriteId: b545fb86b0b783d4abcf3f8294f46714
+    - name: DNAExport_Frame_38
+      frameIndex: 38
+      cellRect:
+        x: 9
+        y: 7
+        width: 10
+        height: 27
+      spriteId: 67144dcf0562cbd4f82217a0c93a651b
+    - name: DNAExport_Frame_39
+      frameIndex: 39
+      cellRect:
+        x: 10
+        y: 7
+        width: 8
+        height: 27
+      spriteId: 20b5216da145d7547a98394f3fcd026c
+    - name: DNAExport_Frame_40
+      frameIndex: 40
+      cellRect:
+        x: 11
+        y: 7
+        width: 6
+        height: 27
+      spriteId: ed396e596242d0b4c81528a7b345a035
+    - name: DNAExport_Frame_41
+      frameIndex: 41
+      cellRect:
+        x: 10
+        y: 8
+        width: 8
+        height: 27
+      spriteId: 78738043f0985734b9d73c4c975f0d11
+    - name: DNAExport_Frame_42
+      frameIndex: 42
+      cellRect:
+        x: 9
+        y: 8
+        width: 10
+        height: 27
+      spriteId: 51716fbaedc8eef43a3e0b91e2910a87
+    - name: DNAExport_Frame_43
+      frameIndex: 43
+      cellRect:
+        x: 8
+        y: 8
+        width: 12
+        height: 27
+      spriteId: 1178f9990c301fb4fbd8133f179f1e6a
+    - name: DNAExport_Frame_44
+      frameIndex: 44
+      cellRect:
+        x: 7
+        y: 7
+        width: 14
+        height: 27
+      spriteId: ce7ccf39f537e284085281e068f39b17
+    - name: DNAExport_Frame_45
+      frameIndex: 45
+      cellRect:
+        x: 6
+        y: 7
+        width: 16
+        height: 27
+      spriteId: 771c630f3c4e11a488da25012492c4c6
+    - name: DNAExport_Frame_46
+      frameIndex: 46
+      cellRect:
+        x: 7
+        y: 7
+        width: 14
+        height: 27
+      spriteId: 1d10c70a2428d414b88e965b5ab1057b
+    - name: DNAExport_Frame_47
+      frameIndex: 47
+      cellRect:
+        x: 8
+        y: 6
+        width: 12
+        height: 27
+      spriteId: b3d3112b75aadcd4ab9a0093583e4d2f
+    - name: DNAExport_Frame_48
+      frameIndex: 48
+      cellRect:
+        x: 9
+        y: 6
+        width: 10
+        height: 27
+      spriteId: 7bf8a0bec1590ba4fbe160e8a619e54b
+    - name: DNAExport_Frame_49
+      frameIndex: 49
+      cellRect:
+        x: 10
+        y: 5
+        width: 8
+        height: 27
+      spriteId: 9c5b62a91dfc2d741b8be0199e59a6d1
+    - name: DNAExport_Frame_50
+      frameIndex: 50
+      cellRect:
+        x: 11
+        y: 5
+        width: 6
+        height: 27
+      spriteId: 609f9d5860706624c8519c6d7d00af6b
+    - name: DNAExport_Frame_51
+      frameIndex: 51
+      cellRect:
+        x: 10
+        y: 5
+        width: 8
+        height: 27
+      spriteId: 1df88c5e044f6a340abd8d2097ca618d
+    - name: DNAExport_Frame_52
+      frameIndex: 52
+      cellRect:
+        x: 9
+        y: 6
+        width: 10
+        height: 27
+      spriteId: 6aa9977b275b2b141925bff5263b6566
+    - name: DNAExport_Frame_53
+      frameIndex: 53
+      cellRect:
+        x: 8
+        y: 6
+        width: 12
+        height: 27
+      spriteId: d890d6e6ee0838641bc3519070db632a
+    - name: DNAExport_Frame_54
+      frameIndex: 54
+      cellRect:
+        x: 7
+        y: 6
+        width: 14
+        height: 27
+      spriteId: 38bac69f332bf374180b49f921191477
+    - name: DNAExport_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 2
+        y: 11
+        width: 24
+        height: 19
+      spriteId: 5b34d21d553460f4db842f407b125f96
+    - name: DNAExport_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 2
+        y: 20
+        width: 24
+        height: 1
+      spriteId: 1e9d65a29f5f8b040980ce3864a3fa1a
+    - name: DNAExport_Frame_33
+      frameIndex: 33
+      cellRect:
+        x: 0
+        y: 1
+        width: 28
+        height: 25
+      spriteId: 6ad2cc59bb155d548875bd927d476fa8
+    - name: DNAExport_Frame_34
+      frameIndex: 34
+      cellRect:
+        x: 0
+        y: 0
+        width: 28
+        height: 27
+      spriteId: 45e2ea520b9d09a41bb378aa9cf8211a
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 28, y: 40}

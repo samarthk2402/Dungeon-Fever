@@ -1,0 +1,391 @@
+fileFormatVersion: 2
+guid: 494ed32534cb44545af1449266de630c
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: LvlUpExport_Frame_0
+    originalName: 
+    pivot: {x: 0.11111111, y: -0.039215688}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 66
+      width: 36
+      height: 51
+    spriteID: ffef139e5f099ff4d8a3e6bc5d4f77e7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 66}
+  - name: LvlUpExport_Frame_1
+    originalName: 
+    pivot: {x: 0.53125, y: -0.6666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 48
+      y: 185
+      width: 32
+      height: 3
+    spriteID: 870de412736621f47b61e36fffe6954a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 48, y: 185}
+  - name: LvlUpExport_Frame_2
+    originalName: 
+    pivot: {x: 0.5294118, y: -0.040816326}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 186
+      width: 34
+      height: 49
+    spriteID: be4d0299172e27449b841450f12485da
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 186}
+  - name: LvlUpExport_Frame_3
+    originalName: 
+    pivot: {x: 0.5277778, y: -0.037037037}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 36
+      height: 54
+    spriteID: 30f490f32a6ac8447bf14f6ae8e09330
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: LvlUpExport_Frame_4
+    originalName: 
+    pivot: {x: 0.53333336, y: -0.037037037}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 48
+      y: 123
+      width: 30
+      height: 54
+    spriteID: f5f4de5f54027b944b9ba20c39657422
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 48, y: 123}
+  - name: LvlUpExport_Frame_5
+    originalName: 
+    pivot: {x: 0.5294118, y: -0.03773585}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 125
+      width: 34
+      height: 53
+    spriteID: 7fc4b12ffcce43649a77b60c0e18048e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 125}
+  - name: LvlUpExport_Frame_6
+    originalName: 
+    pivot: {x: 0.53125, y: -0.03846154}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 48
+      y: 4
+      width: 32
+      height: 52
+    spriteID: 92f54d0a34a9c9f419fe7281c428e7d9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 48, y: 4}
+  - name: LvlUpExport_Frame_7
+    originalName: 
+    pivot: {x: 0.53125, y: -0.039215688}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 48
+      y: 64
+      width: 32
+      height: 51
+    spriteID: 59c7ecc42f25e1343ae72402f6942cec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 48, y: 64}
+  - name: LvlUpExport_Frame_8
+    originalName: 
+    pivot: {x: 0.55, y: -9.400001}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 243
+      width: 20
+      height: 5
+    spriteID: 3d0c09b81cd76784b882d0a9cfb17ea5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 243}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -234379041
+    name: LvlUpExport
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: LvlUpExport_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 28
+        y: 2
+        width: 36
+        height: 51
+      spriteId: ffef139e5f099ff4d8a3e6bc5d4f77e7
+    - name: LvlUpExport_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 15
+        y: 2
+        width: 32
+        height: 3
+      spriteId: 870de412736621f47b61e36fffe6954a
+    - name: LvlUpExport_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 14
+        y: 2
+        width: 34
+        height: 49
+      spriteId: be4d0299172e27449b841450f12485da
+    - name: LvlUpExport_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 13
+        y: 2
+        width: 36
+        height: 54
+      spriteId: 30f490f32a6ac8447bf14f6ae8e09330
+    - name: LvlUpExport_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 16
+        y: 2
+        width: 30
+        height: 54
+      spriteId: f5f4de5f54027b944b9ba20c39657422
+    - name: LvlUpExport_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 14
+        y: 2
+        width: 34
+        height: 53
+      spriteId: 7fc4b12ffcce43649a77b60c0e18048e
+    - name: LvlUpExport_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 15
+        y: 2
+        width: 32
+        height: 52
+      spriteId: 92f54d0a34a9c9f419fe7281c428e7d9
+    - name: LvlUpExport_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 15
+        y: 2
+        width: 32
+        height: 51
+      spriteId: 59c7ecc42f25e1343ae72402f6942cec
+    - name: LvlUpExport_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 21
+        y: 47
+        width: 20
+        height: 5
+      spriteId: 3d0c09b81cd76784b882d0a9cfb17ea5
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 64, y: 64}
