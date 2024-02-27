@@ -10,6 +10,12 @@ public class Attack : MonoBehaviour
     private float moveSpeed;
     [SerializeField] 
     private float moveDistance;
+    [SerializeField]
+    private GameObject damageText;
+    [SerializeField]
+    private int damage;
+    [SerializeField]
+    private Canvas canvas;
 
     private Vector3 originalPosition;
 
@@ -41,6 +47,9 @@ public class Attack : MonoBehaviour
                 
                 // Lerp towards position
                 StartCoroutine(Move());
+                GameObject inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
+                inst.transform.SetParent(canvas.transform, false);
+                inst.GetComponent<textFloat>().damage = damage;
             }
         }
     }
