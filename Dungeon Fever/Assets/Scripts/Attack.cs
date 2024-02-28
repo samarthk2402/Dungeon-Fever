@@ -46,7 +46,6 @@ public class Attack : MonoBehaviour
                 //Debug.Log(turn);
                 if(Input.GetMouseButtonDown(0)){
                     //turn = false;
-                    //Debug.Log(turn);
                     // Cast a ray from the mouse position into the scene
                     Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero, Mathf.Infinity, enemyLayer);
