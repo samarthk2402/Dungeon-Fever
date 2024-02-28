@@ -26,6 +26,8 @@ public class Attack : MonoBehaviour
 
     private Vector3 originalPosition;
     public GameObject player;
+
+    private Animator anim;
     //private bool moveCompleted = false;
 
     // Start is called before the first frame update
@@ -35,6 +37,8 @@ public class Attack : MonoBehaviour
         if(isEnemy){
             moveDistance *= -1;
         }
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -72,7 +76,7 @@ public class Attack : MonoBehaviour
                 }
             }else{
                 turn = false;
-                StartCoroutine(EnemyAttack(1));
+                StartCoroutine(EnemyAttack(1.5f));
             }
         }
     }
@@ -95,7 +99,8 @@ public class Attack : MonoBehaviour
         transform.position = startingPosition + new Vector3(moveDistance, 0, 0);
 
         // Wait for a short duration before returning to the original position
-        //yield return new WaitForSeconds(0.5f);
+        anim.SetTrigger("attack");
+        yield return new WaitForSeconds(0.5f);
 
         // Move back to the original position
         float returnDuration = Vector3.Distance(transform.position, originalPosition) / moveSpeed;
