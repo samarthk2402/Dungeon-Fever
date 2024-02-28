@@ -14,7 +14,7 @@ public class textFloat : MonoBehaviour
     void Start()
     { 
         anim = GetComponent<Animator>();
-        Debug.Log(damage);
+        //Debug.Log(damage);
         textMeshPro = GetComponent<TMP_Text>();
         textMeshPro.text = damage.ToString();
     }

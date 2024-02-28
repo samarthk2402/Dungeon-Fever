@@ -17,46 +17,68 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private Canvas canvas;
 
+    [SerializeField]
+    private bool isEnemy;
+
+    public bool turn;
+    public bool turnCompleted = false;
+
     private Vector3 originalPosition;
+    public GameObject player;
+    //private bool moveCompleted = false;
 
     // Start is called before the first frame update
     void Start()
     {
         originalPosition = transform.position;
+        if(isEnemy){
+            moveDistance *= -1;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Check for mouse click
-        if (Input.GetMouseButtonDown(0))
-        {
-            // Cast a ray from the mouse position into the scene
-            Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero, Mathf.Infinity, enemyLayer);
 
-            // Visualize the raycast
-            //Debug.DrawRay(clickPosition, Vector2.up * 0.1f, Color.red, 1f);
+        if(turn){
+            if(!isEnemy){
+                //Debug.Log(turn);
+                if(Input.GetMouseButtonDown(0)){
+                    //turn = false;
+                    //Debug.Log(turn);
+                    // Cast a ray from the mouse position into the scene
+                    Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero, Mathf.Infinity, enemyLayer);
 
-            // Check if the ray hits any collider on the target layer
-            if (hit.collider != null)
-            {
-                // If the ray hits a collider on the target layer, do something
-                GameObject clickedObject = hit.collider.gameObject;
-                //Debug.Log("Clicked object: " + clickedObject.name);
-                
-                // Lerp towards position
-                StartCoroutine(Move());
-                GameObject inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
-                inst.transform.SetParent(canvas.transform, false);
-                inst.GetComponent<textFloat>().damage = damage;
+                    // Visualize the raycast
+                    //Debug.DrawRay(clickPosition, Vector2.up * 0.1f, Color.red, 1f);
+
+                    // Check if the ray hits any collider on the target layer
+                    if (hit.collider != null)
+                    {
+                        // If the ray hits a collider on the target layer, do something
+                        GameObject clickedObject = hit.collider.gameObject;
+                        //Debug.Log("Clicked object: " + clickedObject.name);
+                        
+                        // Lerp towards position
+                        StartCoroutine(Move());
+                        GameObject inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
+                        inst.transform.SetParent(canvas.transform, false);
+                        inst.GetComponent<textFloat>().damage = damage;
+                        turnCompleted = true;
+                    }
+
+                }
+            }else{
+                turn = false;
+                StartCoroutine(EnemyAttack(1));
             }
         }
     }
 
     IEnumerator Move()
     {
-        float distance = moveDistance;
+        float distance = Mathf.Abs(moveDistance);
         float duration = distance / moveSpeed;
         float elapsedTime = 0f;
         Vector3 startingPosition = transform.position;
@@ -86,5 +108,17 @@ public class Attack : MonoBehaviour
 
         // Ensure we reach exactly the original position
         transform.position = originalPosition;
+    }
+    
+    IEnumerator EnemyAttack(float delay){
+        yield return new WaitForSeconds(delay);
+        if(!turnCompleted){
+            turn = false;
+            StartCoroutine(Move());
+            GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
+            inst.transform.SetParent(canvas.transform, false);
+            inst.GetComponent<textFloat>().damage = damage;
+            turnCompleted = true;
+        }        
     }
 }
