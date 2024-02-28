@@ -5,15 +5,6 @@ using TMPro;
 
 public class ManageGameStat : MonoBehaviour
 {
-    public List<GameObject> enemyList = new List<GameObject>();
-
-    public int enemyNum;
-
-    public GameObject enemyPrefab;
-
-    public GameObject enemy1;
-    public GameObject enemy2;
-    public GameObject enemy3;
 
     public GameObject player;
     public GameObject enemy;
@@ -36,39 +27,9 @@ public class ManageGameStat : MonoBehaviour
         gameState = State.Player;
         player.GetComponent<Attack>().turn = true;
 
+        enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0, 0), Quaternion.identity);
 
-        switch(enemyNum){
-            case 1:
-                enemy1 = Instantiate(enemyPrefab, new Vector3(5, 0, 0), Quaternion.identity);
-                enemyList.Add(enemy1);
-
-                break;
-            case 2:
-                enemy1 = Instantiate(enemyPrefab, new Vector3(5, 2, 0), Quaternion.identity);
-                enemyList.Add(enemy1);
-
-                enemy2 = Instantiate(enemyPrefab, new Vector3(5, -2, 0), Quaternion.identity);
-                enemyList.Add(enemy2);
-
-                break;
-            case 3:
-                enemy1 = Instantiate(enemyPrefab, new Vector3(5, 0, 0), Quaternion.identity);
-                enemyList.Add(enemy1);
-
-                enemy2 = Instantiate(enemyPrefab, new Vector3(5, 4, 0), Quaternion.identity);
-                enemyList.Add(enemy2);
-
-                enemy3 = Instantiate(enemyPrefab, new Vector3(5, -4, 0), Quaternion.identity);
-                enemyList.Add(enemy3);
-
-                break;
-        }
-
-        foreach(GameObject enemy in enemyList){
-            enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0, 0), Quaternion.identity);
-
-            enemyHealthText.transform.SetParent(canvas.transform, false);
-        }
+        enemyHealthText.transform.SetParent(canvas.transform, false);
 
         playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
 
@@ -84,12 +45,10 @@ public class ManageGameStat : MonoBehaviour
             playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
         }
 
-        foreach(GameObject enemy in enemyList){
-            if(enemy.GetComponent<Attack>().health <= 0){
-                enemyHealthText.GetComponent<TMP_Text>().text = "0";
-            }else{
-                enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<Attack>().health.ToString();
-            }
+        if(enemy.GetComponent<Attack>().health <= 0){
+            enemyHealthText.GetComponent<TMP_Text>().text = "0";
+        }else{
+            enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<Attack>().health.ToString();
         }
 
         switch(gameState){
@@ -111,21 +70,7 @@ public class ManageGameStat : MonoBehaviour
                     player.GetComponent<Attack>().turn = true;
                     gameState = State.Player;
                 }
-
-                switch(enemyList.Count){
-                    case 1:
-
-                }
                 break;
-        }
-    }
-
-    private void EnemyTurn(){
-        if(enemy.GetComponent<Attack>().turnCompleted){
-            enemy.GetComponent<Attack>().turn = false;
-            enemy.GetComponent<Attack>().turnCompleted = false;
-            player.GetComponent<Attack>().turn = true;
-            gameState = State.Player;
         }
     }
 }
