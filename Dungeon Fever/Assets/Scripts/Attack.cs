@@ -30,6 +30,8 @@ public class Attack : MonoBehaviour
     private Animator anim;
     //private bool moveCompleted = false;
 
+    private Vector3 flipScale;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,13 +41,19 @@ public class Attack : MonoBehaviour
         }
 
         anim = GetComponent<Animator>();
+
+        // Get the current scale of the GameObject
+        flipScale = transform.localScale;
+
+            // Flip the scale along the x-axis
+        flipScale.x *= -1;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if(turn){
+        if(turn && health>0){
             if(!isEnemy){
                 //Debug.Log(turn);
                 if(Input.GetMouseButtonDown(0)){
@@ -79,8 +87,41 @@ public class Attack : MonoBehaviour
                 StartCoroutine(EnemyAttack(1.5f));
             }
         }
-    }
 
+        if(health<=0){
+            transform.localScale = flipScale;
+
+            Vector3 targetPos;
+
+            if(isEnemy){
+                targetPos = originalPosition + new Vector3(15, 0);
+            }else{
+                targetPos = originalPosition + new Vector3(-15, 0);
+            }
+
+            StartCoroutine(MoveOffScreen(originalPosition, targetPos, moveSpeed));
+
+        }
+    }
+    private IEnumerator MoveOffScreen(Vector3 startPos, Vector3 endPos, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the object reaches exactly the end position
+        transform.position = endPos;
+
+        // Destroy the object if it's close enough to the target position
+        if (Vector3.Distance(transform.position, endPos) < 1)
+        {
+            Destroy(gameObject);
+        }
+    }
     IEnumerator Move()
     {
         float distance = Mathf.Abs(moveDistance);

@@ -53,7 +53,7 @@ public class ManageGameStat : MonoBehaviour
 
         switch(gameState){
             case State.Player:
-                if(player.GetComponent<Attack>().turnCompleted){
+                if(player.GetComponent<Attack>().turnCompleted && player!=null){
                     player.GetComponent<Attack>().turn = false;
                     player.GetComponent<Attack>().turnCompleted = false;
                     enemy.GetComponent<Attack>().turn = true;
@@ -63,7 +63,7 @@ public class ManageGameStat : MonoBehaviour
             case State.Enemy:
                 //Debug.Log("Enemy turn!");
 
-                if(enemy.GetComponent<Attack>().turnCompleted){
+                if(enemy.GetComponent<Attack>().turnCompleted && enemy != null){
                     //Debug.Log("Enemy turn completed");
                     enemy.GetComponent<Attack>().turn = false;
                     enemy.GetComponent<Attack>().turnCompleted = false;
