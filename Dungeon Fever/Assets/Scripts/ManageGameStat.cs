@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ManageGameStat : MonoBehaviour
 {
+
     public GameObject player;
     public GameObject enemy;
+    public GameObject healthText;
+
+    private GameObject playerHealthText;
+    private GameObject enemyHealthText;
+
+    [SerializeField] private Canvas canvas;
+
     public enum State{
         Player,
         Enemy
@@ -17,11 +26,31 @@ public class ManageGameStat : MonoBehaviour
     {
         gameState = State.Player;
         player.GetComponent<Attack>().turn = true;
+
+        enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0, 0), Quaternion.identity);
+
+        enemyHealthText.transform.SetParent(canvas.transform, false);
+
+        playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
+
+        playerHealthText.transform.SetParent(canvas.transform, false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(player.GetComponent<Attack>().health <= 0){
+            playerHealthText.GetComponent<TMP_Text>().text = "0";
+        }else{
+            playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
+        }
+
+        if(enemy.GetComponent<Attack>().health <= 0){
+            enemyHealthText.GetComponent<TMP_Text>().text = "0";
+        }else{
+            enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<Attack>().health.ToString();
+        }
+
         switch(gameState){
             case State.Player:
                 if(player.GetComponent<Attack>().turnCompleted){

@@ -13,7 +13,8 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private GameObject damageText;
     [SerializeField]
-    private int damage;
+    public int damage;
+    public int health;
     [SerializeField]
     private Canvas canvas;
 
@@ -65,6 +66,7 @@ public class Attack : MonoBehaviour
                         GameObject inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
                         inst.transform.SetParent(canvas.transform, false);
                         inst.GetComponent<textFloat>().damage = damage;
+                        hit.collider.gameObject.GetComponent<Attack>().health -= damage;
                         turnCompleted = true;
                     }
 
@@ -118,6 +120,7 @@ public class Attack : MonoBehaviour
             GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
             inst.GetComponent<textFloat>().damage = damage;
+            player.GetComponent<Attack>().health -= damage; 
             turnCompleted = true;
         }        
     }

@@ -154,6 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1474631747}
   enemy: {fileID: 925162998}
+  healthText: {fileID: 7914421860480046568, guid: f956e39754673314caa31bd5c124e6fa, type: 3}
+  canvas: {fileID: 1732492213}
   gameState: 0
 --- !u!4 &398867853
 Transform:
@@ -597,6 +599,7 @@ MonoBehaviour:
   moveDistance: 2
   damageText: {fileID: 1451473678918585391, guid: 70646d11dcf721c4690efb5967cad09f, type: 3}
   damage: 3
+  health: 10
   canvas: {fileID: 1732492213}
   isEnemy: 1
   turn: 0
@@ -640,6 +643,7 @@ MonoBehaviour:
   moveDistance: 2
   damageText: {fileID: 1451473678918585391, guid: 70646d11dcf721c4690efb5967cad09f, type: 3}
   damage: 3
+  health: 10
   canvas: {fileID: 1732492213}
   isEnemy: 0
   turn: 0
