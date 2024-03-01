@@ -11,10 +11,10 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private GameObject damageText;
     [SerializeField]
-    public int damage;
-    public int health;
-    [SerializeField]
     private Canvas canvas;
+
+    [SerializeField]
+    private Enemy enemy;
 
     public GameObject player;
 
@@ -24,9 +24,12 @@ public class EnemyAttack : MonoBehaviour
     private Vector3 originalPosition;
 
     private Animator anim;
+
+    public int health;
     // Start is called before the first frame update
     void Start()
     {
+        health = enemy.health;
         originalPosition = transform.position;
         moveDistance *= -1;
         anim = GetComponent<Animator>();
@@ -87,8 +90,8 @@ public class EnemyAttack : MonoBehaviour
             StartCoroutine(Move());
             GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
-            inst.GetComponent<textFloat>().damage = damage;
-            player.GetComponent<Attack>().health -= damage; 
+            inst.GetComponent<textFloat>().damage = enemy.damage;
+            player.GetComponent<Attack>().health -= enemy.damage; 
             turnCompleted = true;
         }        
     }
