@@ -39,36 +39,43 @@ public class ManageGameStat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.GetComponent<Attack>().health <= 0){
+        if(player.gameObject != null){
+            if(player.GetComponent<Attack>().health <= 0){
             playerHealthText.GetComponent<TMP_Text>().text = "0";
-        }else{
-            playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
+            }else{
+                playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
+            }
         }
 
-        if(enemy.GetComponent<Attack>().health <= 0){
+        if(enemy.gameObject != null){
+            if(enemy.GetComponent<EnemyAttack>().health <= 0){
             enemyHealthText.GetComponent<TMP_Text>().text = "0";
-        }else{
-            enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<Attack>().health.ToString();
+            }else{
+                enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<EnemyAttack>().health.ToString();
+            }
         }
 
         switch(gameState){
             case State.Player:
-                if(player.GetComponent<Attack>().turnCompleted && player!=null){
-                    player.GetComponent<Attack>().turn = false;
-                    player.GetComponent<Attack>().turnCompleted = false;
-                    enemy.GetComponent<Attack>().turn = true;
-                    gameState = State.Enemy;
+                if(player.gameObject != null){
+                    if(player.GetComponent<Attack>().turnCompleted){
+                        player.GetComponent<Attack>().turn = false;
+                        player.GetComponent<Attack>().turnCompleted = false;
+                        enemy.GetComponent<EnemyAttack>().turn = true;
+                        gameState = State.Enemy;
+                    }
                 }
                 break;
             case State.Enemy:
                 //Debug.Log("Enemy turn!");
-
-                if(enemy.GetComponent<Attack>().turnCompleted && enemy != null){
-                    //Debug.Log("Enemy turn completed");
-                    enemy.GetComponent<Attack>().turn = false;
-                    enemy.GetComponent<Attack>().turnCompleted = false;
-                    player.GetComponent<Attack>().turn = true;
-                    gameState = State.Player;
+                if(enemy.gameObject != null){
+                    if(enemy.GetComponent<EnemyAttack>().turnCompleted){
+                        //Debug.Log("Enemy turn completed");
+                        enemy.GetComponent<EnemyAttack>().turn = false;
+                        enemy.GetComponent<EnemyAttack>().turnCompleted = false;
+                        player.GetComponent<Attack>().turn = true;
+                        gameState = State.Player;
+                    }
                 }
                 break;
         }

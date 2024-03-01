@@ -18,9 +18,6 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private Canvas canvas;
 
-    [SerializeField]
-    private bool isEnemy;
-
     public bool turn;
     public bool turnCompleted = false;
 
@@ -36,9 +33,6 @@ public class Attack : MonoBehaviour
     void Start()
     {
         originalPosition = transform.position;
-        if(isEnemy){
-            moveDistance *= -1;
-        }
 
         anim = GetComponent<Animator>();
 
@@ -54,7 +48,6 @@ public class Attack : MonoBehaviour
     {
 
         if(turn && health>0){
-            if(!isEnemy){
                 //Debug.Log(turn);
                 if(Input.GetMouseButtonDown(0)){
                     //turn = false;
@@ -77,15 +70,11 @@ public class Attack : MonoBehaviour
                         GameObject inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
                         inst.transform.SetParent(canvas.transform, false);
                         inst.GetComponent<textFloat>().damage = damage;
-                        hit.collider.gameObject.GetComponent<Attack>().health -= damage;
+                        hit.collider.gameObject.GetComponent<EnemyAttack>().health -= damage;
                         turnCompleted = true;
                     }
 
                 }
-            }else{
-                turn = false;
-                StartCoroutine(EnemyAttack(1.5f));
-            }
         }
 
         if(health<=0){
@@ -93,13 +82,9 @@ public class Attack : MonoBehaviour
 
             Vector3 targetPos;
 
-            if(isEnemy){
-                targetPos = originalPosition + new Vector3(15, 0);
-            }else{
-                targetPos = originalPosition + new Vector3(-15, 0);
-            }
+            targetPos = originalPosition + new Vector3(-15, 0);
 
-            StartCoroutine(MoveOffScreen(originalPosition, targetPos, moveSpeed));
+            StartCoroutine(MoveOffScreen(originalPosition, targetPos, moveSpeed/2));
 
         }
     }
@@ -155,18 +140,5 @@ public class Attack : MonoBehaviour
 
         // Ensure we reach exactly the original position
         transform.position = originalPosition;
-    }
-    
-    IEnumerator EnemyAttack(float delay){
-        yield return new WaitForSeconds(delay);
-        if(!turnCompleted){
-            turn = false;
-            StartCoroutine(Move());
-            GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
-            inst.transform.SetParent(canvas.transform, false);
-            inst.GetComponent<textFloat>().damage = damage;
-            player.GetComponent<Attack>().health -= damage; 
-            turnCompleted = true;
-        }        
     }
 }
