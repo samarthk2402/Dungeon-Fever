@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   name: 
-  damage: 0
-  health: 0
-  animatorController: {fileID: 0}
+  damage: 1
+  health: 3
+  animatorController: {fileID: 22100000, guid: d7df8c8871c63db48801e574577ee7d3, type: 2}

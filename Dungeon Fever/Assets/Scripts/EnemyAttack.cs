@@ -11,10 +11,10 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private GameObject damageText;
     [SerializeField]
-    private Canvas canvas;
+    public Canvas canvas;
 
     [SerializeField]
-    private Enemy enemy;
+    public Enemy enemy;
 
     public GameObject player;
 

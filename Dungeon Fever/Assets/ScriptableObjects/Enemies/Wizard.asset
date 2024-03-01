@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d167b86060e0bb45879cf05f0f27125, type: 3}
   m_Name: Wizard
   m_EditorClassIdentifier: 
-  name: 
-  damage: 0
-  health: 0
-  animatorController: {fileID: 0}
+  name: Wizard
+  damage: 3
+  health: 7
+  animatorController: {fileID: 22100000, guid: 7c54f3c61b34f724b9917c45672edce7, type: 2}

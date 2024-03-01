@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d167b86060e0bb45879cf05f0f27125, type: 3}
   m_Name: Bandit
   m_EditorClassIdentifier: 
-  name: 
-  damage: 0
-  health: 0
+  name: Bandit
+  damage: 2
+  health: 6
+  animatorController: {fileID: 22100000, guid: 72504603d9890834497dec93c012c3ea, type: 2}

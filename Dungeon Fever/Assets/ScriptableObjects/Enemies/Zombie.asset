@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d167b86060e0bb45879cf05f0f27125, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  name: 
-  damage: 0
-  health: 0
-  animatorController: {fileID: 0}
+  name: Zombie
+  damage: 2
+  health: 4
+  animatorController: {fileID: 22100000, guid: c221e6a89a9be6a44bb3209a3eb97e2e, type: 2}
