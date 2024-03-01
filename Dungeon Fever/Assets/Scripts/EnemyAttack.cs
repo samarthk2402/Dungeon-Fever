@@ -29,10 +29,11 @@ public class EnemyAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
+        anim.runtimeAnimatorController = enemy.animatorController;
         health = enemy.health;
         originalPosition = transform.position;
         moveDistance *= -1;
-        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame

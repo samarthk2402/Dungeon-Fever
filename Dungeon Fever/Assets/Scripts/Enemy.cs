@@ -8,4 +8,6 @@ public class Enemy : ScriptableObject
     public new string name;
     public int damage;
     public int health;
+
+    public AnimatorOverrideController animatorController;
 }
