@@ -14,6 +14,5 @@ public class newStage : MonoBehaviour
 
     public void NewStage(){
         gsScript.InstantiateEnemy();
-        Debug.Log("Instantiate Enemy");
     }
 }

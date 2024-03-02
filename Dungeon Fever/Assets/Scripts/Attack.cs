@@ -14,6 +14,8 @@ public class Attack : MonoBehaviour
     private GameObject damageText;
     [SerializeField]
     public int damage;
+    [SerializeField]
+    public int abilityDamage;
     public int health;
     [SerializeField]
     private Canvas canvas;
@@ -29,6 +31,13 @@ public class Attack : MonoBehaviour
 
     private Vector3 flipScale;
     public bool dead = false;
+
+    public enum Option{
+        Attack,
+        Ability
+    }
+
+    public Option option;
 
 
     // Start is called before the first frame update
@@ -67,12 +76,22 @@ public class Attack : MonoBehaviour
                         GameObject clickedObject = hit.collider.gameObject;
                         //Debug.Log("Clicked object: " + clickedObject.name);
                         
-                        // Lerp towards position
-                        StartCoroutine(Move());
-                        GameObject inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
+                        GameObject inst;
+                        inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
                         inst.transform.SetParent(canvas.transform, false);
-                        inst.GetComponent<textFloat>().damage = damage;
-                        hit.collider.gameObject.GetComponent<EnemyAttack>().health -= damage;
+                        // Lerp towards positio
+                        switch(option){
+                            case Option.Attack:
+                                StartCoroutine(Move("attack"));
+                                inst.GetComponent<textFloat>().damage = damage;
+                                hit.collider.gameObject.GetComponent<EnemyAttack>().health -= damage;
+                                break;
+                            case Option.Ability:
+                                StartCoroutine(Move("ability"));
+                                inst.GetComponent<textFloat>().damage = abilityDamage;
+                                hit.collider.gameObject.GetComponent<EnemyAttack>().health -= abilityDamage;
+                                break;
+                        }
                     }
 
                 }
@@ -113,7 +132,7 @@ public class Attack : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    IEnumerator Move()
+    IEnumerator Move(string animation)
     {
         float distance = Mathf.Abs(moveDistance);
         float duration = distance / moveSpeed;
@@ -131,7 +150,7 @@ public class Attack : MonoBehaviour
         transform.position = startingPosition + new Vector3(moveDistance, 0, 0);
 
         // Wait for a short duration before returning to the original position
-        anim.SetTrigger("attack");
+        anim.SetTrigger(animation);
         yield return new WaitForSeconds(0.5f);
 
         // Move back to the original position
@@ -147,5 +166,13 @@ public class Attack : MonoBehaviour
         // Ensure we reach exactly the original position
         transform.position = originalPosition;
         turnCompleted = true;
+    }
+
+    public void SetAttack(){
+        option = Option.Attack;
+    }
+
+    public void SetAbility(){
+        option = Option.Ability;
     }
 }
