@@ -45,8 +45,13 @@ public class EnemyAttack : MonoBehaviour
         }
 
         if(health <= 0){
-            Destroy(this.gameObject);
+            anim.SetTrigger("death");
+            //Destroy(this.gameObject);
         }
+    }
+
+    void Death(){
+        Destroy(this.gameObject);
     }
 
     IEnumerator Move()

@@ -14,10 +14,12 @@ public class ManageGameStat : MonoBehaviour
     public GameObject player;
     public GameObject enemy;
     public GameObject healthText;
+    public GameObject stageText;
 
     private GameObject playerHealthText;
-    private GameObject enemyHealthText;
+    private GameObject enemyHealthText; 
     private bool enemyInstantiating;
+    private int stage;
 
     [SerializeField] private Canvas canvas;
 
@@ -30,6 +32,8 @@ public class ManageGameStat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stage = 0;
+
         gameState = State.Player;
         player.GetComponent<Attack>().turn = true;
 
@@ -48,11 +52,20 @@ public class ManageGameStat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        stageText.GetComponent<TMP_Text>().text = "Stage: "+stage.ToString();
         if(player.gameObject != null){
-            if(player.GetComponent<Attack>().health <= 0){
-            playerHealthText.GetComponent<TMP_Text>().text = "0";
-            }else{
-                playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
+            if(playerHealthText.gameObject != null){
+                if(player.GetComponent<Attack>().health <= 0){
+                    playerHealthText.GetComponent<TMP_Text>().text = "0";
+                }else{
+                    playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
+                }
+
+                if(player.GetComponent<Attack>().dead){
+                    Destroy(playerHealthText);
+                }
+
+                // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
             }
         }
 
@@ -105,6 +118,7 @@ public class ManageGameStat : MonoBehaviour
         enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
         player.GetComponent<Attack>().turn = true;
         enemyInstantiating = false;
+        stage += 1;
     }
 
     // IEnumerator InstantiateEnemyAfterDelay(float delay){

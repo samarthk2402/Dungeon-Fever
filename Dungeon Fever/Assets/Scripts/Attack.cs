@@ -28,6 +28,8 @@ public class Attack : MonoBehaviour
     //private bool moveCompleted = false;
 
     private Vector3 flipScale;
+    public bool dead = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -87,13 +89,18 @@ public class Attack : MonoBehaviour
 
         }
     }
+
     private IEnumerator MoveOffScreen(Vector3 startPos, Vector3 endPos, float duration)
     {
+        //yield return new WaitForSeconds(1);
+
+        dead = true;
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
             transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
+            //Debug.Log(transform.position);
             yield return null;
         }
 
