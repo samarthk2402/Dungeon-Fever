@@ -25,4 +25,8 @@ public class OptionsManager : MonoBehaviour
         // Reload the scene by passing its index
         SceneManager.LoadScene(currentSceneIndex);
     }
+
+    public void Quit(){
+        Application.Quit();
+    }
 }

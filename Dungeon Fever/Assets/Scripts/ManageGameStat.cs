@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ManageGameStat : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ManageGameStat : MonoBehaviour
     private GameObject enemyHealthText; 
     private GameObject playerEnergyText;
     private bool enemyInstantiating;
-    private int stage;
+    public int stage;
 
     [SerializeField] private Canvas canvas;
 
@@ -104,6 +105,9 @@ public class ManageGameStat : MonoBehaviour
                             enemy.GetComponent<EnemyAttack>().turn = true;
                             gameState = State.Enemy;
                         }else{
+                            if(stage>=9){
+                                SceneManager.LoadScene(2);
+                            }
                             if(!enemyInstantiating){
                                 transitionAnim.SetTrigger("newStage");
                                 enemyInstantiating = true;

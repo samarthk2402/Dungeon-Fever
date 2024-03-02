@@ -26,7 +26,6 @@ public class EnemyAttack : MonoBehaviour
     private Animator anim;
 
     public int health;
-    private bool moveCompleted = false;
     // Start is called before the first frame update
     void Start()
     {
