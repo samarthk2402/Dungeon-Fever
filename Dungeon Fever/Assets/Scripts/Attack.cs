@@ -94,7 +94,7 @@ public class Attack : MonoBehaviour
 
             targetPos = originalPosition + new Vector3(-15, 0);
 
-            StartCoroutine(MoveOffScreen(originalPosition, targetPos, moveSpeed/2));
+            StartCoroutine(MoveOffScreen(originalPosition, targetPos, moveSpeed/20));
 
         }
     }

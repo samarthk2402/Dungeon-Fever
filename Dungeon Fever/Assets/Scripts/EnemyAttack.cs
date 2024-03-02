@@ -46,7 +46,6 @@ public class EnemyAttack : MonoBehaviour
         anim.runtimeAnimatorController = enemy.animatorController;
         health = enemy.health;
         originalPosition = transform.position;
-        moveDistance *= -1;
     }
 
     // Update is called once per frame
@@ -78,20 +77,22 @@ public class EnemyAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        float distance = Mathf.Abs(moveDistance);
+        Vector3 startingPosition = transform.position;
+        Vector3 direction = player.transform.position - transform.position;
+        direction.Normalize();
+        float distance = Mathf.Abs(Vector3.Distance(transform.position, player.transform.position-(direction*moveDistance)));
         float duration = distance / moveSpeed;
         float elapsedTime = 0f;
-        Vector3 startingPosition = transform.position;
 
         while (elapsedTime < duration)
         {
-            transform.position = Vector3.Lerp(startingPosition, startingPosition + new Vector3(moveDistance, 0, 0), elapsedTime / duration);
+            transform.position = Vector3.Lerp(startingPosition, startingPosition + direction*distance, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Ensure we reach exactly the stopping distance away
-        transform.position = startingPosition + new Vector3(moveDistance, 0, 0);
+        transform.position = player.transform.position-(direction*moveDistance);
 
         //Debug.Log("forward");
         // Wait for a short duration before returning to the original position
@@ -99,6 +100,8 @@ public class EnemyAttack : MonoBehaviour
         if(turn){
             Attack();
         }
+
+        Vector3 currPos = transform.position;
         yield return new WaitForSeconds(0.5f);
 
         // Move back to the original position
@@ -106,7 +109,7 @@ public class EnemyAttack : MonoBehaviour
         elapsedTime = 0f;
         while (elapsedTime < returnDuration)
         {
-            transform.position = Vector3.Lerp(startingPosition + new Vector3(moveDistance, 0, 0), originalPosition, elapsedTime / returnDuration);
+            transform.position = Vector3.Lerp(currPos, originalPosition, elapsedTime / returnDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }

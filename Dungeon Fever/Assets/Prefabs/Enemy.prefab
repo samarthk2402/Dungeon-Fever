@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f05a9f271668147956d1d674620e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 20
   moveDistance: 2
   damageText: {fileID: 1451473678918585391, guid: 70646d11dcf721c4690efb5967cad09f, type: 3}
   damageEffect: {fileID: 5659210261868204388, guid: 64ca95935877a3a4487dad7927a85a5e, type: 3}
