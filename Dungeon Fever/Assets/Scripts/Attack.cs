@@ -34,6 +34,9 @@ public class Attack : MonoBehaviour
     private Vector3 flipScale;
     public bool dead = false;
 
+    public float shakeDuration;
+    public float shakeIntensity;
+
     public enum Option{
         Attack,
         Ability
@@ -78,32 +81,7 @@ public class Attack : MonoBehaviour
                         GameObject clickedObject = hit.collider.gameObject;
                         //Debug.Log("Clicked object: " + clickedObject.name);
 
-                        SpriteRenderer sr = hit.collider.gameObject.GetComponent<SpriteRenderer>();
-                        Bounds sb = sr.bounds;
-                        
-                        GameObject inst;
-                        inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
-                        inst.transform.SetParent(canvas.transform, false);
-
-                        GameObject ps = Instantiate(damageEffect, hit.collider.gameObject.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
-                        Debug.Log(ps);
-                        Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
-
-                        StartCoroutine(hit.collider.gameObject.GetComponent<EnemyAttack>().ShakeCoroutine());
-
-                        switch(option){
-                            case Option.Attack:
-                                StartCoroutine(Move("attack"));
-                                inst.GetComponent<textFloat>().damage = damage;
-                                hit.collider.gameObject.GetComponent<EnemyAttack>().health -= damage;
-                                break;
-                            case Option.Ability:
-                                energy -= abilityCost;
-                                StartCoroutine(Move("ability"));
-                                inst.GetComponent<textFloat>().damage = abilityDamage;
-                                hit.collider.gameObject.GetComponent<EnemyAttack>().health -= abilityDamage;
-                                break;
-                        }
+                        StartCoroutine(Move(hit.collider.gameObject));
                     }
 
                 }
@@ -144,7 +122,33 @@ public class Attack : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    IEnumerator Move(string animation)
+
+    void DamageEnemy(GameObject enemy){
+        SpriteRenderer sr = enemy.GetComponent<SpriteRenderer>();
+        Bounds sb = sr.bounds;
+                        
+        GameObject inst;
+        inst = Instantiate(damageText, enemy.transform.position, Quaternion.identity);
+        inst.transform.SetParent(canvas.transform, false);
+
+        GameObject ps = Instantiate(damageEffect, enemy.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
+        Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
+
+        StartCoroutine(enemy.GetComponent<EnemyAttack>().ShakeCoroutine());
+
+        switch(option){
+            case Option.Attack:
+                inst.GetComponent<textFloat>().damage = damage;
+                enemy.GetComponent<EnemyAttack>().health -= damage;
+                break;
+            case Option.Ability:
+                energy -= abilityCost;
+                inst.GetComponent<textFloat>().damage = abilityDamage;
+                enemy.GetComponent<EnemyAttack>().health -= abilityDamage;
+                break;
+        }
+    }
+    IEnumerator Move(GameObject enemy)
     {
         float distance = Mathf.Abs(moveDistance);
         float duration = distance / moveSpeed;
@@ -162,7 +166,16 @@ public class Attack : MonoBehaviour
         transform.position = startingPosition + new Vector3(moveDistance, 0, 0);
 
         // Wait for a short duration before returning to the original position
-        anim.SetTrigger(animation);
+        switch(option){
+            case Option.Attack:
+                anim.SetTrigger("attack");
+                break;
+            case Option.Ability:
+                anim.SetTrigger("ability");
+                break;
+        }
+
+        DamageEnemy(enemy);
         yield return new WaitForSeconds(0.5f);
 
         // Move back to the original position
@@ -186,5 +199,22 @@ public class Attack : MonoBehaviour
 
     public void SetAbility(){
         option = Option.Ability;
+    }
+
+    public IEnumerator ShakeCoroutine()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < shakeDuration)
+        {
+            Vector3 randomOffset = Random.insideUnitSphere * shakeIntensity;
+            transform.position = originalPosition + randomOffset;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset the object's position after shake duration ends
+        transform.position = originalPosition;
     }
 }

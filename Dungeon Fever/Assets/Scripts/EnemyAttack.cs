@@ -11,6 +11,8 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private GameObject damageText;
     [SerializeField]
+    private GameObject damageEffect;
+    [SerializeField]
     public Canvas canvas;
 
     [SerializeField]
@@ -35,6 +37,8 @@ public class EnemyAttack : MonoBehaviour
     public float shakeIntensity;
     public float shakeDuration;
 
+    private bool moving;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +57,10 @@ public class EnemyAttack : MonoBehaviour
 
         if(turn && health > 0){
             //turn = false;
-            StartCoroutine(Attack(0.5f));
+            if(!moving){
+                StartCoroutine(Move());
+                moving = true;
+            }
         }
 
         if(health <= 0){
@@ -69,6 +76,8 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator Move()
     {
+        yield return new WaitForSeconds(0.5f);
+
         float distance = Mathf.Abs(moveDistance);
         float duration = distance / moveSpeed;
         float elapsedTime = 0f;
@@ -78,15 +87,18 @@ public class EnemyAttack : MonoBehaviour
         {
             transform.position = Vector3.Lerp(startingPosition, startingPosition + new Vector3(moveDistance, 0, 0), elapsedTime / duration);
             elapsedTime += Time.deltaTime;
-            Debug.Log("Moving");
             yield return null;
         }
 
         // Ensure we reach exactly the stopping distance away
         transform.position = startingPosition + new Vector3(moveDistance, 0, 0);
 
+        //Debug.Log("forward");
         // Wait for a short duration before returning to the original position
         anim.SetTrigger("attack");
+        if(turn){
+            Attack();
+        }
         yield return new WaitForSeconds(0.5f);
 
         // Move back to the original position
@@ -102,18 +114,27 @@ public class EnemyAttack : MonoBehaviour
         // Ensure we reach exactly the original position
         transform.position = originalPosition;
         turnCompleted = true;
+        moving = false;
+        //Debug.Log("back");
     }
 
-    IEnumerator Attack(float delay){
-        yield return new WaitForSeconds(delay);
-        if(turn){
+    void Attack(){
+            //Debug.Log("Enemy Attack");
             turn = false;
-            StartCoroutine(Move());
+
+            SpriteRenderer sr = player.GetComponent<SpriteRenderer>();
+            Bounds sb = sr.bounds;
+
+            GameObject ps = Instantiate(damageEffect, player.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
+            Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
+
             GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
             inst.GetComponent<textFloat>().damage = enemy.damage;
-            player.GetComponent<Attack>().health -= enemy.damage; 
-        }        
+
+            StartCoroutine(player.GetComponent<Attack>().ShakeCoroutine());
+
+            player.GetComponent<Attack>().health -= enemy.damage;    
     }
 
     public IEnumerator ShakeCoroutine()

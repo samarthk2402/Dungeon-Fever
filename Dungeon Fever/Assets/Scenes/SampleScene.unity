@@ -2175,6 +2175,8 @@ MonoBehaviour:
   turnCompleted: 0
   player: {fileID: 0}
   dead: 0
+  shakeDuration: 0.1
+  shakeIntensity: 0.2
   option: 0
 --- !u!212 &1474631749
 SpriteRenderer:
