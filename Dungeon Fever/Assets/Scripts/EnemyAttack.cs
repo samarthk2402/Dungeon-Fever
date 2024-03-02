@@ -16,6 +16,9 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     public Enemy enemy;
 
+    [SerializeField]
+    private GameObject shadow;
+
     public GameObject player;
 
     public bool turn;
@@ -23,9 +26,15 @@ public class EnemyAttack : MonoBehaviour
 
     private Vector3 originalPosition;
 
-    private Animator anim;
+    public Animator anim;
 
     public int health;
+
+    private Vector3 bottomPos;
+
+    public float shakeIntensity;
+    public float shakeDuration;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,12 +48,16 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bottomPos = new Vector3(0, -GetComponent<SpriteRenderer>().bounds.size.y/2, 0);
+        shadow.transform.position = transform.position + bottomPos;
+
         if(turn && health > 0){
             //turn = false;
             StartCoroutine(Attack(0.5f));
         }
 
         if(health <= 0){
+            shadow.SetActive(false);
             anim.SetTrigger("death");
             //Destroy(this.gameObject);
         }
@@ -65,6 +78,7 @@ public class EnemyAttack : MonoBehaviour
         {
             transform.position = Vector3.Lerp(startingPosition, startingPosition + new Vector3(moveDistance, 0, 0), elapsedTime / duration);
             elapsedTime += Time.deltaTime;
+            Debug.Log("Moving");
             yield return null;
         }
 
@@ -100,5 +114,22 @@ public class EnemyAttack : MonoBehaviour
             inst.GetComponent<textFloat>().damage = enemy.damage;
             player.GetComponent<Attack>().health -= enemy.damage; 
         }        
+    }
+
+    public IEnumerator ShakeCoroutine()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < shakeDuration)
+        {
+            Vector3 randomOffset = Random.insideUnitSphere * shakeIntensity;
+            transform.position = originalPosition + randomOffset;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset the object's position after shake duration ends
+        transform.position = originalPosition;
     }
 }

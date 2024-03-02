@@ -12,6 +12,8 @@ public class Attack : MonoBehaviour
     private float moveDistance;
     [SerializeField]
     private GameObject damageText;
+    [SerializeField]
+    private GameObject damageEffect;
     public int damage;
     public int abilityDamage;
     public int abilityCost;
@@ -75,11 +77,20 @@ public class Attack : MonoBehaviour
                         // If the ray hits a collider on the target layer, do something
                         GameObject clickedObject = hit.collider.gameObject;
                         //Debug.Log("Clicked object: " + clickedObject.name);
+
+                        SpriteRenderer sr = hit.collider.gameObject.GetComponent<SpriteRenderer>();
+                        Bounds sb = sr.bounds;
                         
                         GameObject inst;
                         inst = Instantiate(damageText, hit.collider.gameObject.transform.position, Quaternion.identity);
                         inst.transform.SetParent(canvas.transform, false);
-                        // Lerp towards positio
+
+                        GameObject ps = Instantiate(damageEffect, hit.collider.gameObject.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
+                        Debug.Log(ps);
+                        Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
+
+                        StartCoroutine(hit.collider.gameObject.GetComponent<EnemyAttack>().ShakeCoroutine());
+
                         switch(option){
                             case Option.Attack:
                                 StartCoroutine(Move("attack"));
