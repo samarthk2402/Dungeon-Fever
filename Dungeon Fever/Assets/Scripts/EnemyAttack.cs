@@ -41,7 +41,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if(turn && health > 0){
             turn = false;
-            StartCoroutine(Attack(1.5f));
+            StartCoroutine(Attack(0.5f));
         }
 
         if(health <= 0){

@@ -71,7 +71,6 @@ public class Attack : MonoBehaviour
                         inst.transform.SetParent(canvas.transform, false);
                         inst.GetComponent<textFloat>().damage = damage;
                         hit.collider.gameObject.GetComponent<EnemyAttack>().health -= damage;
-                        turnCompleted = true;
                     }
 
                 }
@@ -140,5 +139,6 @@ public class Attack : MonoBehaviour
 
         // Ensure we reach exactly the original position
         transform.position = originalPosition;
+        turnCompleted = true;
     }
 }

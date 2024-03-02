@@ -9,12 +9,15 @@ public class ManageGameStat : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform spawnTransform;
 
+    public Animator transitionAnim;
+
     public GameObject player;
     public GameObject enemy;
     public GameObject healthText;
 
     private GameObject playerHealthText;
     private GameObject enemyHealthText;
+    private bool enemyInstantiating;
 
     [SerializeField] private Canvas canvas;
 
@@ -39,6 +42,7 @@ public class ManageGameStat : MonoBehaviour
         playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
 
         playerHealthText.transform.SetParent(canvas.transform, false);
+
     }
 
     // Update is called once per frame
@@ -58,8 +62,6 @@ public class ManageGameStat : MonoBehaviour
             }else{
                 enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<EnemyAttack>().health.ToString();
             }
-        }else{
-            StartCoroutine(InstantiateEnemyAfterDelay(1.5f));
         }
 
         switch(gameState){
@@ -71,6 +73,11 @@ public class ManageGameStat : MonoBehaviour
                         if(enemy != null){
                             enemy.GetComponent<EnemyAttack>().turn = true;
                             gameState = State.Enemy;
+                        }else{
+                            if(!enemyInstantiating){
+                                transitionAnim.SetTrigger("newStage");
+                                enemyInstantiating = true;
+                            }
                         }
                     }
                 }
@@ -90,19 +97,23 @@ public class ManageGameStat : MonoBehaviour
         }
     }
 
-    void InstantiateEnemy(){
+    public void InstantiateEnemy(){
         int rand = Random.Range(0, enemyTypes.Count);
         enemy = Instantiate(enemyPrefab, spawnTransform.position, Quaternion.identity);
         enemy.GetComponent<EnemyAttack>().player = player.gameObject;
         enemy.GetComponent<EnemyAttack>().canvas = canvas;
         enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
         player.GetComponent<Attack>().turn = true;
+        enemyInstantiating = false;
     }
 
-    IEnumerator InstantiateEnemyAfterDelay(float delay){
-        yield return new WaitForSeconds(delay);
-        if(enemy.gameObject == null){
-            InstantiateEnemy();
-        }
-    }
+    // IEnumerator InstantiateEnemyAfterDelay(float delay){
+    //     if(enemy.gameObject == null){
+    //         transitionAnim.SetTrigger("newStage");
+    //     }
+    //     yield return new WaitForSeconds(delay);
+    //     if(enemy.gameObject == null){
+    //         InstantiateEnemy();
+    //     }
+    // }
 }
