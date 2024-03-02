@@ -12,11 +12,11 @@ public class Attack : MonoBehaviour
     private float moveDistance;
     [SerializeField]
     private GameObject damageText;
-    [SerializeField]
     public int damage;
-    [SerializeField]
     public int abilityDamage;
+    public int abilityCost;
     public int health;
+    public int energy;
     [SerializeField]
     private Canvas canvas;
 
@@ -61,7 +61,6 @@ public class Attack : MonoBehaviour
         if(turn && health>0){
                 //Debug.Log(turn);
                 if(Input.GetMouseButtonDown(0)){
-                    //turn = false;
                     // Cast a ray from the mouse position into the scene
                     Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero, Mathf.Infinity, enemyLayer);
@@ -72,6 +71,7 @@ public class Attack : MonoBehaviour
                     // Check if the ray hits any collider on the target layer
                     if (hit.collider != null)
                     {
+                        turn = false;
                         // If the ray hits a collider on the target layer, do something
                         GameObject clickedObject = hit.collider.gameObject;
                         //Debug.Log("Clicked object: " + clickedObject.name);
@@ -87,6 +87,7 @@ public class Attack : MonoBehaviour
                                 hit.collider.gameObject.GetComponent<EnemyAttack>().health -= damage;
                                 break;
                             case Option.Ability:
+                                energy -= abilityCost;
                                 StartCoroutine(Move("ability"));
                                 inst.GetComponent<textFloat>().damage = abilityDamage;
                                 hit.collider.gameObject.GetComponent<EnemyAttack>().health -= abilityDamage;

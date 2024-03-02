@@ -14,10 +14,12 @@ public class ManageGameStat : MonoBehaviour
     public GameObject player;
     public GameObject enemy;
     public GameObject healthText;
+    public GameObject energyText;
     public GameObject stageText;
 
     private GameObject playerHealthText;
     private GameObject enemyHealthText; 
+    private GameObject playerEnergyText;
     private bool enemyInstantiating;
     private int stage;
 
@@ -39,13 +41,14 @@ public class ManageGameStat : MonoBehaviour
 
         InstantiateEnemy();
 
-        enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0, 0), Quaternion.identity);
-
+        enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0.6f, 0), Quaternion.identity);
         enemyHealthText.transform.SetParent(canvas.transform, false);
 
-        playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
-
+        playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-2, 0.6f, 0), Quaternion.identity);
         playerHealthText.transform.SetParent(canvas.transform, false);
+
+        playerEnergyText = Instantiate(energyText, player.transform.position + new Vector3(-2, 0f, 0), Quaternion.identity);
+        playerEnergyText.transform.SetParent(canvas.transform, false);
 
     }
 
@@ -56,9 +59,9 @@ public class ManageGameStat : MonoBehaviour
         if(player.gameObject != null){
             if(playerHealthText.gameObject != null){
                 if(player.GetComponent<Attack>().health <= 0){
-                    playerHealthText.GetComponent<TMP_Text>().text = "0";
+                    playerHealthText.GetComponent<TMP_Text>().text = "Health: 0";
                 }else{
-                    playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
+                    playerHealthText.GetComponent<TMP_Text>().text = "Health: "+player.GetComponent<Attack>().health.ToString();
                 }
 
                 if(player.GetComponent<Attack>().dead){
@@ -67,13 +70,27 @@ public class ManageGameStat : MonoBehaviour
 
                 // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
             }
+
+            if(playerEnergyText.gameObject != null){
+                if(player.GetComponent<Attack>().health <= 0){
+                    playerEnergyText.GetComponent<TMP_Text>().text = "Energy: 0";
+                }else{
+                    playerEnergyText.GetComponent<TMP_Text>().text = "Energy: "+player.GetComponent<Attack>().energy.ToString();
+                }
+
+                if(player.GetComponent<Attack>().dead){
+                    Destroy(playerEnergyText);
+                }
+
+                // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
+            }
         }
 
         if(enemy.gameObject != null){
             if(enemy.GetComponent<EnemyAttack>().health <= 0){
-            enemyHealthText.GetComponent<TMP_Text>().text = "0";
+            enemyHealthText.GetComponent<TMP_Text>().text = "Health: 0";
             }else{
-                enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<EnemyAttack>().health.ToString();
+                enemyHealthText.GetComponent<TMP_Text>().text = "Health: "+enemy.GetComponent<EnemyAttack>().health.ToString();
             }
         }
 
@@ -103,6 +120,7 @@ public class ManageGameStat : MonoBehaviour
                         enemy.GetComponent<EnemyAttack>().turn = false;
                         enemy.GetComponent<EnemyAttack>().turnCompleted = false;
                         player.GetComponent<Attack>().turn = true;
+                        player.GetComponent<Attack>().option = Attack.Option.Attack;
                         gameState = State.Player;
                     }
                 }
@@ -117,6 +135,7 @@ public class ManageGameStat : MonoBehaviour
         enemy.GetComponent<EnemyAttack>().canvas = canvas;
         enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
         player.GetComponent<Attack>().turn = true;
+        player.GetComponent<Attack>().option = Attack.Option.Attack;
         enemyInstantiating = false;
         stage += 1;
     }

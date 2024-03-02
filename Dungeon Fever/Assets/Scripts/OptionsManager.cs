@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OptionsManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public GameObject player;
+    public Button AbilityButton;
+
+    void Update(){
+        if(player != null){
+            if(player.GetComponent<Attack>().energy <= 0){
+                AbilityButton.interactable = false;
+            }else{
+                AbilityButton.interactable = true;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Restart(){
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Reload the scene by passing its index
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }

@@ -1626,7 +1626,7 @@ MonoBehaviour:
   turnCompleted: 0
   player: {fileID: 0}
   dead: 0
-  option: 1
+  option: 0
 --- !u!212 &1474631749
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -26,6 +26,7 @@ public class EnemyAttack : MonoBehaviour
     private Animator anim;
 
     public int health;
+    private bool moveCompleted = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +41,7 @@ public class EnemyAttack : MonoBehaviour
     void Update()
     {
         if(turn && health > 0){
-            turn = false;
+            //turn = false;
             StartCoroutine(Attack(0.5f));
         }
 
@@ -87,18 +88,18 @@ public class EnemyAttack : MonoBehaviour
 
         // Ensure we reach exactly the original position
         transform.position = originalPosition;
+        turnCompleted = true;
     }
 
     IEnumerator Attack(float delay){
         yield return new WaitForSeconds(delay);
-        if(!turnCompleted){
+        if(turn){
             turn = false;
             StartCoroutine(Move());
             GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
             inst.GetComponent<textFloat>().damage = enemy.damage;
             player.GetComponent<Attack>().health -= enemy.damage; 
-            turnCompleted = true;
         }        
     }
 }
