@@ -150,20 +150,22 @@ public class Attack : MonoBehaviour
     }
     IEnumerator Move(GameObject enemy)
     {
-        float distance = Mathf.Abs(moveDistance);
+        Vector3 startingPosition = transform.position;
+        Vector3 direction = enemy.transform.position - transform.position;
+        direction.Normalize();
+        float distance = Mathf.Abs(Vector3.Distance(transform.position, enemy.transform.position-(direction*moveDistance)));
         float duration = distance / moveSpeed;
         float elapsedTime = 0f;
-        Vector3 startingPosition = transform.position;
 
         while (elapsedTime < duration)
         {
-            transform.position = Vector3.Lerp(startingPosition, startingPosition + new Vector3(moveDistance, 0, 0), elapsedTime / duration);
+            transform.position = Vector3.Lerp(startingPosition, startingPosition + direction*distance, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Ensure we reach exactly the stopping distance away
-        transform.position = startingPosition + new Vector3(moveDistance, 0, 0);
+        transform.position = enemy.transform.position-(direction*moveDistance);
 
         // Wait for a short duration before returning to the original position
         switch(option){
@@ -175,6 +177,8 @@ public class Attack : MonoBehaviour
                 break;
         }
 
+        Vector3 currPos = transform.position;
+
         DamageEnemy(enemy);
         yield return new WaitForSeconds(0.5f);
 
@@ -183,7 +187,7 @@ public class Attack : MonoBehaviour
         elapsedTime = 0f;
         while (elapsedTime < returnDuration)
         {
-            transform.position = Vector3.Lerp(startingPosition + new Vector3(moveDistance, 0, 0), originalPosition, elapsedTime / returnDuration);
+            transform.position = Vector3.Lerp(currPos, originalPosition, elapsedTime / returnDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
