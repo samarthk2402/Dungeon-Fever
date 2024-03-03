@@ -2310,6 +2310,8 @@ MonoBehaviour:
   dead: 0
   shakeDuration: 0.1
   shakeIntensity: 0.2
+  critChance: 10
+  critText: {fileID: 3586966181924163584, guid: c92608e08af4f8241adaf9504c4d87dc, type: 3}
   option: 0
 --- !u!212 &1474631749
 SpriteRenderer:

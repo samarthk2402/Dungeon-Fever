@@ -7,7 +7,7 @@ public class textFloat : MonoBehaviour
 {
     private Animator anim;
     private TMP_Text textMeshPro;
-    public int damage;
+    public string damage;
 
     [SerializeField] private float seconds;
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class textFloat : MonoBehaviour
         anim = GetComponent<Animator>();
         //Debug.Log(damage);
         textMeshPro = GetComponent<TMP_Text>();
-        textMeshPro.text = damage.ToString();
+        textMeshPro.text = damage;
     }
 
     // Update is called once per frame

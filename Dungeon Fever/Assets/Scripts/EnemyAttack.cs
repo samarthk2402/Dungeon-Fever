@@ -133,7 +133,7 @@ public class EnemyAttack : MonoBehaviour
 
             GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
-            inst.GetComponent<textFloat>().damage = enemy.damage;
+            inst.GetComponent<textFloat>().damage = enemy.damage.ToString();
 
             StartCoroutine(player.GetComponent<Attack>().ShakeCoroutine());
 

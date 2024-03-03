@@ -39,6 +39,9 @@ public class Attack : MonoBehaviour
     public float shakeDuration;
     public float shakeIntensity;
 
+    public float critChance = 10;
+    public GameObject critText;
+
     public enum Option{
         Attack,
         Ability
@@ -140,16 +143,33 @@ public class Attack : MonoBehaviour
 
         switch(option){
             case Option.Attack:
-                inst.GetComponent<textFloat>().damage = damage;
-                enemy.GetComponent<EnemyAttack>().health -= damage;
+                inst.GetComponent<textFloat>().damage = (damage * Crit(enemy)).ToString();
+                enemy.GetComponent<EnemyAttack>().health -= damage * Crit(enemy);
                 break;
             case Option.Ability:
                 energy -= abilityCost;
-                inst.GetComponent<textFloat>().damage = abilityDamage;
-                enemy.GetComponent<EnemyAttack>().health -= abilityDamage;
+                inst.GetComponent<textFloat>().damage = (abilityDamage * Crit(enemy)).ToString();
+                enemy.GetComponent<EnemyAttack>().health -= abilityDamage * Crit(enemy);
                 break;
         }
     }
+
+    int Crit(GameObject enemy){
+        int randomNumber = Random.Range(0, 100);
+
+        // Check if the random number falls within the execution chance
+        if (randomNumber < critChance)
+        {
+            GameObject crit;
+            crit = Instantiate(critText, enemy.transform.position+new Vector3(0, 2, 0), Quaternion.identity);
+            crit.GetComponentInChildren<textFloat>().damage = "Crit";
+            crit.transform.SetParent(canvas.transform, false);
+            return 2;
+        }else{
+            return 1;
+        }
+    }
+
     IEnumerator Move(GameObject enemy)
     {
         Vector3 startingPosition = transform.position;
