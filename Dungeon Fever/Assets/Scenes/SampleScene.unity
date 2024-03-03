@@ -2163,7 +2163,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 0c443d56f17f0cf4c9f49170e40c4f07, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46c4bc21ba9833f4486acd7020073003, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2208,7 +2208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 5675824692698281603, guid: ac94444a25844944bb7a87ca08eb801c, type: 3}
   arms: {fileID: 1445275482}
-  w: {fileID: 11400000, guid: ebcca91810fc90d4aafb17145cd229df, type: 2}
+  w: {fileID: 11400000, guid: f41ccb08fc9e1d14b9e4eb9baf5f87e1, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2218,7 +2218,7 @@ MonoBehaviour:
   damageEffect: {fileID: 5659210261868204388, guid: 64ca95935877a3a4487dad7927a85a5e, type: 3}
   health: 12
   energy: 8
-  character: {fileID: 11400000, guid: c7b199562b6fc604fa09ebd72ed3b66c, type: 2}
+  character: {fileID: 11400000, guid: efb4fa9567c3a124bbfd61e19fed5d53, type: 2}
   canvas: {fileID: 1732492213}
   transAnim: {fileID: 994144672}
   turn: 0
