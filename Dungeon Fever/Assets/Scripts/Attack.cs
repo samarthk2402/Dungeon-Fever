@@ -5,6 +5,8 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [SerializeField] 
+    private Animator weapon;
+    [SerializeField] 
     private LayerMask enemyLayer;
     [SerializeField] 
     private float moveSpeed;
@@ -171,6 +173,7 @@ public class Attack : MonoBehaviour
         switch(option){
             case Option.Attack:
                 anim.SetTrigger("attack");
+                weapon.SetTrigger("attack");
                 break;
             case Option.Ability:
                 anim.SetTrigger("ability");
@@ -180,7 +183,7 @@ public class Attack : MonoBehaviour
         Vector3 currPos = transform.position;
 
         DamageEnemy(enemy);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         // Move back to the original position
         float returnDuration = Vector3.Distance(transform.position, originalPosition) / moveSpeed;
