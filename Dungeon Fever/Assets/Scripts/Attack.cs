@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    [SerializeField] 
+    public GameObject weaponPrefab;
     private GameObject weapon;
+    public Transform arms;
+    [SerializeField]
+    private Weapon w;
     private Animator weaponAnim;
     [SerializeField] 
     private LayerMask enemyLayer;
@@ -17,12 +20,11 @@ public class Attack : MonoBehaviour
     private GameObject damageText;
     [SerializeField]
     private GameObject damageEffect;
-    public int damage;
-    public int abilityDamage;
-    public int abilityCost;
-    public GameObject abilityEffect;
+
     public int health;
     public int energy;
+
+    public Character character;
 
     public Canvas canvas;
     public Animator transAnim;
@@ -56,9 +58,12 @@ public class Attack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = character.health;
+        energy = character.energy;
         originalPosition = transform.position;
 
         anim = GetComponent<Animator>();
+        anim.runtimeAnimatorController = character.animatorController;
 
         // Get the current scale of the GameObject
         flipScale = transform.localScale;
@@ -66,7 +71,10 @@ public class Attack : MonoBehaviour
             // Flip the scale along the x-axis
         flipScale.x *= -1;
 
+        weapon = Instantiate(weaponPrefab, new Vector3(0, 0.15f, 0), Quaternion.identity);
+        weapon.transform.SetParent(arms.transform, false);
         weaponAnim = weapon.GetComponent<Animator>();
+        weaponAnim.runtimeAnimatorController = w.animatorController;
     }
 
     // Update is called once per frame
@@ -148,15 +156,15 @@ public class Attack : MonoBehaviour
 
         switch(option){
             case Option.Attack:
-                inst.GetComponent<textFloat>().damage = (damage * Crit(enemy)).ToString();
-                enemy.GetComponent<EnemyAttack>().health -= damage * Crit(enemy);
+                inst.GetComponent<textFloat>().damage = ((character.strength + w.damage) * Crit(enemy)).ToString();
+                enemy.GetComponent<EnemyAttack>().health -= (character.strength + w.damage) * Crit(enemy);
                 break;
             case Option.Ability:
-                GameObject ae = Instantiate(abilityEffect, transform.position, Quaternion.identity);
+                GameObject ae = Instantiate(character.abilityEffect, transform.position, Quaternion.identity);
                 Destroy(ae, ae.GetComponent<ParticleSystem>().main.duration);
-                energy -= abilityCost;
-                inst.GetComponent<textFloat>().damage = (abilityDamage * Crit(enemy)).ToString();
-                enemy.GetComponent<EnemyAttack>().health -= abilityDamage * Crit(enemy);
+                energy -= character.abilityCost;
+                inst.GetComponent<textFloat>().damage = (character.abilityDamage * Crit(enemy)).ToString();
+                enemy.GetComponent<EnemyAttack>().health -= character.abilityDamage * Crit(enemy);
                 break;
         }
     }

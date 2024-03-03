@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7dc90a5ab6ea844aa10f5ea1f4c5444, type: 3}
+  m_Name: Common1
+  m_EditorClassIdentifier: 
+  name: Jeff
+  strength: 2
+  health: 10
+  energy: 8
+  abilityDamage: 5
+  abilityCost: 2
+  abilityEffect: {fileID: 7216451168758945258, guid: 1931a1c27254a844eb9c56d1bf1d79d7, type: 3}
+  animatorController: {fileID: 22100000, guid: e57bbf7950f79ae4a9eece0f255c079b, type: 2}
