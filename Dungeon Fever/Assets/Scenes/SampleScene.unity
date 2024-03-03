@@ -718,6 +718,29 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d01a718bcf01f834295539ee0e825586, type: 2}
   enemyPrefab: {fileID: 5860348554480985717, guid: 50d731383b08aa34fb45f20c627785c0, type: 3}
   spawnTransform: {fileID: 1658634055}
+  items:
+  - {fileID: 21300000, guid: 16bb386b859ad50458d2a839b8352902, type: 3}
+  - {fileID: 21300000, guid: 550acbd83c59abf4e90c89f7c8036a8a, type: 3}
+  - {fileID: 21300000, guid: 09b9229a90c87f24a8d048631719a710, type: 3}
+  - {fileID: 21300000, guid: 2fc0b342a1e09e64191f40334c0f7a3e, type: 3}
+  - {fileID: 21300000, guid: bfa5d80393f1235459e40fd48d11deb2, type: 3}
+  - {fileID: 21300000, guid: b1da91f4b097d364d805065ad1b91f5c, type: 3}
+  - {fileID: 21300000, guid: e6ff0bfcf3782744db1a04564034e3ce, type: 3}
+  - {fileID: 21300000, guid: 04958a677bd575940b9b83c070f4ce98, type: 3}
+  - {fileID: 21300000, guid: 96eeabd7f283086439ffe375bf05fe54, type: 3}
+  - {fileID: 21300000, guid: 18a7cfbb88647684894e7d656c1266a8, type: 3}
+  - {fileID: 21300000, guid: 2a53ffad0bcde88438f291d874d06a6f, type: 3}
+  - {fileID: 21300000, guid: 00c00f310948db8459a0f1fab33503e0, type: 3}
+  - {fileID: 21300000, guid: 00c00f310948db8459a0f1fab33503e0, type: 3}
+  - {fileID: 21300000, guid: f8ed6cedb528c96458b2e0f2bf0b101a, type: 3}
+  - {fileID: 21300000, guid: 25148f5981a6eb74da21f90de1e5bf3d, type: 3}
+  - {fileID: 21300000, guid: d0d899eaf6bd4c1479ec472876f10bb0, type: 3}
+  - {fileID: 21300000, guid: b74e5f142d8ed014ab33fa52d6ac94d7, type: 3}
+  - {fileID: 21300000, guid: 169d17e9d9d77cc4096cec9cc6253c6a, type: 3}
+  - {fileID: 21300000, guid: 4c9d0a98864440c4889ee2c4cc61cc07, type: 3}
+  - {fileID: 21300000, guid: c5efa37332b4e944ea5f9e3622c450a0, type: 3}
+  - {fileID: 21300000, guid: 21dcecbd13c33ef48b3ca674ef599ff9, type: 3}
+  itemPrefab: {fileID: 4418064543238339904, guid: 0b18822fa0f021e4d81ca3f57c9e4acb, type: 3}
   transitionAnim: {fileID: 994144672}
   player: {fileID: 1474631747}
   enemy: {fileID: 0}
@@ -2311,7 +2334,7 @@ MonoBehaviour:
   dead: 0
   shakeDuration: 0.1
   shakeIntensity: 0.2
-  critChance: 10
+  critChance: 100
   critText: {fileID: 3586966181924163584, guid: c92608e08af4f8241adaf9504c4d87dc, type: 3}
   option: 0
 --- !u!212 &1474631749

@@ -10,6 +10,9 @@ public class ManageGameStat : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform spawnTransform;
 
+    public List<Sprite> items = new List<Sprite>();
+    public GameObject itemPrefab;
+
     public Animator transitionAnim;
 
     public GameObject player;
@@ -108,12 +111,13 @@ public class ManageGameStat : MonoBehaviour
                             if(stage>=9){
                                 SceneManager.LoadScene(2);
                             }
-                            if(!enemyInstantiating){
-                                transitionAnim.SetTrigger("newStage");
-                                enemyInstantiating = true;
-                            }
                         }
                     }
+                }
+
+                if(!enemyInstantiating && enemy==null){
+                    StartCoroutine(ItemDrop());
+                    enemyInstantiating = true;
                 }
                 break;
             case State.Enemy:
@@ -142,6 +146,15 @@ public class ManageGameStat : MonoBehaviour
         player.GetComponent<Attack>().option = Attack.Option.Attack;
         enemyInstantiating = false;
         stage += 1;
+    }
+
+    IEnumerator ItemDrop(){
+        GameObject item = Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
+        int rand = Random.Range(0, items.Count);
+        item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
+        yield return new WaitForSeconds(1);
+        Destroy(item);
+        transitionAnim.SetTrigger("newStage");
     }
 
     // IEnumerator InstantiateEnemyAfterDelay(float delay){
