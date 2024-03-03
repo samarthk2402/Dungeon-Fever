@@ -21,8 +21,9 @@ public class Attack : MonoBehaviour
     public int abilityCost;
     public int health;
     public int energy;
-    [SerializeField]
-    private Canvas canvas;
+
+    public Canvas canvas;
+    public Animator transAnim;
 
     public bool turn;
     public bool turnCompleted = false;
@@ -164,6 +165,9 @@ public class Attack : MonoBehaviour
             crit = Instantiate(critText, enemy.transform.position+new Vector3(0, 2, 0), Quaternion.identity);
             crit.GetComponentInChildren<textFloat>().damage = "Crit";
             crit.transform.SetParent(canvas.transform, false);
+            Destroy(crit, 2);
+
+            transAnim.SetTrigger("critical");
             return 2;
         }else{
             return 1;

@@ -2304,6 +2304,7 @@ MonoBehaviour:
   health: 12
   energy: 8
   canvas: {fileID: 1732492213}
+  transAnim: {fileID: 994144672}
   turn: 0
   turnCompleted: 0
   player: {fileID: 0}
