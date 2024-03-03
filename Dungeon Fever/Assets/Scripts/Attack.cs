@@ -5,7 +5,8 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [SerializeField] 
-    private Animator weapon;
+    private GameObject weapon;
+    private Animator weaponAnim;
     [SerializeField] 
     private LayerMask enemyLayer;
     [SerializeField] 
@@ -19,6 +20,7 @@ public class Attack : MonoBehaviour
     public int damage;
     public int abilityDamage;
     public int abilityCost;
+    public GameObject abilityEffect;
     public int health;
     public int energy;
 
@@ -63,6 +65,8 @@ public class Attack : MonoBehaviour
 
             // Flip the scale along the x-axis
         flipScale.x *= -1;
+
+        weaponAnim = weapon.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -148,6 +152,8 @@ public class Attack : MonoBehaviour
                 enemy.GetComponent<EnemyAttack>().health -= damage * Crit(enemy);
                 break;
             case Option.Ability:
+                GameObject ae = Instantiate(abilityEffect, transform.position, Quaternion.identity);
+                Destroy(ae, ae.GetComponent<ParticleSystem>().main.duration);
                 energy -= abilityCost;
                 inst.GetComponent<textFloat>().damage = (abilityDamage * Crit(enemy)).ToString();
                 enemy.GetComponent<EnemyAttack>().health -= abilityDamage * Crit(enemy);
@@ -197,10 +203,11 @@ public class Attack : MonoBehaviour
         switch(option){
             case Option.Attack:
                 anim.SetTrigger("attack");
-                weapon.SetTrigger("attack");
+                weaponAnim.SetTrigger("attack");
                 break;
             case Option.Ability:
                 anim.SetTrigger("ability");
+                weapon.SetActive(false);
                 break;
         }
 
@@ -208,6 +215,7 @@ public class Attack : MonoBehaviour
 
         DamageEnemy(enemy);
         yield return new WaitForSeconds(1f);
+        weapon.SetActive(true);
 
         // Move back to the original position
         float returnDuration = Vector3.Distance(transform.position, originalPosition) / moveSpeed;

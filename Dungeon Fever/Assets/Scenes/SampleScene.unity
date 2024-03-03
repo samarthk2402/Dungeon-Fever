@@ -2313,7 +2313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7102fc73a7960448d932bfcca6aed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 52984584}
+  weapon: {fileID: 52984582}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2324,6 +2324,7 @@ MonoBehaviour:
   damage: 3
   abilityDamage: 6
   abilityCost: 2
+  abilityEffect: {fileID: 7216451168758945258, guid: 1931a1c27254a844eb9c56d1bf1d79d7, type: 3}
   health: 12
   energy: 8
   canvas: {fileID: 1732492213}
@@ -2334,7 +2335,7 @@ MonoBehaviour:
   dead: 0
   shakeDuration: 0.1
   shakeIntensity: 0.2
-  critChance: 100
+  critChance: 10
   critText: {fileID: 3586966181924163584, guid: c92608e08af4f8241adaf9504c4d87dc, type: 3}
   option: 0
 --- !u!212 &1474631749
