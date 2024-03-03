@@ -45,13 +45,13 @@ public class ManageGameStat : MonoBehaviour
 
         InstantiateEnemy();
 
-        enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0.6f, 0), Quaternion.identity);
+        enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0f, 0), Quaternion.identity);
         enemyHealthText.transform.SetParent(canvas.transform, false);
 
-        playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-2, 0.6f, 0), Quaternion.identity);
+        playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-1, 0.3f, 0), Quaternion.identity);
         playerHealthText.transform.SetParent(canvas.transform, false);
 
-        playerEnergyText = Instantiate(energyText, player.transform.position + new Vector3(-2, 0f, 0), Quaternion.identity);
+        playerEnergyText = Instantiate(energyText, player.transform.position + new Vector3(-1, -0.3f, 0), Quaternion.identity);
         playerEnergyText.transform.SetParent(canvas.transform, false);
 
     }
@@ -63,9 +63,9 @@ public class ManageGameStat : MonoBehaviour
         if(player.gameObject != null){
             if(playerHealthText.gameObject != null){
                 if(player.GetComponent<Attack>().health <= 0){
-                    playerHealthText.GetComponent<TMP_Text>().text = "Health: 0";
+                    playerHealthText.GetComponent<TMP_Text>().text = "0";
                 }else{
-                    playerHealthText.GetComponent<TMP_Text>().text = "Health: "+player.GetComponent<Attack>().health.ToString();
+                    playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
                 }
 
                 if(player.GetComponent<Attack>().dead){
@@ -77,9 +77,9 @@ public class ManageGameStat : MonoBehaviour
 
             if(playerEnergyText.gameObject != null){
                 if(player.GetComponent<Attack>().health <= 0){
-                    playerEnergyText.GetComponent<TMP_Text>().text = "Energy: 0";
+                    playerEnergyText.GetComponent<TMP_Text>().text = "0";
                 }else{
-                    playerEnergyText.GetComponent<TMP_Text>().text = "Energy: "+player.GetComponent<Attack>().energy.ToString();
+                    playerEnergyText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().energy.ToString();
                 }
 
                 if(player.GetComponent<Attack>().dead){
@@ -92,9 +92,9 @@ public class ManageGameStat : MonoBehaviour
 
         if(enemy.gameObject != null){
             if(enemy.GetComponent<EnemyAttack>().health <= 0){
-            enemyHealthText.GetComponent<TMP_Text>().text = "Health: 0";
+            enemyHealthText.GetComponent<TMP_Text>().text = "0";
             }else{
-                enemyHealthText.GetComponent<TMP_Text>().text = "Health: "+enemy.GetComponent<EnemyAttack>().health.ToString();
+                enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<EnemyAttack>().health.ToString();
             }
         }
 
