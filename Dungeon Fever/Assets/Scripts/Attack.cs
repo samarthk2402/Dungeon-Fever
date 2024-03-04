@@ -216,6 +216,7 @@ public class Attack : MonoBehaviour
             case Option.Ability:
                 anim.SetTrigger("ability");
                 weapon.SetActive(false);
+                StartCoroutine(ReactivateWeapon());
                 break;
         }
 
@@ -223,7 +224,7 @@ public class Attack : MonoBehaviour
 
         DamageEnemy(enemy);
         yield return new WaitForSeconds(1f);
-        weapon.SetActive(true);
+        //weapon.SetActive(true);
 
         // Move back to the original position
         float returnDuration = Vector3.Distance(transform.position, originalPosition) / moveSpeed;
@@ -238,6 +239,11 @@ public class Attack : MonoBehaviour
         // Ensure we reach exactly the original position
         transform.position = originalPosition;
         turnCompleted = true;
+    }
+    
+    IEnumerator ReactivateWeapon(){
+        yield return new WaitForSeconds(0.8f);
+        weapon.SetActive(true);
     }
 
     public void SetAttack(){
