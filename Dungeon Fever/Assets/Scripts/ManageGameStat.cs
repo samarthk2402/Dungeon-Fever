@@ -27,6 +27,10 @@ public class ManageGameStat : MonoBehaviour
     private GameObject playerEnergyText;
     private bool enemyInstantiating;
     public int stage;
+    public int goldToDrop;
+    private int gold;
+    public TMP_Text goldText;
+    public GameObject goldCoinPrefab;
 
     [SerializeField] private Canvas canvas;
 
@@ -39,6 +43,8 @@ public class ManageGameStat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gold = 0;
+
         timer = GetComponentInChildren<Timer>();
         timer.StartTimer();
         stage = 0;
@@ -62,6 +68,7 @@ public class ManageGameStat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        goldText.text = gold.ToString();
         stageText.GetComponent<TMP_Text>().text = "Stage: "+stage.ToString();
         if(player.gameObject != null){
             if(playerHealthText.gameObject != null){
@@ -153,6 +160,10 @@ public class ManageGameStat : MonoBehaviour
     }
 
     IEnumerator ItemDrop(){
+        GameObject coin = Instantiate(goldCoinPrefab, spawnTransform.position, Quaternion.identity);
+        Destroy(coin, 1);
+        gold += goldToDrop;
+
         GameObject item = Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
