@@ -97,11 +97,12 @@ public class EnemyAttack : MonoBehaviour
         //Debug.Log("forward");
         // Wait for a short duration before returning to the original position
         anim.SetTrigger("attack");
+        Vector3 currPos = transform.position;
+
+        yield return new WaitForSeconds(0.3f);
         if(turn){
             Attack();
         }
-
-        Vector3 currPos = transform.position;
         yield return new WaitForSeconds(0.5f);
 
         // Move back to the original position

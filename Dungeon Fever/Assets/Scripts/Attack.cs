@@ -222,8 +222,9 @@ public class Attack : MonoBehaviour
 
         Vector3 currPos = transform.position;
 
+        yield return new WaitForSeconds(0.3f);
         DamageEnemy(enemy);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         //weapon.SetActive(true);
 
         // Move back to the original position
