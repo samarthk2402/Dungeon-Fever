@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ManageGameStat : MonoBehaviour
 {
+    public Timer timer;
     public List<Enemy> enemyTypes = new List<Enemy>();
     public GameObject enemyPrefab;
     public Transform spawnTransform;
@@ -38,6 +39,8 @@ public class ManageGameStat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer = GetComponentInChildren<Timer>();
+        timer.StartTimer();
         stage = 0;
 
         gameState = State.Player;
@@ -70,6 +73,7 @@ public class ManageGameStat : MonoBehaviour
 
                 if(player.GetComponent<Attack>().dead){
                     Destroy(playerHealthText);
+                    timer.StopTimer();
                 }
 
                 // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
