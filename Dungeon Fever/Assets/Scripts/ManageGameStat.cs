@@ -30,6 +30,7 @@ public class ManageGameStat : MonoBehaviour
     public int goldToDrop;
     private int gold;
     public TMP_Text goldText;
+    public Transform goldIcon;
     public GameObject goldCoinPrefab;
 
     [SerializeField] private Canvas canvas;
@@ -160,9 +161,11 @@ public class ManageGameStat : MonoBehaviour
     }
 
     IEnumerator ItemDrop(){
-        GameObject coin = Instantiate(goldCoinPrefab, spawnTransform.position, Quaternion.identity);
-        Destroy(coin, 1);
-        gold += goldToDrop;
+
+        for(int i = 0; i<goldToDrop; i++){
+            //Debug.Log(i);
+            Invoke("InstantiateCoin", i*0.1f);
+        }
 
         GameObject item = Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
@@ -172,13 +175,31 @@ public class ManageGameStat : MonoBehaviour
         transitionAnim.SetTrigger("newStage");
     }
 
-    // IEnumerator InstantiateEnemyAfterDelay(float delay){
-    //     if(enemy.gameObject == null){
-    //         transitionAnim.SetTrigger("newStage");
-    //     }
-    //     yield return new WaitForSeconds(delay);
-    //     if(enemy.gameObject == null){
-    //         InstantiateEnemy();
-    //     }
-    // }
+    void InstantiateCoin(){
+        Debug.Log("Instantiating coin");
+        GameObject coin = Instantiate(goldCoinPrefab, spawnTransform.position, Quaternion.identity);
+        StartCoroutine(LerpObject(coin.transform, goldIcon, 0.6f));
+        Destroy(coin, 0.7f);
+    }
+
+    IEnumerator LerpObject(Transform startTransform, Transform endTransform, float lerpDuration)
+    {
+        float elapsedTime = 0f;
+
+        Vector3 startingPosition = startTransform.position;
+        Vector3 endingPosition = endTransform.position;
+
+        while (elapsedTime < lerpDuration)
+        {
+            float t = elapsedTime / lerpDuration;
+            startTransform.position = Vector3.Lerp(startingPosition, endingPosition, t);
+            elapsedTime += Time.deltaTime;
+            //Debug.Log(startTransform.position);
+            yield return null;
+        }
+
+        // Ensure final position
+        startTransform.position = endingPosition;
+        gold += 1;
+    }
 }

@@ -163,8 +163,9 @@ public class Attack : MonoBehaviour
                 GameObject ae = Instantiate(character.abilityEffect, transform.position, Quaternion.identity);
                 Destroy(ae, ae.GetComponent<ParticleSystem>().main.duration);
                 energy -= character.abilityCost;
-                inst.GetComponent<textFloat>().damage = (character.abilityDamage * Crit(enemy)).ToString();
-                enemy.GetComponent<EnemyAttack>().health -= character.abilityDamage * Crit(enemy);
+                int d = character.abilityDamage * Crit(enemy);
+                inst.GetComponent<textFloat>().damage = d.ToString();
+                enemy.GetComponent<EnemyAttack>().health -= d;
                 break;
         }
     }
