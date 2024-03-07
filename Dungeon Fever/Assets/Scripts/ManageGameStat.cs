@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ManageGameStat : MonoBehaviour
 {
+    public List<Gradient> rarityColours = new List<Gradient>();
     public Timer timer;
     public List<Enemy> enemyTypes = new List<Enemy>();
     public GameObject enemyPrefab;
@@ -171,13 +172,22 @@ public class ManageGameStat : MonoBehaviour
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
         item.GetComponent<Rigidbody2D>().AddForce((player.transform.position-spawnTransform.position)*2, ForceMode2D.Impulse);
+
+        int randColour = Random.Range(0, rarityColours.Count);
+        item.GetComponentInChildren<LineRenderer>().startColor = rarityColours[randColour].Evaluate(0);
+        item.GetComponentInChildren<LineRenderer>().endColor = rarityColours[randColour].Evaluate(1);
+
+        var mainModule = item.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
+        mainModule.color = new ParticleSystem.MinMaxGradient(rarityColours[randColour]);
+        Debug.Log(mainModule.color);
+
         yield return new WaitForSeconds(2);
         Destroy(item, 0.5f);
         transitionAnim.SetTrigger("newStage");
     }
 
     void InstantiateCoin(){
-        Debug.Log("Instantiating coin");
+        //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, spawnTransform.position, Quaternion.identity);
         StartCoroutine(LerpObject(coin.transform, goldIcon, 0.6f));
         Destroy(coin, 0.7f);
