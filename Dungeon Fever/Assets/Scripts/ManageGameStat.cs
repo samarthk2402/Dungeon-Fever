@@ -170,8 +170,9 @@ public class ManageGameStat : MonoBehaviour
         GameObject item = Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
-        yield return new WaitForSeconds(1);
-        Destroy(item);
+        item.GetComponent<Rigidbody2D>().AddForce((player.transform.position-spawnTransform.position)*2, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(2);
+        Destroy(item, 0.5f);
         transitionAnim.SetTrigger("newStage");
     }
 
