@@ -996,6 +996,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   healthText: {fileID: 7914421860480046568, guid: f956e39754673314caa31bd5c124e6fa, type: 3}
   energyText: {fileID: 2503877654054072417, guid: d6571df9ec5fca8489f5acaebfdb1f17, type: 3}
+  levelText: {fileID: 5506966764116795792, guid: dffd2d6f76b916f489a8c4ba618b919a, type: 3}
   stageText: {fileID: 1017966477}
   stage: 0
   goldToDrop: 5
@@ -2728,6 +2729,8 @@ MonoBehaviour:
   damageEffect: {fileID: 5659210261868204388, guid: 64ca95935877a3a4487dad7927a85a5e, type: 3}
   health: 12
   energy: 8
+  level: 0
+  xp: 0
   character: {fileID: 11400000, guid: c7b199562b6fc604fa09ebd72ed3b66c, type: 2}
   canvas: {fileID: 1732492213}
   transAnim: {fileID: 994144672}

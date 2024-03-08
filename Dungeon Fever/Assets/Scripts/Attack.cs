@@ -23,6 +23,8 @@ public class Attack : MonoBehaviour
 
     public int health;
     public int energy;
+    public int level;
+    public int xp;
 
     public Character character;
 
@@ -80,6 +82,10 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(xp>=100){
+            level += 1;
+            xp = 0;
+        }
 
         if(turn && health>0){
                 //Debug.Log(turn);

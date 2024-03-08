@@ -21,11 +21,14 @@ public class ManageGameStat : MonoBehaviour
     public GameObject enemy;
     public GameObject healthText;
     public GameObject energyText;
+    public GameObject levelText;
     public GameObject stageText;
 
     private GameObject playerHealthText;
     private GameObject enemyHealthText; 
     private GameObject playerEnergyText;
+    private GameObject playerLevelText;
+
     private bool enemyInstantiating;
     public int stage;
     public int goldToDrop;
@@ -65,6 +68,9 @@ public class ManageGameStat : MonoBehaviour
         playerEnergyText = Instantiate(energyText, player.transform.position + new Vector3(-1, -0.3f, 0), Quaternion.identity);
         playerEnergyText.transform.SetParent(canvas.transform, false);
 
+        playerLevelText = Instantiate(levelText, player.transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
+        playerLevelText.transform.SetParent(canvas.transform, false);
+
     }
 
     // Update is called once per frame
@@ -72,6 +78,7 @@ public class ManageGameStat : MonoBehaviour
     {
         goldText.text = gold.ToString();
         stageText.GetComponent<TMP_Text>().text = "Stage: "+stage.ToString();
+
         if(player.gameObject != null){
             if(playerHealthText.gameObject != null){
                 if(player.GetComponent<Attack>().health <= 0){
@@ -97,6 +104,17 @@ public class ManageGameStat : MonoBehaviour
 
                 if(player.GetComponent<Attack>().dead){
                     Destroy(playerEnergyText);
+                }
+
+                // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
+            }
+
+            if(playerLevelText.gameObject != null){
+                playerLevelText.GetComponent<TMP_Text>().text = "Lvl "+player.GetComponent<Attack>().level.ToString();
+
+
+                if(player.GetComponent<Attack>().dead){
+                    Destroy(playerLevelText);
                 }
 
                 // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
@@ -129,6 +147,7 @@ public class ManageGameStat : MonoBehaviour
                 }
 
                 if(!enemyInstantiating && enemy==null){
+                    player.GetComponent<Attack>().xp += 20;
                     StartCoroutine(ItemDrop());
                     enemyInstantiating = true;
                 }
