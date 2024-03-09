@@ -68,7 +68,7 @@ public class ManageGameStat : MonoBehaviour
         playerEnergyText = Instantiate(energyText, player.transform.position + new Vector3(-1, -0.3f, 0), Quaternion.identity);
         playerEnergyText.transform.SetParent(canvas.transform, false);
 
-        playerLevelText = Instantiate(levelText, player.transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
+        playerLevelText = Instantiate(levelText, player.transform.position + new Vector3(-1.5f, -1.5f, 0), Quaternion.identity);
         playerLevelText.transform.SetParent(canvas.transform, false);
 
     }
@@ -111,7 +111,7 @@ public class ManageGameStat : MonoBehaviour
 
             if(playerLevelText.gameObject != null){
                 playerLevelText.GetComponent<TMP_Text>().text = "Lvl "+player.GetComponent<Attack>().level.ToString();
-
+                playerLevelText.GetComponentInChildren<XPBar>().SetXP(player.GetComponent<Attack>().xp);
 
                 if(player.GetComponent<Attack>().dead){
                     Destroy(playerLevelText);
@@ -198,7 +198,6 @@ public class ManageGameStat : MonoBehaviour
 
         var mainModule = item.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
         mainModule.color = new ParticleSystem.MinMaxGradient(rarityColours[randColour]);
-        Debug.Log(mainModule.color);
 
         yield return new WaitForSeconds(2);
         Destroy(item, 0.5f);
