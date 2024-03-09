@@ -38,6 +38,7 @@ public class EnemyAttack : MonoBehaviour
     public float shakeDuration;
 
     private bool moving;
+    public bool rare;
 
     // Start is called before the first frame update
     void Start()
