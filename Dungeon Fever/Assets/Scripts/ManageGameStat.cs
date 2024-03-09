@@ -191,6 +191,12 @@ public class ManageGameStat : MonoBehaviour
         item.GetComponentInChildren<LineRenderer>().startColor = rarityColours[randColour].Evaluate(0);
         item.GetComponentInChildren<LineRenderer>().endColor = rarityColours[randColour].Evaluate(1);
 
+        Material material = item.GetComponentInChildren<SpriteRenderer>().material;
+        Debug.Log(material);
+
+        // Set the outline color property of the material to the new color
+        material.SetColor("_color", rarityColours[randColour].Evaluate(0)*5*randColour);
+
         var mainModule = item.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
         mainModule.color = new ParticleSystem.MinMaxGradient(rarityColours[randColour]);
 
