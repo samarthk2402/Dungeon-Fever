@@ -34,8 +34,9 @@ public class ManageGameStat : MonoBehaviour
     public int goldToDrop;
     private int gold;
     public TMP_Text goldText;
-    public Transform goldIcon;
+    public RectTransform goldIcon;
     public GameObject goldCoinPrefab;
+    public GameObject xpPrefab;
 
     [SerializeField] private Canvas canvas;
 
@@ -147,7 +148,6 @@ public class ManageGameStat : MonoBehaviour
                 }
 
                 if(!enemyInstantiating && enemy==null){
-                    player.GetComponent<Attack>().xp += 20;
                     StartCoroutine(ItemDrop());
                     enemyInstantiating = true;
                 }
@@ -182,11 +182,6 @@ public class ManageGameStat : MonoBehaviour
 
     IEnumerator ItemDrop(){
 
-        for(int i = 0; i<goldToDrop; i++){
-            //Debug.Log(i);
-            Invoke("InstantiateCoin", i*0.1f);
-        }
-
         GameObject item = Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
@@ -199,7 +194,19 @@ public class ManageGameStat : MonoBehaviour
         var mainModule = item.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
         mainModule.color = new ParticleSystem.MinMaxGradient(rarityColours[randColour]);
 
-        yield return new WaitForSeconds(2);
+        for(int i = 0; i<goldToDrop; i++){
+            //Debug.Log(i);
+            Invoke("InstantiateCoin", i*0.1f);
+        }
+
+        yield return new WaitForSeconds(1);
+
+        for(int i = 0; i<10; i++){
+            //Debug.Log(i);
+            Invoke("InstantiateXPSoul", i*0.05f);
+        }
+
+        yield return new WaitForSeconds(2.5f);
         Destroy(item, 0.5f);
         transitionAnim.SetTrigger("newStage");
     }
@@ -207,16 +214,22 @@ public class ManageGameStat : MonoBehaviour
     void InstantiateCoin(){
         //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, spawnTransform.position, Quaternion.identity);
-        StartCoroutine(LerpObject(coin.transform, goldIcon, 0.6f));
-        Destroy(coin, 0.7f);
+        StartCoroutine(LerpObject(coin.transform, goldIcon.position, 1f, true));
+        Destroy(coin, 1.1f);
     }
 
-    IEnumerator LerpObject(Transform startTransform, Transform endTransform, float lerpDuration)
+    void InstantiateXPSoul(){
+        //Debug.Log("Instantiating coin");
+        GameObject soul = Instantiate(xpPrefab, spawnTransform.position, Quaternion.identity);
+        StartCoroutine(LerpObject(soul.transform, playerLevelText.transform.position, 1f, false));
+        Destroy(soul, 1.1f);
+    }
+
+    IEnumerator LerpObject(Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin)
     {
         float elapsedTime = 0f;
 
         Vector3 startingPosition = startTransform.position;
-        Vector3 endingPosition = endTransform.position;
 
         while (elapsedTime < lerpDuration)
         {
@@ -229,6 +242,10 @@ public class ManageGameStat : MonoBehaviour
 
         // Ensure final position
         startTransform.position = endingPosition;
-        gold += 1;
+        if(isCoin){
+            gold += 1;
+        }else{
+            player.GetComponent<Attack>().xp += 1;
+        }
     }
 }
