@@ -163,16 +163,19 @@ public class Attack : MonoBehaviour
 
         StartCoroutine(enemy.GetComponent<EnemyAttack>().ShakeCoroutine());
 
+        int d;
+
         switch(option){
             case Option.Attack:
-                inst.GetComponent<textFloat>().damage = ((character.strength + w.damage) * Crit(enemy)).ToString();
-                enemy.GetComponent<EnemyAttack>().health -= (character.strength + w.damage) * Crit(enemy);
+                d = (character.strength + w.damage) * Crit(enemy);
+                inst.GetComponent<textFloat>().damage = d.ToString();
+                enemy.GetComponent<EnemyAttack>().health -= d;
                 break;
             case Option.Ability:
                 GameObject ae = Instantiate(character.abilityEffect, transform.position, Quaternion.identity);
                 Destroy(ae, ae.GetComponent<ParticleSystem>().main.duration);
                 energy -= character.abilityCost;
-                int d = character.abilityDamage * Crit(enemy);
+                d = character.abilityDamage * Crit(enemy);
                 inst.GetComponent<textFloat>().damage = d.ToString();
                 enemy.GetComponent<EnemyAttack>().health -= d;
                 break;

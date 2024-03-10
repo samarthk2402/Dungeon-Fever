@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 149622374}
   - component: {fileID: 149622376}
   - component: {fileID: 149622375}
+  - component: {fileID: 149622377}
   m_Layer: 5
   m_Name: GoldIcon
   m_TagString: Untagged
@@ -328,6 +329,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149622373}
   m_CullTransparentMesh: 1
+--- !u!95 &149622377
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149622373}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db53c7b0b8f2bf341adc5859b5243b4d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &180954714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1023,7 @@ MonoBehaviour:
   stage: 0
   goldToDrop: 5
   goldText: {fileID: 1717927953}
-  goldIcon: {fileID: 149622374}
+  goldIcon: {fileID: 149622373}
   goldCoinPrefab: {fileID: 3832823831369796315, guid: 855a12d85a3720e468f574ea80d7c744, type: 3}
   xpPrefab: {fileID: 8670922457745611623, guid: e1f93087a4ce005428992d7cceb3fafd, type: 3}
   xpToDrop: 0

@@ -34,7 +34,7 @@ public class ManageGameStat : MonoBehaviour
     public int goldToDrop;
     private int gold;
     public TMP_Text goldText;
-    public RectTransform goldIcon;
+    public GameObject goldIcon;
     public GameObject goldCoinPrefab;
     public GameObject xpPrefab;
     public int xpToDrop;
@@ -241,14 +241,14 @@ public class ManageGameStat : MonoBehaviour
 
         for(int i = 0; i<goldToDrop; i++){
             //Debug.Log(i);
-            Invoke("InstantiateCoin", i*0.1f);
+            Invoke("InstantiateCoin", i*0.5f/goldToDrop);
         }
 
         yield return new WaitForSeconds(1);
 
         for(int i = 0; i<xpToDrop; i++){
             //Debug.Log(i);
-            Invoke("InstantiateXPSoul", i*0.05f);
+            Invoke("InstantiateXPSoul", i*0.5f/xpToDrop);
         }
 
         yield return new WaitForSeconds(2.5f);
@@ -259,14 +259,14 @@ public class ManageGameStat : MonoBehaviour
     void InstantiateCoin(){
         //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, spawnTransform.position, Quaternion.identity);
-        StartCoroutine(LerpObject(coin.transform, goldIcon.position, 1f, true));
+        StartCoroutine(LerpObject(coin.transform, goldIcon.transform.position, 1f, true));
         Destroy(coin, 1.1f);
     }
 
     void InstantiateXPSoul(){
         //Debug.Log("Instantiating coin");
         GameObject soul = Instantiate(xpPrefab, spawnTransform.position, Quaternion.identity);
-        StartCoroutine(LerpObject(soul.transform, playerLevelText.transform.position, 1f, false));
+        StartCoroutine(LerpObject(soul.transform, playerLevelText.transform.position, 0.8f, false));
         Destroy(soul, 1.1f);
     }
 
@@ -289,6 +289,7 @@ public class ManageGameStat : MonoBehaviour
         startTransform.position = endingPosition;
         if(isCoin){
             gold += 1;
+            goldIcon.GetComponent<Animator>().SetTrigger("moreGold");
         }else{
             player.GetComponent<Attack>().xp += 1;
         }

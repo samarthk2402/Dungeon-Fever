@@ -44,6 +44,9 @@ public class EnemyAttack : MonoBehaviour
     public Material mat;
     public Color rareCol;
     public Color superRareCol;
+    public Gradient rareGrad;
+    public Gradient superRareGrad;
+    public GameObject ps;
     private static readonly int colour = Shader.PropertyToID("_color");
 
     // Start is called before the first frame update
@@ -52,12 +55,21 @@ public class EnemyAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         anim.runtimeAnimatorController = enemy.animatorController;
         if(rare){
-            mat.SetColor(colour, rareCol);
+            ps.SetActive(true);
+            mat.SetColor(colour, rareCol*1.2f);
             health = Mathf.RoundToInt(enemy.health*1.5f);
+
+            var mainModule = ps.GetComponent<ParticleSystem>().colorOverLifetime;
+            mainModule.color = new ParticleSystem.MinMaxGradient(rareGrad);
         }else if(superRare){
-            mat.SetColor(colour, superRareCol);
+            ps.SetActive(true);
+            mat.SetColor(colour, superRareCol*1.2f);
             health = Mathf.RoundToInt(enemy.health*2f);
+
+            var mainModule = ps.GetComponent<ParticleSystem>().colorOverLifetime;
+            mainModule.color = new ParticleSystem.MinMaxGradient(superRareGrad);
         }else{
+            ps.SetActive(false);
             mat.SetColor(colour, Color.white);
             health = Mathf.RoundToInt(enemy.health);
         } 
