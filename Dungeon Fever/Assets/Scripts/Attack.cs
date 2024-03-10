@@ -156,6 +156,7 @@ public class Attack : MonoBehaviour
         GameObject inst;
         inst = Instantiate(damageText, enemy.transform.position, Quaternion.identity);
         inst.transform.SetParent(canvas.transform, false);
+        inst.GetComponent<textFloat>().colour = Color.white;
 
         GameObject ps = Instantiate(damageEffect, enemy.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
         Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
@@ -187,6 +188,7 @@ public class Attack : MonoBehaviour
             GameObject crit;
             crit = Instantiate(critText, enemy.transform.position+new Vector3(0, 2, 0), Quaternion.identity);
             crit.GetComponentInChildren<textFloat>().damage = "Crit";
+            crit.GetComponentInChildren<textFloat>().colour = Color.red;
             crit.transform.SetParent(canvas.transform, false);
             Destroy(crit, 2);
 

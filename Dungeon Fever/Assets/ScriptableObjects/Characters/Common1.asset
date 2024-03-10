@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Common1
   m_EditorClassIdentifier: 
   name: Jeff
-  strength: 2
-  health: 10
+  strength: 3
+  health: 12
   energy: 8
-  abilityDamage: 5
+  abilityDamage: 6
   abilityCost: 2
   abilityEffect: {fileID: 7216451168758945258, guid: 1931a1c27254a844eb9c56d1bf1d79d7, type: 3}
   animatorController: {fileID: 22100000, guid: e57bbf7950f79ae4a9eece0f255c079b, type: 2}

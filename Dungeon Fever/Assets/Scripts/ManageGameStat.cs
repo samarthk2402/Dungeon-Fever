@@ -37,6 +37,12 @@ public class ManageGameStat : MonoBehaviour
     public RectTransform goldIcon;
     public GameObject goldCoinPrefab;
     public GameObject xpPrefab;
+    public int xpToDrop;
+    public int rareEnemyChance;
+    public int superRareEnemyChance;
+
+    private bool prevRareEnemy;
+    private bool prevSuperRareEnemy;
 
     [SerializeField] private Canvas canvas;
 
@@ -169,11 +175,29 @@ public class ManageGameStat : MonoBehaviour
     }
 
     public void InstantiateEnemy(){
+
         int rand = Random.Range(0, enemyTypes.Count);
         enemy = Instantiate(enemyPrefab, spawnTransform.position, Quaternion.identity);
         enemy.GetComponent<EnemyAttack>().player = player.gameObject;
         enemy.GetComponent<EnemyAttack>().canvas = canvas;
         enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
+
+        rand = Random.Range(0, 100);     
+
+        if(rand<=superRareEnemyChance){
+            enemy.GetComponent<EnemyAttack>().superRare = true;
+            prevSuperRareEnemy = true;
+        }else if(rand<=rareEnemyChance){
+            enemy.GetComponent<EnemyAttack>().rare = true;
+            prevRareEnemy = true;
+        }else{
+            enemy.GetComponent<EnemyAttack>().superRare = false;
+            enemy.GetComponent<EnemyAttack>().rare = false;
+            prevRareEnemy = false;
+            prevSuperRareEnemy = false;
+        }
+
+
         player.GetComponent<Attack>().turn = true;
         player.GetComponent<Attack>().option = Attack.Option.Attack;
         enemyInstantiating = false;
@@ -187,7 +211,22 @@ public class ManageGameStat : MonoBehaviour
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
         item.GetComponent<Rigidbody2D>().AddForce((player.transform.position-spawnTransform.position)*2, ForceMode2D.Impulse);
 
-        int randColour = Random.Range(0, rarityColours.Count);
+        int randColour;
+        if(prevSuperRareEnemy){
+            randColour = Random.Range(rarityColours.Count-2, rarityColours.Count);
+            goldToDrop = 15;
+            xpToDrop = 30;
+        }else if(prevRareEnemy){
+            randColour = Random.Range(rarityColours.Count-3, rarityColours.Count);
+            goldToDrop = 10;
+            xpToDrop = 20;
+        }else{
+            randColour = Random.Range(0, rarityColours.Count-3);
+            goldToDrop = 5;
+            xpToDrop = 10;
+        }
+
+
         item.GetComponentInChildren<LineRenderer>().startColor = rarityColours[randColour].Evaluate(0);
         item.GetComponentInChildren<LineRenderer>().endColor = rarityColours[randColour].Evaluate(1);
 
@@ -195,7 +234,7 @@ public class ManageGameStat : MonoBehaviour
         Debug.Log(material);
 
         // Set the outline color property of the material to the new color
-        material.SetColor("_color", rarityColours[randColour].Evaluate(0)*5*randColour);
+        material.SetColor("_color", rarityColours[randColour].Evaluate(0)*randColour);
 
         var mainModule = item.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
         mainModule.color = new ParticleSystem.MinMaxGradient(rarityColours[randColour]);
@@ -207,7 +246,7 @@ public class ManageGameStat : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        for(int i = 0; i<10; i++){
+        for(int i = 0; i<xpToDrop; i++){
             //Debug.Log(i);
             Invoke("InstantiateXPSoul", i*0.05f);
         }

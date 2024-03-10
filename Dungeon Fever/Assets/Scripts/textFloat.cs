@@ -8,6 +8,7 @@ public class textFloat : MonoBehaviour
     private Animator anim;
     private TMP_Text textMeshPro;
     public string damage;
+    public Color colour;
 
     [SerializeField] private float seconds;
     // Start is called before the first frame update
@@ -17,6 +18,11 @@ public class textFloat : MonoBehaviour
         //Debug.Log(damage);
         textMeshPro = GetComponent<TMP_Text>();
         textMeshPro.text = damage;
+        if(colour != null){
+            textMeshPro.color = colour;
+        }else{
+            textMeshPro.color = Color.white;
+        }
     }
 
     // Update is called once per frame

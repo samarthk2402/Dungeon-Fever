@@ -39,19 +39,35 @@ public class EnemyAttack : MonoBehaviour
 
     private bool moving;
     public bool rare;
+    public bool superRare;
+
+    public Material mat;
+    public Color rareCol;
+    public Color superRareCol;
+    private static readonly int colour = Shader.PropertyToID("_color");
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         anim.runtimeAnimatorController = enemy.animatorController;
-        health = enemy.health;
+        if(rare){
+            mat.SetColor(colour, rareCol);
+            health = Mathf.RoundToInt(enemy.health*1.5f);
+        }else if(superRare){
+            mat.SetColor(colour, superRareCol);
+            health = Mathf.RoundToInt(enemy.health*2f);
+        }else{
+            mat.SetColor(colour, Color.white);
+            health = Mathf.RoundToInt(enemy.health);
+        } 
         originalPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(sr.color);
         bottomPos = new Vector3(0, -GetComponent<SpriteRenderer>().bounds.size.y/2, 0);
         shadow.transform.position = transform.position + bottomPos;
 
@@ -135,11 +151,21 @@ public class EnemyAttack : MonoBehaviour
 
             GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
-            inst.GetComponent<textFloat>().damage = enemy.damage.ToString();
+            if(rare){
+                inst.GetComponent<textFloat>().damage = Mathf.RoundToInt(enemy.damage*1.5f).ToString();
+                inst.GetComponent<textFloat>().colour = rareCol;
+                player.GetComponent<Attack>().health -= Mathf.RoundToInt(enemy.damage*1.5f);
+            }else if(superRare){
+                inst.GetComponent<textFloat>().damage = Mathf.RoundToInt(enemy.damage*2f).ToString();
+                inst.GetComponent<textFloat>().colour = superRareCol;
+                player.GetComponent<Attack>().health -= Mathf.RoundToInt(enemy.damage*2f);
+            }else{
+                inst.GetComponent<textFloat>().damage = Mathf.RoundToInt(enemy.damage).ToString();
+                inst.GetComponent<textFloat>().colour = Color.white;
+                player.GetComponent<Attack>().health -= enemy.damage;
+            }
 
-            StartCoroutine(player.GetComponent<Attack>().ShakeCoroutine());
-
-            player.GetComponent<Attack>().health -= enemy.damage;    
+            StartCoroutine(player.GetComponent<Attack>().ShakeCoroutine());   
     }
 
     public IEnumerator ShakeCoroutine()
