@@ -45,6 +45,9 @@ public class ManageGameStat : MonoBehaviour
     private bool prevSuperRareEnemy;
 
     [SerializeField] private Canvas canvas;
+    [SerializeField] private RectTransform goldCounter;
+
+    private Vector3 goldDestination;
 
     public enum State{
         Player,
@@ -78,6 +81,14 @@ public class ManageGameStat : MonoBehaviour
         playerLevelText = Instantiate(levelText, player.transform.position + new Vector3(-1.5f, -1.5f, 0), Quaternion.identity);
         playerLevelText.transform.SetParent(canvas.transform, false);
 
+        // Get the position of the UI element in screen space
+        Vector3 screenPosition = goldCounter.position;
+
+        // Convert screen space position to world space
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+        goldDestination = worldPosition;
+        //Debug.Log("World space position of UI element: " + worldPosition);
+        //Debug.Log("Local pos: " + goldIcon.transform.position);
     }
 
     // Update is called once per frame
@@ -259,7 +270,7 @@ public class ManageGameStat : MonoBehaviour
     void InstantiateCoin(){
         //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, spawnTransform.position, Quaternion.identity);
-        StartCoroutine(LerpObject(coin.transform, goldIcon.transform.position, 1f, true));
+        StartCoroutine(LerpObject(coin.transform, goldDestination, 1f, true));
         Destroy(coin, 1.1f);
     }
 
