@@ -13,6 +13,8 @@ public class newStage : MonoBehaviour
     }
 
     public void NewStage(){
-        gsScript.InstantiateEnemy();
+        foreach(Vector3 pos in gsScript.enemyPositions){
+            gsScript.InstantiateEnemy(pos);
+        }
     }
 }

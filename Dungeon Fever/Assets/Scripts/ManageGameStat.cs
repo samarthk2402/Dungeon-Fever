@@ -47,6 +47,11 @@ public class ManageGameStat : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private RectTransform goldCounter;
 
+    public List<Vector3> enemyPositions = new List<Vector3>();
+    public List<GameObject> enemies = new List<GameObject>();
+    public int currentEnemyIndex;  
+    private GameObject currEnemy;
+
     private Vector3 goldDestination;
 
     public enum State{
@@ -67,7 +72,9 @@ public class ManageGameStat : MonoBehaviour
         gameState = State.Player;
         player.GetComponent<Attack>().turn = true;
 
-        InstantiateEnemy();
+        foreach(Vector3 pos in enemyPositions){
+            InstantiateEnemy(pos);
+        }
 
         enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0f, 0), Quaternion.identity);
         enemyHealthText.transform.SetParent(canvas.transform, false);
@@ -96,6 +103,18 @@ public class ManageGameStat : MonoBehaviour
     {
         goldText.text = gold.ToString();
         stageText.GetComponent<TMP_Text>().text = "Stage: "+stage.ToString();
+
+        // Check if any enemy in the list is destroyed
+        for (int i = enemies.Count - 1; i >= 0; i--)
+        {
+            if (enemies[i] == null)
+            {
+                // Remove the destroyed GameObject from the list
+                enemies.RemoveAt(i);
+            }
+        }
+
+        //Debug.Log(enemies.Count);
 
         if(player.gameObject != null){
             if(playerHealthText.gameObject != null){
@@ -139,11 +158,13 @@ public class ManageGameStat : MonoBehaviour
             }
         }
 
-        if(enemy.gameObject != null){
-            if(enemy.GetComponent<EnemyAttack>().health <= 0){
-            enemyHealthText.GetComponent<TMP_Text>().text = "0";
-            }else{
-                enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<EnemyAttack>().health.ToString();
+        foreach(GameObject enemy in enemies){
+            if(enemy.gameObject != null){
+                if(enemy.GetComponent<EnemyAttack>().health <= 0){
+                enemyHealthText.GetComponent<TMP_Text>().text = "0";
+                }else{
+                    enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<EnemyAttack>().health.ToString();
+                }
             }
         }
 
@@ -153,12 +174,15 @@ public class ManageGameStat : MonoBehaviour
                     if(player.GetComponent<Attack>().turnCompleted){
                         player.GetComponent<Attack>().turn = false;
                         player.GetComponent<Attack>().turnCompleted = false;
-                        if(enemy != null){
-                            enemy.GetComponent<EnemyAttack>().turn = true;
+                        if(currentEnemyIndex < enemies.Count){
+                            currEnemy = enemies[currentEnemyIndex];
+                            currEnemy.GetComponent<EnemyAttack>().turn = true;
                             gameState = State.Enemy;
                         }else{
                             if(stage>=9){
                                 SceneManager.LoadScene(2);
+                            }else{
+                                StartCoroutine(NewStage());
                             }
                         }
                     }
@@ -171,24 +195,32 @@ public class ManageGameStat : MonoBehaviour
                 break;
             case State.Enemy:
                 //Debug.Log("Enemy turn!");
-                if(enemy.gameObject != null){
-                    if(enemy.GetComponent<EnemyAttack>().turnCompleted){
-                        //Debug.Log("Enemy turn completed");
-                        enemy.GetComponent<EnemyAttack>().turn = false;
-                        enemy.GetComponent<EnemyAttack>().turnCompleted = false;
-                        player.GetComponent<Attack>().turn = true;
-                        player.GetComponent<Attack>().option = Attack.Option.Attack;
-                        gameState = State.Player;
+                currEnemy = enemies[currentEnemyIndex];
+
+                if(currEnemy.gameObject != null){
+                    //Debug.Log(currEnemy.GetComponent<EnemyAttack>().enemy);
+                    if(currEnemy.GetComponent<EnemyAttack>().turnCompleted){
+                        currEnemy.GetComponent<EnemyAttack>().turn = false;
+                        //currEnemy.GetComponent<EnemyAttack>().turnCompleted = false;
+                        currentEnemyIndex += 1;
+                        if(currentEnemyIndex>=enemies.Count){
+                            player.GetComponent<Attack>().turn = true;
+                            player.GetComponent<Attack>().option = Attack.Option.Attack;
+                            currentEnemyIndex = 0;
+                            gameState = State.Player;
+                        }
+                    }else{
+                        currEnemy.GetComponent<EnemyAttack>().turn = true;
                     }
                 }
                 break;
         }
     }
 
-    public void InstantiateEnemy(){
-
+    public void InstantiateEnemy(Vector3 pos){
         int rand = Random.Range(0, enemyTypes.Count);
-        enemy = Instantiate(enemyPrefab, spawnTransform.position, Quaternion.identity);
+        enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+        enemies.Add(enemy);
         enemy.GetComponent<EnemyAttack>().player = player.gameObject;
         enemy.GetComponent<EnemyAttack>().canvas = canvas;
         enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
@@ -212,7 +244,7 @@ public class ManageGameStat : MonoBehaviour
         player.GetComponent<Attack>().turn = true;
         player.GetComponent<Attack>().option = Attack.Option.Attack;
         enemyInstantiating = false;
-        stage += 1;
+        //stage += 1;
     }
 
     IEnumerator ItemDrop(){
@@ -262,8 +294,12 @@ public class ManageGameStat : MonoBehaviour
             Invoke("InstantiateXPSoul", i*0.5f/xpToDrop);
         }
 
+        //yield return new WaitForSeconds(2.5f);
+        Destroy(item, 2.5f);
+    }
+
+    IEnumerator NewStage(){
         yield return new WaitForSeconds(2.5f);
-        Destroy(item, 0.5f);
         transitionAnim.SetTrigger("newStage");
     }
 

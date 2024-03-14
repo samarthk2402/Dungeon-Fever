@@ -1031,6 +1031,11 @@ MonoBehaviour:
   superRareEnemyChance: 5
   canvas: {fileID: 1732492213}
   goldCounter: {fileID: 149622374}
+  enemyPositions:
+  - {x: 3, y: 0, z: 0}
+  - {x: 3, y: -2, z: 0}
+  enemies: []
+  currentEnemyIndex: 0
   gameState: 0
 --- !u!4 &398867853
 Transform:
@@ -1288,7 +1293,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.01
+  orthographic size: 3.7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
