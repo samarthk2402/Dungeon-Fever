@@ -51,6 +51,7 @@ public class ManageGameStat : MonoBehaviour
     private GameObject currEnemy;
 
     private Vector3 goldDestination;
+    private bool lootFinished = true;
 
     public enum State{
         Player,
@@ -172,7 +173,7 @@ public class ManageGameStat : MonoBehaviour
 
         switch(gameState){
             case State.Player:
-                if(player.gameObject != null){
+                if(player.gameObject != null && lootFinished){
                     if(player.GetComponent<Attack>().turnCompleted){
                         player.GetComponent<Attack>().turn = false;
                         player.GetComponent<Attack>().turnCompleted = false;
@@ -204,15 +205,19 @@ public class ManageGameStat : MonoBehaviour
                     if(currEnemy.GetComponent<EnemyAttack>().turnCompleted){
                         currEnemy.GetComponent<EnemyAttack>().turn = false;
                         //currEnemy.GetComponent<EnemyAttack>().turnCompleted = false;
-                        currentEnemyIndex += 1;
-                        if(currentEnemyIndex>=enemies.Count){
-                            player.GetComponent<Attack>().turn = true;
-                            player.GetComponent<Attack>().option = Attack.Option.Attack;
-                            currentEnemyIndex = 0;
-                            gameState = State.Player;
+                        if(lootFinished){
+                            currentEnemyIndex += 1;
+                            if(currentEnemyIndex>=enemies.Count){
+                                player.GetComponent<Attack>().turn = true;
+                                player.GetComponent<Attack>().option = Attack.Option.Attack;
+                                currentEnemyIndex = 0;
+                                gameState = State.Player;
+                            }
                         }
                     }else{
-                        currEnemy.GetComponent<EnemyAttack>().turn = true;
+                        if(lootFinished){
+                            currEnemy.GetComponent<EnemyAttack>().turn = true;
+                        }
                     }
                 }
                 break;
@@ -250,7 +255,7 @@ public class ManageGameStat : MonoBehaviour
     }
 
     IEnumerator ItemDrop(){
-
+        lootFinished = false;
         GameObject item = Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
@@ -296,13 +301,15 @@ public class ManageGameStat : MonoBehaviour
             Invoke("InstantiateXPSoul", i*0.5f/xpToDrop);
         }
 
-        //yield return new WaitForSeconds(2.5f);
-        Destroy(item, 2f);
+        yield return new WaitForSeconds(2f);
+        lootFinished = true;
+        Destroy(item);
     }
 
     IEnumerator NewStage(){
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1f);
         transitionAnim.SetTrigger("newStage");
+        stage += 1;
     }
 
     void InstantiateCoin(){
