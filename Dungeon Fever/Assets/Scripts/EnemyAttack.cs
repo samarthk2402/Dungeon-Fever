@@ -129,9 +129,7 @@ public class EnemyAttack : MonoBehaviour
         Vector3 currPos = transform.position;
 
         yield return new WaitForSeconds(0.3f);
-        if(turn){
-            Attack();
-        }
+        Attack();
         yield return new WaitForSeconds(0.5f);
 
         // Move back to the original position

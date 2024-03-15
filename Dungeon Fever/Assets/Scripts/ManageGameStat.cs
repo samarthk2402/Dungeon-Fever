@@ -18,18 +18,15 @@ public class ManageGameStat : MonoBehaviour
     public Animator transitionAnim;
 
     public GameObject player;
-    public GameObject enemy;
     public GameObject healthText;
     public GameObject energyText;
     public GameObject levelText;
     public GameObject stageText;
 
     private GameObject playerHealthText;
-    private GameObject enemyHealthText; 
     private GameObject playerEnergyText;
     private GameObject playerLevelText;
 
-    private bool enemyInstantiating;
     public int stage;
     public int goldToDrop;
     private int gold;
@@ -49,6 +46,7 @@ public class ManageGameStat : MonoBehaviour
 
     public List<Vector3> enemyPositions = new List<Vector3>();
     public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemyHealthTexts = new List<GameObject>();
     public int currentEnemyIndex;  
     private GameObject currEnemy;
 
@@ -76,8 +74,9 @@ public class ManageGameStat : MonoBehaviour
             InstantiateEnemy(pos);
         }
 
-        enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0f, 0), Quaternion.identity);
-        enemyHealthText.transform.SetParent(canvas.transform, false);
+        // foreach(GameObject enemy in enemies){
+        //     InstantiateEnemyHealth(enemy);
+        // }
 
         playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-1, 0.3f, 0), Quaternion.identity);
         playerHealthText.transform.SetParent(canvas.transform, false);
@@ -110,7 +109,10 @@ public class ManageGameStat : MonoBehaviour
             if (enemies[i] == null)
             {
                 // Remove the destroyed GameObject from the list
+                StartCoroutine(ItemDrop());
                 enemies.RemoveAt(i);
+                Destroy(enemyHealthTexts[i]);
+                enemyHealthTexts.RemoveAt(i);
             }
         }
 
@@ -158,12 +160,12 @@ public class ManageGameStat : MonoBehaviour
             }
         }
 
-        foreach(GameObject enemy in enemies){
-            if(enemy.gameObject != null){
-                if(enemy.GetComponent<EnemyAttack>().health <= 0){
-                enemyHealthText.GetComponent<TMP_Text>().text = "0";
+        for(int i=0; i<enemies.Count; i++){
+            if(enemies[i].gameObject != null){
+                if(enemies[i].GetComponent<EnemyAttack>().health <= 0){
+                    enemyHealthTexts[i].GetComponent<TMP_Text>().text = "0";
                 }else{
-                    enemyHealthText.GetComponent<TMP_Text>().text = enemy.GetComponent<EnemyAttack>().health.ToString();
+                    enemyHealthTexts[i].GetComponent<TMP_Text>().text = enemies[i].GetComponent<EnemyAttack>().health.ToString();
                 }
             }
         }
@@ -188,10 +190,10 @@ public class ManageGameStat : MonoBehaviour
                     }
                 }
 
-                if(!enemyInstantiating && enemy==null){
-                    StartCoroutine(ItemDrop());
-                    enemyInstantiating = true;
-                }
+                // if(!enemyInstantiating && enemy==null){
+                //     StartCoroutine(ItemDrop());
+                //     enemyInstantiating = true;
+                // }
                 break;
             case State.Enemy:
                 //Debug.Log("Enemy turn!");
@@ -219,7 +221,7 @@ public class ManageGameStat : MonoBehaviour
 
     public void InstantiateEnemy(Vector3 pos){
         int rand = Random.Range(0, enemyTypes.Count);
-        enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
         enemies.Add(enemy);
         enemy.GetComponent<EnemyAttack>().player = player.gameObject;
         enemy.GetComponent<EnemyAttack>().canvas = canvas;
@@ -239,11 +241,11 @@ public class ManageGameStat : MonoBehaviour
             prevRareEnemy = false;
             prevSuperRareEnemy = false;
         }
-
+        
+        InstantiateEnemyHealth(enemy);
 
         player.GetComponent<Attack>().turn = true;
         player.GetComponent<Attack>().option = Attack.Option.Attack;
-        enemyInstantiating = false;
         //stage += 1;
     }
 
@@ -274,7 +276,7 @@ public class ManageGameStat : MonoBehaviour
         item.GetComponentInChildren<LineRenderer>().endColor = rarityColours[randColour].Evaluate(1);
 
         Material material = item.GetComponentInChildren<SpriteRenderer>().material;
-        Debug.Log(material);
+        //Debug.Log(material);
 
         // Set the outline color property of the material to the new color
         material.SetColor("_color", rarityColours[randColour].Evaluate(0)*randColour);
@@ -295,7 +297,7 @@ public class ManageGameStat : MonoBehaviour
         }
 
         //yield return new WaitForSeconds(2.5f);
-        Destroy(item, 2.5f);
+        Destroy(item, 2f);
     }
 
     IEnumerator NewStage(){
@@ -340,5 +342,11 @@ public class ManageGameStat : MonoBehaviour
         }else{
             player.GetComponent<Attack>().xp += 1;
         }
+    }
+
+    void InstantiateEnemyHealth(GameObject enemy){
+        GameObject enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0f, 0), Quaternion.identity);
+        enemyHealthText.transform.SetParent(canvas.transform, false);
+        enemyHealthTexts.Add(enemyHealthText);
     }
 }
