@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 576e7461f22026a44b35d811b6eac7d7, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   moveDistance: 2
-  damageText: {fileID: 1451473678918585391, guid: 70646d11dcf721c4690efb5967cad09f, type: 3}
+  damageText: {fileID: 6244607821728056572, guid: bb9a71bc54bf680489b083820973b04a, type: 3}
   damageEffect: {fileID: 5659210261868204388, guid: 64ca95935877a3a4487dad7927a85a5e, type: 3}
   canvas: {fileID: 0}
   enemy: {fileID: 11400000, guid: ca5dab6788456534581eb0490b9b9ed4, type: 2}
@@ -116,7 +116,9 @@ MonoBehaviour:
   shakeDuration: 0.2
   rare: 0
   superRare: 0
-  mat: {fileID: 2100000, guid: 576e7461f22026a44b35d811b6eac7d7, type: 2}
+  RareMat: {fileID: 2100000, guid: 576e7461f22026a44b35d811b6eac7d7, type: 2}
+  SuperRareMat: {fileID: 2100000, guid: 3a2e50b2050bff146a0871521a80e438, type: 2}
+  defaultMat: {fileID: 0}
   rareCol: {r: 0.36862746, g: 1, b: 1, a: 1}
   superRareCol: {r: 1, g: 0.63529414, b: 0.63529414, a: 1}
   rareGrad:

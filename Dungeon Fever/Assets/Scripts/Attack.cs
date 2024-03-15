@@ -154,9 +154,9 @@ public class Attack : MonoBehaviour
         Bounds sb = sr.bounds;
                         
         GameObject inst;
-        inst = Instantiate(damageText, enemy.transform.position, Quaternion.identity);
+        inst = Instantiate(damageText, enemy.transform.position+new Vector3(0, 1, 0), Quaternion.identity);
         inst.transform.SetParent(canvas.transform, false);
-        inst.GetComponent<textFloat>().colour = Color.white;
+        inst.GetComponentInChildren<textFloat>().colour = Color.white;
 
         GameObject ps = Instantiate(damageEffect, enemy.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
         Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
@@ -168,7 +168,7 @@ public class Attack : MonoBehaviour
         switch(option){
             case Option.Attack:
                 d = (character.strength + w.damage) * Crit(enemy);
-                inst.GetComponent<textFloat>().damage = d.ToString();
+                inst.GetComponentInChildren<textFloat>().damage = d.ToString();
                 enemy.GetComponent<EnemyAttack>().health -= d;
                 break;
             case Option.Ability:
@@ -176,7 +176,7 @@ public class Attack : MonoBehaviour
                 Destroy(ae, ae.GetComponent<ParticleSystem>().main.duration);
                 energy -= character.abilityCost;
                 d = character.abilityDamage * Crit(enemy);
-                inst.GetComponent<textFloat>().damage = d.ToString();
+                inst.GetComponentInChildren<textFloat>().damage = d.ToString();
                 enemy.GetComponent<EnemyAttack>().health -= d;
                 break;
         }

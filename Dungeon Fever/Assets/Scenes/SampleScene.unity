@@ -1015,7 +1015,6 @@ MonoBehaviour:
   itemPrefab: {fileID: 4418064543238339904, guid: 0b18822fa0f021e4d81ca3f57c9e4acb, type: 3}
   transitionAnim: {fileID: 994144672}
   player: {fileID: 1474631747}
-  enemy: {fileID: 0}
   healthText: {fileID: 7914421860480046568, guid: f956e39754673314caa31bd5c124e6fa, type: 3}
   energyText: {fileID: 2503877654054072417, guid: d6571df9ec5fca8489f5acaebfdb1f17, type: 3}
   levelText: {fileID: 5506966764116795792, guid: dffd2d6f76b916f489a8c4ba618b919a, type: 3}
@@ -1035,6 +1034,7 @@ MonoBehaviour:
   - {x: 3, y: 0, z: 0}
   - {x: 3, y: -2, z: 0}
   enemies: []
+  enemyHealthTexts: []
   currentEnemyIndex: 0
   gameState: 0
 --- !u!4 &398867853
@@ -2843,7 +2843,7 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 20
   moveDistance: 2
-  damageText: {fileID: 1451473678918585391, guid: 70646d11dcf721c4690efb5967cad09f, type: 3}
+  damageText: {fileID: 6244607821728056572, guid: bb9a71bc54bf680489b083820973b04a, type: 3}
   damageEffect: {fileID: 5659210261868204388, guid: 64ca95935877a3a4487dad7927a85a5e, type: 3}
   health: 12
   energy: 8
@@ -2939,7 +2939,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474631747}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

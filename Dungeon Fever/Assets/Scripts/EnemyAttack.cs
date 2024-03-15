@@ -41,7 +41,9 @@ public class EnemyAttack : MonoBehaviour
     public bool rare;
     public bool superRare;
 
-    public Material mat;
+    public Material RareMat;
+    public Material SuperRareMat;
+    public Material defaultMat;
     public Color rareCol;
     public Color superRareCol;
     public Gradient rareGrad;
@@ -54,23 +56,25 @@ public class EnemyAttack : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         anim.runtimeAnimatorController = enemy.animatorController;
+        Renderer rend = GetComponent<Renderer>();
+        defaultMat = rend.material;
         if(rare){
             ps.SetActive(true);
-            mat.SetColor(colour, rareCol*1.2f);
+            rend.material = RareMat;
             health = Mathf.RoundToInt(enemy.health*1.5f);
 
             var mainModule = ps.GetComponent<ParticleSystem>().colorOverLifetime;
             mainModule.color = new ParticleSystem.MinMaxGradient(rareGrad);
         }else if(superRare){
             ps.SetActive(true);
-            mat.SetColor(colour, superRareCol*1.2f);
+            rend.material = SuperRareMat;
             health = Mathf.RoundToInt(enemy.health*2f);
 
             var mainModule = ps.GetComponent<ParticleSystem>().colorOverLifetime;
             mainModule.color = new ParticleSystem.MinMaxGradient(superRareGrad);
         }else{
             ps.SetActive(false);
-            mat.SetColor(colour, Color.white);
+            rend.material = defaultMat;
             health = Mathf.RoundToInt(enemy.health);
         } 
         originalPosition = transform.position;
@@ -159,19 +163,19 @@ public class EnemyAttack : MonoBehaviour
             GameObject ps = Instantiate(damageEffect, player.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
             Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
 
-            GameObject inst = Instantiate(damageText, player.transform.position, Quaternion.identity);
+            GameObject inst = Instantiate(damageText, player.transform.position+new Vector3(0, 1, 0), Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
             if(rare){
-                inst.GetComponent<textFloat>().damage = Mathf.RoundToInt(enemy.damage*1.5f).ToString();
-                inst.GetComponent<textFloat>().colour = rareCol;
+                inst.GetComponentInChildren<textFloat>().damage = Mathf.RoundToInt(enemy.damage*1.5f).ToString();
+                inst.GetComponentInChildren<textFloat>().colour = rareCol;
                 player.GetComponent<Attack>().health -= Mathf.RoundToInt(enemy.damage*1.5f);
             }else if(superRare){
-                inst.GetComponent<textFloat>().damage = Mathf.RoundToInt(enemy.damage*2f).ToString();
-                inst.GetComponent<textFloat>().colour = superRareCol;
+                inst.GetComponentInChildren<textFloat>().damage = Mathf.RoundToInt(enemy.damage*2f).ToString();
+                inst.GetComponentInChildren<textFloat>().colour = superRareCol;
                 player.GetComponent<Attack>().health -= Mathf.RoundToInt(enemy.damage*2f);
             }else{
-                inst.GetComponent<textFloat>().damage = Mathf.RoundToInt(enemy.damage).ToString();
-                inst.GetComponent<textFloat>().colour = Color.white;
+                inst.GetComponentInChildren<textFloat>().damage = Mathf.RoundToInt(enemy.damage).ToString();
+                inst.GetComponentInChildren<textFloat>().colour = Color.white;
                 player.GetComponent<Attack>().health -= enemy.damage;
             }
 

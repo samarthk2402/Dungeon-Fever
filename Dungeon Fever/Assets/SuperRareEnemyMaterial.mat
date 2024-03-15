@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: auraMat
+  m_Name: SuperRareEnemyMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 71b935fc18c3f794b9ca9b8d2163701f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -57,5 +57,5 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _color: {r: 1, g: 1, b: 1, a: 1}
+    - _color: {r: 1, g: 0.63529414, b: 0.63529414, a: 1}
   m_BuildTextureStacks: []
