@@ -21,7 +21,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private GameObject shadow;
 
-    public GameObject player;
+    public List<GameObject> characters = new List<GameObject>();
 
     public bool turn;
     public bool turnCompleted = false;
@@ -91,8 +91,11 @@ public class EnemyAttack : MonoBehaviour
         if(turn && health > 0){
             //turn = false;
             if(!moving){
-                StartCoroutine(Move());
-                moving = true;
+                int randPlayer = Random.Range(0, characters.Count-1);
+                if(characters[randPlayer] != null && !characters[randPlayer].GetComponent<Attack>().dead){
+                    StartCoroutine(Move(characters[randPlayer]));
+                    moving = true;
+                }
             }
         }
 
@@ -107,7 +110,7 @@ public class EnemyAttack : MonoBehaviour
         dead = true;
     }
 
-    IEnumerator Move()
+    IEnumerator Move(GameObject player)
     {
         yield return new WaitForSeconds(0.5f);
 
@@ -134,7 +137,7 @@ public class EnemyAttack : MonoBehaviour
         Vector3 currPos = transform.position;
 
         yield return new WaitForSeconds(0.3f);
-        Attack();
+        Attack(player);
         yield return new WaitForSeconds(0.5f);
 
         // Move back to the original position
@@ -154,7 +157,7 @@ public class EnemyAttack : MonoBehaviour
         //Debug.Log("back");
     }
 
-    void Attack(){
+    void Attack(GameObject player){
             //Debug.Log("Enemy Attack");
             turn = false;
 

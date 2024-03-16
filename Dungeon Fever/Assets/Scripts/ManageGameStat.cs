@@ -52,6 +52,9 @@ public class ManageGameStat : MonoBehaviour
 
     List<List<GameObject>> charUIElements = new List<List<GameObject>>();
 
+    public GameObject attackButton;
+    public GameObject abilityButton;
+
     private Vector3 goldDestination;
     private bool lootFinished = true;
 
@@ -107,6 +110,8 @@ public class ManageGameStat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        attackButton.GetComponent<AttackButton>().player = currChar;
+        abilityButton.GetComponent<AttackButton>().player = currChar;
         goldText.text = gold.ToString();
         stageText.GetComponent<TMP_Text>().text = "Stage: "+stage.ToString();
 
@@ -123,6 +128,21 @@ public class ManageGameStat : MonoBehaviour
                     enemies.RemoveAt(i);
                     Destroy(enemyHealthTexts[i]);
                     enemyHealthTexts.RemoveAt(i);
+                }
+            }
+        }
+
+        if(characters != null){
+            // Check if any enemy in the list is destroyed
+            for (int i = characters.Count - 1; i >= 0; i--)
+            {
+                if (characters[i]==null)
+                {
+                    characters.RemoveAt(i);
+                    foreach(GameObject ui in charUIElements[i]){
+                        Destroy(ui);
+                    }
+                    charUIElements.RemoveAt(i);
                 }
             }
         }
@@ -187,8 +207,10 @@ public class ManageGameStat : MonoBehaviour
 
         switch(gameState){
             case State.Player:
-                currChar = characters[currentCharIndex];
-                if(lootFinished){
+                if(characters.Count>0){
+                    currChar = characters[currentCharIndex];
+                }
+                if(lootFinished && characters!= null){
                     if(currChar.gameObject != null){
                         if(currChar.GetComponent<Attack>().turnCompleted){
                             currChar.GetComponent<Attack>().turn = false;
@@ -198,6 +220,7 @@ public class ManageGameStat : MonoBehaviour
                             if(currentCharIndex>=characters.Count || enemies.Count<=0){
                                 if(currentEnemyIndex < enemies.Count){
                                     currEnemy = enemies[currentEnemyIndex];
+                                    currEnemy.GetComponent<EnemyAttack>().characters = characters;
                                     currEnemy.GetComponent<EnemyAttack>().turn = true;
                                     currentCharIndex = 0;
                                     gameState = State.Enemy;
@@ -240,13 +263,17 @@ public class ManageGameStat : MonoBehaviour
                             if(currentEnemyIndex>=enemies.Count){
                                 currChar = characters[currentCharIndex];
                                 currChar.GetComponent<Attack>().turn = true;
-                                currChar.GetComponent<Attack>().option = Attack.Option.Attack;
+                                foreach(GameObject character in characters){
+                                    character.GetComponent<Attack>().option = Attack.Option.Attack;
+                                }
                                 currentEnemyIndex = 0;
                                 gameState = State.Player;
                             }
                         }
                     }else{
                         if(lootFinished){
+                            currEnemy.GetComponent<EnemyAttack>().characters = characters;
+
                             currEnemy.GetComponent<EnemyAttack>().turn = true;
                         }
                     }
@@ -257,10 +284,8 @@ public class ManageGameStat : MonoBehaviour
 
     public void InstantiateEnemy(Vector3 pos){
         int rand = Random.Range(0, enemyTypes.Count);
-        int randPlayer = Random.Range(0, characters.Count);
         GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
         enemies.Add(enemy);
-        enemy.GetComponent<EnemyAttack>().player = characters[randPlayer];
         enemy.GetComponent<EnemyAttack>().canvas = canvas;
         enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
 
