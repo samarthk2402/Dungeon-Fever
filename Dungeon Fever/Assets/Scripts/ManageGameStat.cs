@@ -18,15 +18,10 @@ public class ManageGameStat : MonoBehaviour
 
     public Animator transitionAnim;
 
-    public GameObject player;
     public GameObject healthText;
     public GameObject energyText;
     public GameObject levelText;
     public GameObject stageText;
-
-    private GameObject playerHealthText;
-    private GameObject playerEnergyText;
-    private GameObject playerLevelText;
 
     public int stage;
     public int goldToDrop;
@@ -54,6 +49,8 @@ public class ManageGameStat : MonoBehaviour
     public List<GameObject> characters = new List<GameObject>();
     public int currentCharIndex;
     public GameObject currChar;
+
+    List<List<GameObject>> charUIElements = new List<List<GameObject>>();
 
     private Vector3 goldDestination;
     private bool lootFinished = true;
@@ -84,14 +81,18 @@ public class ManageGameStat : MonoBehaviour
         //     InstantiateEnemyHealth(enemy);
         // }
 
-        playerHealthText = Instantiate(healthText, player.transform.position + new Vector3(-1, 0.3f, 0), Quaternion.identity);
-        playerHealthText.transform.SetParent(canvas.transform, false);
+        foreach(GameObject character in characters){
+            GameObject playerHealthText = Instantiate(healthText, character.transform.position + new Vector3(-0.8f, 0.3f, 0), Quaternion.identity);
+            playerHealthText.transform.SetParent(canvas.transform, false);
 
-        playerEnergyText = Instantiate(energyText, player.transform.position + new Vector3(-1, -0.3f, 0), Quaternion.identity);
-        playerEnergyText.transform.SetParent(canvas.transform, false);
+            GameObject playerEnergyText = Instantiate(energyText, character.transform.position + new Vector3(-0.8f, 0f, 0), Quaternion.identity);
+            playerEnergyText.transform.SetParent(canvas.transform, false);
 
-        playerLevelText = Instantiate(levelText, player.transform.position + new Vector3(-1.5f, -1.5f, 0), Quaternion.identity);
-        playerLevelText.transform.SetParent(canvas.transform, false);
+            GameObject playerLevelText = Instantiate(levelText, character.transform.position + new Vector3(-1.2f, -1f, 0), Quaternion.identity);
+            playerLevelText.transform.SetParent(canvas.transform, false);
+
+            charUIElements.Add(new List<GameObject> {playerHealthText, playerEnergyText, playerLevelText});
+        }
 
         // Get the position of the UI element in screen space
         Vector3 screenPosition = goldCounter.position;
@@ -127,46 +128,48 @@ public class ManageGameStat : MonoBehaviour
         }
 
         //Debug.Log(enemies.Count);
+        for(int i=0; i<characters.Count; i++){
+            GameObject playerHealthText = charUIElements[i][0];
+            GameObject playerEnergyText = charUIElements[i][1];
+            GameObject playerLevelText = charUIElements[i][2];
+            if(characters[i].gameObject != null){
+                if(playerHealthText.gameObject != null){
+                    if(characters[i].GetComponent<Attack>().health <= 0){
+                        playerHealthText.GetComponent<TMP_Text>().text = "0";
+                    }else{
+                        playerHealthText.GetComponent<TMP_Text>().text = characters[i].GetComponent<Attack>().health.ToString();
+                    }
 
-        if(player.gameObject != null){
-            if(playerHealthText.gameObject != null){
-                if(player.GetComponent<Attack>().health <= 0){
-                    playerHealthText.GetComponent<TMP_Text>().text = "0";
-                }else{
-                    playerHealthText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().health.ToString();
+                    if(characters[i].GetComponent<Attack>().dead){
+                        Destroy(playerHealthText);
+                        timer.StopTimer();
+                    }
                 }
 
-                if(player.GetComponent<Attack>().dead){
-                    Destroy(playerHealthText);
-                    timer.StopTimer();
+                if(playerEnergyText.gameObject != null){
+                    if(characters[i].GetComponent<Attack>().energy <= 0){
+                        playerEnergyText.GetComponent<TMP_Text>().text = "0";
+                    }else{
+                        playerEnergyText.GetComponent<TMP_Text>().text = characters[i].GetComponent<Attack>().energy.ToString();
+                    }
+
+                    if(characters[i].GetComponent<Attack>().dead){
+                        Destroy(playerEnergyText);
+                    }
+
+                    // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
                 }
 
-                // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
-            }
+                if(playerLevelText.gameObject != null){
+                    playerLevelText.GetComponent<TMP_Text>().text = "Lvl "+characters[i].GetComponent<Attack>().level.ToString();
+                    playerLevelText.GetComponentInChildren<XPBar>().SetXP(characters[i].GetComponent<Attack>().xp);
 
-            if(playerEnergyText.gameObject != null){
-                if(player.GetComponent<Attack>().health <= 0){
-                    playerEnergyText.GetComponent<TMP_Text>().text = "0";
-                }else{
-                    playerEnergyText.GetComponent<TMP_Text>().text = player.GetComponent<Attack>().energy.ToString();
+                    if(characters[i].GetComponent<Attack>().dead){
+                        Destroy(playerLevelText);
+                    }
+
+                    // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
                 }
-
-                if(player.GetComponent<Attack>().dead){
-                    Destroy(playerEnergyText);
-                }
-
-                // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
-            }
-
-            if(playerLevelText.gameObject != null){
-                playerLevelText.GetComponent<TMP_Text>().text = "Lvl "+player.GetComponent<Attack>().level.ToString();
-                playerLevelText.GetComponentInChildren<XPBar>().SetXP(player.GetComponent<Attack>().xp);
-
-                if(player.GetComponent<Attack>().dead){
-                    Destroy(playerLevelText);
-                }
-
-                // playerHealthText.transform.position = player.transform.position + new Vector3(-2, 0, 0);
             }
         }
 
@@ -254,9 +257,10 @@ public class ManageGameStat : MonoBehaviour
 
     public void InstantiateEnemy(Vector3 pos){
         int rand = Random.Range(0, enemyTypes.Count);
+        int randPlayer = Random.Range(0, characters.Count);
         GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
         enemies.Add(enemy);
-        enemy.GetComponent<EnemyAttack>().player = player.gameObject;
+        enemy.GetComponent<EnemyAttack>().player = characters[randPlayer];
         enemy.GetComponent<EnemyAttack>().canvas = canvas;
         enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
 
@@ -287,7 +291,7 @@ public class ManageGameStat : MonoBehaviour
         GameObject item = Instantiate(itemPrefab, prevEnemyPos, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
-        item.GetComponent<Rigidbody2D>().AddForce((player.transform.position-prevEnemyPos)*2, ForceMode2D.Impulse);
+        item.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos), ForceMode2D.Impulse);
 
         int randColour;
         if(prevSuperRareEnemy){
@@ -350,7 +354,7 @@ public class ManageGameStat : MonoBehaviour
     void InstantiateXPSoul(){
         //Debug.Log("Instantiating coin");
         GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
-        StartCoroutine(LerpObject(soul.transform, playerLevelText.transform.position, 0.8f, false));
+        StartCoroutine(LerpObject(soul.transform, charUIElements[currentCharIndex][2].transform.position, 0.8f, false));
         Destroy(soul, 1.1f);
     }
 
@@ -375,7 +379,7 @@ public class ManageGameStat : MonoBehaviour
             gold += 1;
             goldIcon.GetComponent<Animator>().SetTrigger("moreGold");
         }else{
-            player.GetComponent<Attack>().xp += 1;
+            currChar.GetComponent<Attack>().xp += 1;
         }
     }
 
