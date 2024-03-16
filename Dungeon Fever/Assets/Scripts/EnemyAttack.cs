@@ -50,6 +50,7 @@ public class EnemyAttack : MonoBehaviour
     public Gradient superRareGrad;
     public GameObject ps;
     private static readonly int colour = Shader.PropertyToID("_color");
+    public bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -103,7 +104,7 @@ public class EnemyAttack : MonoBehaviour
     }
 
     void Death(){
-        Destroy(this.gameObject);
+        dead = true;
     }
 
     IEnumerator Move()

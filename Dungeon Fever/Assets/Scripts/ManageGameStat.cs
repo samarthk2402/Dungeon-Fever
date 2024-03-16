@@ -10,7 +10,7 @@ public class ManageGameStat : MonoBehaviour
     public Timer timer;
     public List<Enemy> enemyTypes = new List<Enemy>();
     public GameObject enemyPrefab;
-    public Transform spawnTransform;
+    public Vector3 prevEnemyPos;
 
     public List<Sprite> items = new List<Sprite>();
     public GameObject itemPrefab;
@@ -107,9 +107,11 @@ public class ManageGameStat : MonoBehaviour
         // Check if any enemy in the list is destroyed
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
-            if (enemies[i] == null)
+            if (enemies[i].GetComponent<EnemyAttack>().dead)
             {
                 // Remove the destroyed GameObject from the list
+                prevEnemyPos = enemies[i].transform.position;
+                Destroy(enemies[i].gameObject);
                 StartCoroutine(ItemDrop());
                 enemies.RemoveAt(i);
                 Destroy(enemyHealthTexts[i]);
@@ -256,10 +258,10 @@ public class ManageGameStat : MonoBehaviour
 
     IEnumerator ItemDrop(){
         lootFinished = false;
-        GameObject item = Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
+        GameObject item = Instantiate(itemPrefab, prevEnemyPos, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
-        item.GetComponent<Rigidbody2D>().AddForce((player.transform.position-spawnTransform.position)*2, ForceMode2D.Impulse);
+        item.GetComponent<Rigidbody2D>().AddForce((player.transform.position-prevEnemyPos)*2, ForceMode2D.Impulse);
 
         int randColour;
         if(prevSuperRareEnemy){
@@ -314,14 +316,14 @@ public class ManageGameStat : MonoBehaviour
 
     void InstantiateCoin(){
         //Debug.Log("Instantiating coin");
-        GameObject coin = Instantiate(goldCoinPrefab, spawnTransform.position, Quaternion.identity);
+        GameObject coin = Instantiate(goldCoinPrefab, prevEnemyPos, Quaternion.identity);
         StartCoroutine(LerpObject(coin.transform, goldDestination, 1f, true));
         Destroy(coin, 1.1f);
     }
 
     void InstantiateXPSoul(){
         //Debug.Log("Instantiating coin");
-        GameObject soul = Instantiate(xpPrefab, spawnTransform.position, Quaternion.identity);
+        GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
         StartCoroutine(LerpObject(soul.transform, playerLevelText.transform.position, 0.8f, false));
         Destroy(soul, 1.1f);
     }
