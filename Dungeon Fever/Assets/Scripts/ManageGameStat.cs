@@ -10,6 +10,7 @@ public class ManageGameStat : MonoBehaviour
     public Timer timer;
     public List<Enemy> enemyTypes = new List<Enemy>();
     public GameObject enemyPrefab;
+    public GameObject characterPrefab;
     public Vector3 prevEnemyPos;
 
     public List<Sprite> items = new List<Sprite>();
@@ -50,6 +51,10 @@ public class ManageGameStat : MonoBehaviour
     public int currentEnemyIndex;  
     private GameObject currEnemy;
 
+    public List<GameObject> characters = new List<GameObject>();
+    public int currentCharIndex;
+    public GameObject currChar;
+
     private Vector3 goldDestination;
     private bool lootFinished = true;
 
@@ -69,7 +74,7 @@ public class ManageGameStat : MonoBehaviour
         stage = 0;
 
         gameState = State.Player;
-        player.GetComponent<Attack>().turn = true;
+        currChar.GetComponent<Attack>().turn = true;
 
         foreach(Vector3 pos in enemyPositions){
             InstantiateEnemy(pos);
@@ -104,18 +109,20 @@ public class ManageGameStat : MonoBehaviour
         goldText.text = gold.ToString();
         stageText.GetComponent<TMP_Text>().text = "Stage: "+stage.ToString();
 
-        // Check if any enemy in the list is destroyed
-        for (int i = enemies.Count - 1; i >= 0; i--)
-        {
-            if (enemies[i].GetComponent<EnemyAttack>().dead)
+        if(enemies!= null){
+            // Check if any enemy in the list is destroyed
+            for (int i = enemies.Count - 1; i >= 0; i--)
             {
-                // Remove the destroyed GameObject from the list
-                prevEnemyPos = enemies[i].transform.position;
-                Destroy(enemies[i].gameObject);
-                StartCoroutine(ItemDrop());
-                enemies.RemoveAt(i);
-                Destroy(enemyHealthTexts[i]);
-                enemyHealthTexts.RemoveAt(i);
+                if (enemies[i].GetComponent<EnemyAttack>().dead)
+                {
+                    // Remove the destroyed GameObject from the list
+                    prevEnemyPos = enemies[i].transform.position;
+                    Destroy(enemies[i].gameObject);
+                    StartCoroutine(ItemDrop());
+                    enemies.RemoveAt(i);
+                    Destroy(enemyHealthTexts[i]);
+                    enemyHealthTexts.RemoveAt(i);
+                }
             }
         }
 
@@ -163,35 +170,53 @@ public class ManageGameStat : MonoBehaviour
             }
         }
 
-        for(int i=0; i<enemies.Count; i++){
-            if(enemies[i].gameObject != null){
-                if(enemies[i].GetComponent<EnemyAttack>().health <= 0){
-                    enemyHealthTexts[i].GetComponent<TMP_Text>().text = "0";
-                }else{
-                    enemyHealthTexts[i].GetComponent<TMP_Text>().text = enemies[i].GetComponent<EnemyAttack>().health.ToString();
+        if(enemies != null && enemyHealthTexts != null){
+            for(int i=0; i<enemies.Count; i++){
+                if(enemies[i].gameObject != null){
+                    if(enemies[i].GetComponent<EnemyAttack>().health <= 0){
+                        enemyHealthTexts[i].GetComponent<TMP_Text>().text = "0";
+                    }else{
+                        enemyHealthTexts[i].GetComponent<TMP_Text>().text = enemies[i].GetComponent<EnemyAttack>().health.ToString();
+                    }
                 }
             }
         }
 
         switch(gameState){
             case State.Player:
-                if(player.gameObject != null && lootFinished){
-                    if(player.GetComponent<Attack>().turnCompleted){
-                        player.GetComponent<Attack>().turn = false;
-                        player.GetComponent<Attack>().turnCompleted = false;
-                        if(currentEnemyIndex < enemies.Count){
-                            currEnemy = enemies[currentEnemyIndex];
-                            currEnemy.GetComponent<EnemyAttack>().turn = true;
-                            gameState = State.Enemy;
-                        }else{
-                            if(stage>=9){
-                                SceneManager.LoadScene(2);
-                            }else{
-                                StartCoroutine(NewStage());
+                currChar = characters[currentCharIndex];
+                if(lootFinished){
+                    if(currChar.gameObject != null){
+                        if(currChar.GetComponent<Attack>().turnCompleted){
+                            currChar.GetComponent<Attack>().turn = false;
+                            currChar.GetComponent<Attack>().turnCompleted = false;
+
+                            currentCharIndex += 1;
+                            if(currentCharIndex>=characters.Count || enemies.Count<=0){
+                                if(currentEnemyIndex < enemies.Count){
+                                    currEnemy = enemies[currentEnemyIndex];
+                                    currEnemy.GetComponent<EnemyAttack>().turn = true;
+                                    currentCharIndex = 0;
+                                    gameState = State.Enemy;
+                                }else{
+                                    if(stage>=9){
+                                        SceneManager.LoadScene(2);
+                                    }else{
+                                        currentCharIndex = 0;
+                                        StartCoroutine(NewStage());
+                                    }
+                                }
                             }
+                        
+                        }else{
+                            //Debug.Log(currChar);
+                            currChar.GetComponent<Attack>().turn = true;
                         }
                     }
+                }else{
+                    currChar.GetComponent<Attack>().turn = false;
                 }
+                
 
                 // if(!enemyInstantiating && enemy==null){
                 //     StartCoroutine(ItemDrop());
@@ -210,8 +235,9 @@ public class ManageGameStat : MonoBehaviour
                         if(lootFinished){
                             currentEnemyIndex += 1;
                             if(currentEnemyIndex>=enemies.Count){
-                                player.GetComponent<Attack>().turn = true;
-                                player.GetComponent<Attack>().option = Attack.Option.Attack;
+                                currChar = characters[currentCharIndex];
+                                currChar.GetComponent<Attack>().turn = true;
+                                currChar.GetComponent<Attack>().option = Attack.Option.Attack;
                                 currentEnemyIndex = 0;
                                 gameState = State.Player;
                             }
@@ -251,8 +277,8 @@ public class ManageGameStat : MonoBehaviour
         
         InstantiateEnemyHealth(enemy);
 
-        player.GetComponent<Attack>().turn = true;
-        player.GetComponent<Attack>().option = Attack.Option.Attack;
+        currChar.GetComponent<Attack>().turn = true;
+        currChar.GetComponent<Attack>().option = Attack.Option.Attack;
         //stage += 1;
     }
 
@@ -354,7 +380,7 @@ public class ManageGameStat : MonoBehaviour
     }
 
     void InstantiateEnemyHealth(GameObject enemy){
-        GameObject enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(2, 0f, 0), Quaternion.identity);
+        GameObject enemyHealthText = Instantiate(healthText, enemy.transform.position + new Vector3(1.5f, 0f, 0), Quaternion.identity);
         enemyHealthText.transform.SetParent(canvas.transform, false);
         enemyHealthTexts.Add(enemyHealthText);
     }

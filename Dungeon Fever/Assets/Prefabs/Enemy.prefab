@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.03, y: -1.33, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2506075660480864074}
@@ -182,6 +182,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   ps: {fileID: 9215782243214123393}
+  dead: 0
 --- !u!70 &7378010922596777024
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
