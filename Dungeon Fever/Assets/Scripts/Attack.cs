@@ -55,6 +55,8 @@ public class Attack : MonoBehaviour
         Ability
     }
 
+    public bool clicked = false;
+
     public Option option;
 
 
@@ -92,6 +94,7 @@ public class Attack : MonoBehaviour
         if(turn && health>0){
                 //Debug.Log(turn);
                 if(Input.GetMouseButtonDown(0)){
+                    clicked = true;
                     // Cast a ray from the mouse position into the scene
                     Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero, Mathf.Infinity, enemyLayer);
@@ -102,12 +105,14 @@ public class Attack : MonoBehaviour
                     // Check if the ray hits any collider on the target layer
                     if (hit.collider != null)
                     {
-                        turn = false;
+                        //turn = false;
                         // If the ray hits a collider on the target layer, do something
                         GameObject clickedObject = hit.collider.gameObject;
                         //Debug.Log("Clicked object: " + clickedObject.name);
-
-                        StartCoroutine(Move(hit.collider.gameObject));
+                        if(turn){
+                            StartCoroutine(Move(hit.collider.gameObject));
+                        }   
+                        
                     }
 
                 }
@@ -180,6 +185,7 @@ public class Attack : MonoBehaviour
                 enemy.GetComponent<EnemyAttack>().health -= d;
                 break;
         }
+
     }
 
     int Crit(GameObject enemy){
@@ -204,6 +210,7 @@ public class Attack : MonoBehaviour
 
     IEnumerator Move(GameObject enemy)
     {
+        turn = false;
         Vector3 startingPosition = transform.position;
         Vector3 direction = enemy.transform.position - transform.position;
         direction.Normalize();

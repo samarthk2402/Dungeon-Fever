@@ -123,6 +123,16 @@ public class ManageGameStat : MonoBehaviour
                 {
                     // Remove the destroyed GameObject from the list
                     prevEnemyPos = enemies[i].transform.position;
+                    if(enemies[i].GetComponent<EnemyAttack>().superRare){
+                        prevSuperRareEnemy = true;
+                        prevRareEnemy = false;
+                    }else if(enemies[i].GetComponent<EnemyAttack>().rare){
+                        prevRareEnemy = true;
+                        prevSuperRareEnemy = false;
+                    }else{
+                        prevRareEnemy = false;
+                        prevSuperRareEnemy = false;
+                    }
                     Destroy(enemies[i].gameObject);
                     StartCoroutine(ItemDrop());
                     enemies.RemoveAt(i);
@@ -236,14 +246,21 @@ public class ManageGameStat : MonoBehaviour
                         
                         }else{
                             //Debug.Log(currChar);
-                            currChar.GetComponent<Attack>().turn = true;
+                            if(!currChar.GetComponent<Attack>().clicked){
+                                currChar.GetComponent<Attack>().turn = true;
+                            }
+                            
                         }
                     }
                 }else{
                     currChar.GetComponent<Attack>().turn = false;
                 }
                 
-
+                for(int i=0; i<characters.Count; i++){
+                    if(i>currentCharIndex){
+                        characters[i].GetComponent<Attack>().clicked = false;
+                    }
+                }
                 // if(!enemyInstantiating && enemy==null){
                 //     StartCoroutine(ItemDrop());
                 //     enemyInstantiating = true;
@@ -265,6 +282,7 @@ public class ManageGameStat : MonoBehaviour
                                 currChar.GetComponent<Attack>().turn = true;
                                 foreach(GameObject character in characters){
                                     character.GetComponent<Attack>().option = Attack.Option.Attack;
+                                    character.GetComponent<Attack>().clicked = false;
                                 }
                                 currentEnemyIndex = 0;
                                 gameState = State.Player;
@@ -293,15 +311,15 @@ public class ManageGameStat : MonoBehaviour
 
         if(rand<=superRareEnemyChance){
             enemy.GetComponent<EnemyAttack>().superRare = true;
-            prevSuperRareEnemy = true;
+
         }else if(rand<=rareEnemyChance){
             enemy.GetComponent<EnemyAttack>().rare = true;
-            prevRareEnemy = true;
+
         }else{
             enemy.GetComponent<EnemyAttack>().superRare = false;
             enemy.GetComponent<EnemyAttack>().rare = false;
             prevRareEnemy = false;
-            prevSuperRareEnemy = false;
+
         }
         
         InstantiateEnemyHealth(enemy);
@@ -316,7 +334,7 @@ public class ManageGameStat : MonoBehaviour
         GameObject item = Instantiate(itemPrefab, prevEnemyPos, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
-        item.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos), ForceMode2D.Impulse);
+        item.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos)*1.5f, ForceMode2D.Impulse);
 
         int randColour;
         if(prevSuperRareEnemy){
