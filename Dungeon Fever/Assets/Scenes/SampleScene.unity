@@ -1124,6 +1124,7 @@ MonoBehaviour:
   currChar: {fileID: 1625378835}
   attackButton: {fileID: 417551667}
   abilityButton: {fileID: 278700901}
+  floor: {fileID: 188081843}
   gameState: 0
 --- !u!4 &398867853
 Transform:

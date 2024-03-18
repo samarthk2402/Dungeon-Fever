@@ -58,6 +58,8 @@ public class ManageGameStat : MonoBehaviour
     private Vector3 goldDestination;
     private bool lootFinished = true;
 
+    public GameObject floor;
+
     public enum State{
         Player,
         Enemy
@@ -123,6 +125,7 @@ public class ManageGameStat : MonoBehaviour
                 {
                     // Remove the destroyed GameObject from the list
                     prevEnemyPos = enemies[i].transform.position;
+                    floor.transform.position = enemies[i].transform.position + new Vector3(0, -1.5f, 0);
                     if(enemies[i].GetComponent<EnemyAttack>().superRare){
                         prevSuperRareEnemy = true;
                         prevRareEnemy = false;
