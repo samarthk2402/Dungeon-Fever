@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fighter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1098,7 +1102,7 @@ MonoBehaviour:
   energyText: {fileID: 2503877654054072417, guid: d6571df9ec5fca8489f5acaebfdb1f17, type: 3}
   levelText: {fileID: 5506966764116795792, guid: dffd2d6f76b916f489a8c4ba618b919a, type: 3}
   stageText: {fileID: 1017966477}
-  stage: 0
+  stage: 1
   goldToDrop: 5
   goldText: {fileID: 1717927953}
   goldIcon: {fileID: 149622373}
@@ -1111,7 +1115,7 @@ MonoBehaviour:
   goldCounter: {fileID: 149622374}
   enemyPositions:
   - {x: 3, y: 0.5, z: 0}
-  - {x: 1.5, y: -1, z: 0}
+  - {x: 2, y: -1, z: 0}
   - {x: 3, y: -2.5, z: 0}
   enemies: []
   enemyHealthTexts: []
@@ -1348,6 +1352,10 @@ PrefabInstance:
     - target: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
       propertyPath: m_Name
       value: Fighter (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3065,7 +3073,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -2
   m_TargetDisplay: 0
 --- !u!224 &1732492214
 RectTransform:
@@ -3196,6 +3204,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 692604030753065944, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: efd5d89d596cb254285c44cde0a5d2d4, type: 3}
+    - target: {fileID: 692604030753065944, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2781992402727027020, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.46
@@ -3240,6 +3256,10 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1732492213}
+    - target: {fileID: 4400427194090010872, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 11400000, guid: efb4fa9567c3a124bbfd61e19fed5d53, type: 2}
     - target: {fileID: 4400427194090010872, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
       propertyPath: transAnim
       value: 

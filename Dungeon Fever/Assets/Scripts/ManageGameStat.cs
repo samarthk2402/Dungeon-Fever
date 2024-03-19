@@ -73,7 +73,7 @@ public class ManageGameStat : MonoBehaviour
 
         timer = GetComponentInChildren<Timer>();
         timer.StartTimer();
-        stage = 0;
+        stage = 1;
 
         gameState = State.Player;
         currChar.GetComponent<Attack>().turn = true;
@@ -230,7 +230,7 @@ public class ManageGameStat : MonoBehaviour
                             currChar.GetComponent<Attack>().turnCompleted = false;
 
                             currentCharIndex += 1;
-                            if(currentCharIndex>=characters.Count || enemies.Count<=0){
+                            if(currentCharIndex>=characters.Count || enemies.Count<=0 || characters.Count<=1){
                                 if(currentEnemyIndex < enemies.Count){
                                     currEnemy = enemies[currentEnemyIndex];
                                     currEnemy.GetComponent<EnemyAttack>().characters = characters;
@@ -280,7 +280,7 @@ public class ManageGameStat : MonoBehaviour
                         //currEnemy.GetComponent<EnemyAttack>().turnCompleted = false;
                         if(lootFinished){
                             currentEnemyIndex += 1;
-                            if(currentEnemyIndex>=enemies.Count){
+                            if(currentEnemyIndex>=enemies.Count && enemies.Count>=1){
                                 currChar = characters[currentCharIndex];
                                 currChar.GetComponent<Attack>().turn = true;
                                 foreach(GameObject character in characters){

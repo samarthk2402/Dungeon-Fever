@@ -91,11 +91,14 @@ public class EnemyAttack : MonoBehaviour
         if(turn && health > 0){
             //turn = false;
             if(!moving){
-                int randPlayer = Random.Range(0, characters.Count-1);
-                if(characters[randPlayer] != null && !characters[randPlayer].GetComponent<Attack>().dead){
-                    StartCoroutine(Move(characters[randPlayer]));
-                    moving = true;
+                int randPlayer = Random.Range(0, characters.Count);
+                if(characters.Count>0){
+                    if(characters[randPlayer] != null && !characters[randPlayer].GetComponent<Attack>().dead){
+                        StartCoroutine(Move(characters[randPlayer]));
+                        moving = true;
+                    }
                 }
+                
             }
         }
 
