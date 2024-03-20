@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1116,14 +1116,11 @@ MonoBehaviour:
   enemyPositions:
   - {x: 3, y: 0.5, z: 0}
   - {x: 2, y: -1, z: 0}
-  - {x: 3, y: -2.5, z: 0}
   enemies: []
   enemyHealthTexts: []
   currentEnemyIndex: 0
   characters:
-  - {fileID: 1625378835}
   - {fileID: 1474631747}
-  - {fileID: 1313440511}
   currentCharIndex: 0
   currChar: {fileID: 1625378835}
   attackButton: {fileID: 417551667}
@@ -1355,7 +1352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2811,11 +2808,6 @@ RectTransform:
   m_AnchoredPosition: {x: 20, y: 30}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1313440511 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
-  m_PrefabInstance: {fileID: 430110904}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1474631747 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}

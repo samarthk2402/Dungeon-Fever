@@ -141,6 +141,9 @@ public class ManageGameStat : MonoBehaviour
                     enemies.RemoveAt(i);
                     Destroy(enemyHealthTexts[i]);
                     enemyHealthTexts.RemoveAt(i);
+                    if(characters.Count <= 1){
+                        gameState = State.Enemy;
+                    }
                 }
             }
         }
@@ -273,30 +276,25 @@ public class ManageGameStat : MonoBehaviour
                 //Debug.Log("Enemy turn!");
                 currEnemy = enemies[currentEnemyIndex];
 
-                if(currEnemy.gameObject != null){
+                if(currEnemy.gameObject != null && lootFinished){
                     //Debug.Log(currEnemy.GetComponent<EnemyAttack>().enemy);
                     if(currEnemy.GetComponent<EnemyAttack>().turnCompleted){
                         currEnemy.GetComponent<EnemyAttack>().turn = false;
                         //currEnemy.GetComponent<EnemyAttack>().turnCompleted = false;
-                        if(lootFinished){
-                            currentEnemyIndex += 1;
-                            if(currentEnemyIndex>=enemies.Count && enemies.Count>=1){
-                                currChar = characters[currentCharIndex];
-                                currChar.GetComponent<Attack>().turn = true;
-                                foreach(GameObject character in characters){
-                                    character.GetComponent<Attack>().option = Attack.Option.Attack;
-                                    character.GetComponent<Attack>().clicked = false;
-                                }
-                                currentEnemyIndex = 0;
-                                gameState = State.Player;
+                        currentEnemyIndex += 1;
+                        if(currentEnemyIndex>=enemies.Count){
+                            currChar = characters[currentCharIndex];
+                            currChar.GetComponent<Attack>().turn = true;
+                            foreach(GameObject character in characters){
+                                character.GetComponent<Attack>().option = Attack.Option.Attack;
+                                character.GetComponent<Attack>().clicked = false;
                             }
+                            currentEnemyIndex = 0;
+                            gameState = State.Player;
                         }
                     }else{
-                        if(lootFinished){
-                            currEnemy.GetComponent<EnemyAttack>().characters = characters;
-
-                            currEnemy.GetComponent<EnemyAttack>().turn = true;
-                        }
+                        currEnemy.GetComponent<EnemyAttack>().characters = characters;
+                        currEnemy.GetComponent<EnemyAttack>().turn = true;
                     }
                 }
                 break;
