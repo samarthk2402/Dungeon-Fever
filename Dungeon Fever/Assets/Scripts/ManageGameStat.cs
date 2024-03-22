@@ -56,7 +56,7 @@ public class ManageGameStat : MonoBehaviour
     public GameObject abilityButton;
 
     private Vector3 goldDestination;
-    private bool lootFinished = true;
+    public bool lootFinished = true;
 
     public GameObject floor;
 
@@ -223,21 +223,26 @@ public class ManageGameStat : MonoBehaviour
 
         switch(gameState){
             case State.Player:
-                if(characters.Count>0){
+                //if more than 0 players set current character to current character index
+                if(characters!=null){
                     currChar = characters[currentCharIndex];
                 }
-                if(lootFinished && characters!= null){
-                    if(currChar.gameObject != null){
-                        if(currChar.GetComponent<Attack>().turnCompleted){
+                if(characters!= null){ //wait for loot to drop and if characters exist
+                    if(currChar.gameObject != null){ //check if current character alive
+                        if(currChar.GetComponent<Attack>().turnCompleted){ //if turn completed
+                            Debug.Log("turn completed");
+                            //Set turn to false 
                             currChar.GetComponent<Attack>().turn = false;
                             currChar.GetComponent<Attack>().turnCompleted = false;
-
+                            //Move onto next character
                             currentCharIndex += 1;
-                            if(currentCharIndex>=characters.Count || enemies.Count<=0 || characters.Count<=1){
-                                if(currentEnemyIndex < enemies.Count){
+                            //Check if looped through all players
+                            if(currentCharIndex>=characters.Count){
+                                //Check if there are any enemies left
+                                if(enemies.Count>0){
                                     currEnemy = enemies[currentEnemyIndex];
-                                    currEnemy.GetComponent<EnemyAttack>().characters = characters;
-                                    currEnemy.GetComponent<EnemyAttack>().turn = true;
+                                    // currEnemy.GetComponent<EnemyAttack>().characters = characters;
+                                    // currEnemy.GetComponent<EnemyAttack>().turn = true;
                                     currentCharIndex = 0;
                                     gameState = State.Enemy;
                                 }else{
@@ -250,41 +255,39 @@ public class ManageGameStat : MonoBehaviour
                                 }
                             }
                         
-                        }else{
-                            //Debug.Log(currChar);
+                        }else{ //if turn waiting to be taken...
                             if(!currChar.GetComponent<Attack>().clicked){
                                 currChar.GetComponent<Attack>().turn = true;
+                                //its is there turn until they have clicked
                             }
                             
                         }
                     }
-                }else{
-                    currChar.GetComponent<Attack>().turn = false;
+                }else{ //if loot dropping or all characters dead
+                    currChar.GetComponent<Attack>().turn = false; //pause turn
                 }
                 
-                for(int i=0; i<characters.Count; i++){
-                    if(i>currentCharIndex){
-                        characters[i].GetComponent<Attack>().clicked = false;
-                    }
-                }
-                // if(!enemyInstantiating && enemy==null){
-                //     StartCoroutine(ItemDrop());
-                //     enemyInstantiating = true;
+                //iterate through all characters
+                // for(int i=0; i<characters.Count; i++){
+                //     //set all the 
+                //     if(i>currentCharIndex){
+                //         characters[i].GetComponent<Attack>().clicked = false;
+                //     }
                 // }
+
                 break;
             case State.Enemy:
-                //Debug.Log("Enemy turn!");
-                currEnemy = enemies[currentEnemyIndex];
+                if(enemies!=null && currentEnemyIndex<enemies.Count){
+                    currEnemy = enemies[currentEnemyIndex];
+                }
 
                 if(currEnemy.gameObject != null && lootFinished){
-                    //Debug.Log(currEnemy.GetComponent<EnemyAttack>().enemy);
                     if(currEnemy.GetComponent<EnemyAttack>().turnCompleted){
                         currEnemy.GetComponent<EnemyAttack>().turn = false;
-                        //currEnemy.GetComponent<EnemyAttack>().turnCompleted = false;
                         currentEnemyIndex += 1;
                         if(currentEnemyIndex>=enemies.Count){
                             currChar = characters[currentCharIndex];
-                            currChar.GetComponent<Attack>().turn = true;
+                            // currChar.GetComponent<Attack>().turn = true;
                             foreach(GameObject character in characters){
                                 character.GetComponent<Attack>().option = Attack.Option.Attack;
                                 character.GetComponent<Attack>().clicked = false;
@@ -292,7 +295,7 @@ public class ManageGameStat : MonoBehaviour
                             currentEnemyIndex = 0;
                             gameState = State.Player;
                         }
-                    }else{
+                    }else{ //waiting for turn to be completed
                         currEnemy.GetComponent<EnemyAttack>().characters = characters;
                         currEnemy.GetComponent<EnemyAttack>().turn = true;
                     }
