@@ -9,6 +9,7 @@ public class textFloat : MonoBehaviour
     private TMP_Text textMeshPro;
     public string damage;
     public Color colour;
+    public TMP_FontAsset fontAsset;
 
     [SerializeField] private float seconds;
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class textFloat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        textMeshPro.font = fontAsset;
         StartCoroutine(End());
     }
 

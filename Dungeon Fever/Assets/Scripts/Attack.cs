@@ -162,6 +162,7 @@ public class Attack : MonoBehaviour
         inst = Instantiate(damageText, enemy.transform.position+new Vector3(0, 1, 0), Quaternion.identity);
         inst.transform.SetParent(canvas.transform, false);
         inst.GetComponentInChildren<textFloat>().colour = Color.white;
+        Destroy(inst, 2);
 
         GameObject ps = Instantiate(damageEffect, enemy.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
         Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
@@ -195,7 +196,7 @@ public class Attack : MonoBehaviour
         if (randomNumber < critChance)
         {
             GameObject crit;
-            crit = Instantiate(critText, enemy.transform.position+new Vector3(0, 2, 0), Quaternion.identity);
+            crit = Instantiate(critText, enemy.transform.position+new Vector3(0, 1.5f, 0), Quaternion.identity);
             crit.GetComponentInChildren<textFloat>().damage = "Crit";
             crit.GetComponentInChildren<textFloat>().colour = Color.red;
             crit.transform.SetParent(canvas.transform, false);
