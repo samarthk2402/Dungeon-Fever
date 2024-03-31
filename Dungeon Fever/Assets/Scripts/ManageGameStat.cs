@@ -78,9 +78,11 @@ public class ManageGameStat : MonoBehaviour
         gameState = State.Player;
         currChar.GetComponent<Attack>().turn = true;
 
-        foreach(Vector3 pos in enemyPositions){
-            InstantiateEnemy(pos);
-        }
+        InstantiateEnemy(enemyPositions[1]);
+
+        // foreach(Vector3 pos in enemyPositions){
+        //     InstantiateEnemy(pos);
+        // }
 
         // foreach(GameObject enemy in enemies){
         //     InstantiateEnemyHealth(enemy);
