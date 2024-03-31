@@ -181,8 +181,14 @@ public class ManageGameStat : MonoBehaviour
                 if(playerHealthText.gameObject != null){
                     if(characters[i].GetComponent<Attack>().health <= 0){
                         playerHealthText.GetComponent<TMP_Text>().text = "0";
+                        playerHealthText.GetComponent<TMP_Text>().color = Color.white;
                     }else{
                         playerHealthText.GetComponent<TMP_Text>().text = characters[i].GetComponent<Attack>().health.ToString();
+                        if(characters[i].GetComponent<Attack>().health == characters[i].GetComponent<Attack>().character.health){
+                            playerHealthText.GetComponent<TMP_Text>().color = Color.green;
+                        }else{
+                            playerHealthText.GetComponent<TMP_Text>().color = Color.white;
+                        }
                     }
 
                     if(characters[i].GetComponent<Attack>().dead){
@@ -194,8 +200,15 @@ public class ManageGameStat : MonoBehaviour
                 if(playerEnergyText.gameObject != null){
                     if(characters[i].GetComponent<Attack>().energy <= 0){
                         playerEnergyText.GetComponent<TMP_Text>().text = "0";
+                        playerEnergyText.GetComponent<TMP_Text>().color = Color.white;
                     }else{
                         playerEnergyText.GetComponent<TMP_Text>().text = characters[i].GetComponent<Attack>().energy.ToString();
+
+                        if(characters[i].GetComponent<Attack>().energy == characters[i].GetComponent<Attack>().character.energy){
+                            playerEnergyText.GetComponent<TMP_Text>().color = Color.blue;
+                        }else{
+                            playerEnergyText.GetComponent<TMP_Text>().color = Color.white;
+                        }
                     }
 
                     if(characters[i].GetComponent<Attack>().dead){
