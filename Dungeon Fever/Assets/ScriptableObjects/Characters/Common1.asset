@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Jeff
   strength: 3
-  health: 1
+  health: 10
   energy: 8
   abilityDamage: 6
   abilityCost: 2

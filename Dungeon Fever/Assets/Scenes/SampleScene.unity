@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1116,15 +1116,19 @@ MonoBehaviour:
   enemyPositions:
   - {x: 3, y: 0.5, z: 0}
   - {x: 2, y: -1, z: 0}
+  - {x: 3, y: -2.5, z: 0}
   enemies: []
   enemyHealthTexts: []
   currentEnemyIndex: 0
   characters:
+  - {fileID: 1625378835}
   - {fileID: 1474631747}
+  - {fileID: 1568499728}
   currentCharIndex: 0
   currChar: {fileID: 1625378835}
   attackButton: {fileID: 417551667}
   abilityButton: {fileID: 278700901}
+  lootFinished: 1
   floor: {fileID: 188081843}
   gameState: 0
 --- !u!4 &398867853
@@ -1352,7 +1356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1466,7 +1470,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 3.8
+  orthographic size: 4.4933333
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2812,6 +2816,11 @@ RectTransform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
   m_PrefabInstance: {fileID: 1628452819051541140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1568499728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
+  m_PrefabInstance: {fileID: 430110904}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1625378835 stripped
 GameObject:

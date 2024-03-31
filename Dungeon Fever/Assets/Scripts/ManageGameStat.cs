@@ -141,9 +141,9 @@ public class ManageGameStat : MonoBehaviour
                     enemies.RemoveAt(i);
                     Destroy(enemyHealthTexts[i]);
                     enemyHealthTexts.RemoveAt(i);
-                    if(characters.Count <= 1){
-                        gameState = State.Enemy;
-                    }
+                    // if(characters.Count <= 1){
+                    //     gameState = State.Enemy;
+                    // }
                 }
             }
         }
@@ -227,13 +227,13 @@ public class ManageGameStat : MonoBehaviour
                 if(characters!=null){
                     currChar = characters[currentCharIndex];
                 }
-                if(characters!= null){ //wait for loot to drop and if characters exist
+                if(characters!= null && lootFinished){ //wait for loot to drop and if characters exist
                     if(currChar.gameObject != null){ //check if current character alive
                         if(currChar.GetComponent<Attack>().turnCompleted){ //if turn completed
-                            Debug.Log("turn completed");
                             //Set turn to false 
                             currChar.GetComponent<Attack>().turn = false;
                             currChar.GetComponent<Attack>().turnCompleted = false;
+                            currChar.GetComponent<Attack>().clicked = false;
                             //Move onto next character
                             currentCharIndex += 1;
                             //Check if looped through all players
@@ -252,6 +252,15 @@ public class ManageGameStat : MonoBehaviour
                                         currentCharIndex = 0;
                                         StartCoroutine(NewStage());
                                     }
+                                }
+                            }
+
+                            if(enemies.Count<=0){
+                                if(stage>=9){
+                                    SceneManager.LoadScene(2);
+                                }else{
+                                    currentCharIndex = 0;
+                                    StartCoroutine(NewStage());
                                 }
                             }
                         
@@ -277,13 +286,14 @@ public class ManageGameStat : MonoBehaviour
 
                 break;
             case State.Enemy:
-                if(enemies!=null && currentEnemyIndex<enemies.Count){
+                if(enemies!=null){
                     currEnemy = enemies[currentEnemyIndex];
                 }
 
                 if(currEnemy.gameObject != null && lootFinished){
                     if(currEnemy.GetComponent<EnemyAttack>().turnCompleted){
                         currEnemy.GetComponent<EnemyAttack>().turn = false;
+                        currEnemy.GetComponent<EnemyAttack>().turnCompleted = false;
                         currentEnemyIndex += 1;
                         if(currentEnemyIndex>=enemies.Count){
                             currChar = characters[currentCharIndex];
@@ -293,6 +303,7 @@ public class ManageGameStat : MonoBehaviour
                                 character.GetComponent<Attack>().clicked = false;
                             }
                             currentEnemyIndex = 0;
+                            currentCharIndex = 0;
                             gameState = State.Player;
                         }
                     }else{ //waiting for turn to be completed
