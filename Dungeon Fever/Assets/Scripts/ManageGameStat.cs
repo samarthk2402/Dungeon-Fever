@@ -54,6 +54,7 @@ public class ManageGameStat : MonoBehaviour
 
     public GameObject attackButton;
     public GameObject abilityButton;
+    public GameObject options;
 
     private Vector3 goldDestination;
     public bool lootFinished = true;
@@ -69,6 +70,8 @@ public class ManageGameStat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        attackButton.SetActive(false);
+        abilityButton.SetActive(false);
         gold = 0;
 
         timer = GetComponentInChildren<Timer>();
@@ -107,6 +110,10 @@ public class ManageGameStat : MonoBehaviour
         // Convert screen space position to world space
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
         goldDestination = worldPosition;
+
+        Vector3 optionsScreenPosition = options.transform.position;
+
+        Vector3 optionsWorldPosition = Camera.main.ScreenToWorldPoint(optionsScreenPosition);
         //Debug.Log("World space position of UI element: " + worldPosition);
         //Debug.Log("Local pos: " + goldIcon.transform.position);
     }
@@ -222,17 +229,24 @@ public class ManageGameStat : MonoBehaviour
                 }
             }
         }
-
+        attackButton.SetActive(false);
+        abilityButton.SetActive(false);
         switch(gameState){
             case State.Player:
                 //if more than 0 players set current character to current character index
                 if(characters!=null){
                     currChar = characters[currentCharIndex];
                 }
+
+                if(enemies.Count>0){
+                    attackButton.SetActive(true);
+                    abilityButton.SetActive(true);
+                }
+
                 if(characters!= null && lootFinished){ //wait for loot to drop and if characters exist
                     if(currChar.gameObject != null){ //check if current character alive
                         if(currChar.GetComponent<Attack>().turnCompleted){ //if turn completed
-                            //Set turn to false 
+                            //Set turn to false
                             currChar.GetComponent<Attack>().turn = false;
                             currChar.GetComponent<Attack>().turnCompleted = false;
                             currChar.GetComponent<Attack>().clicked = false;
@@ -269,6 +283,7 @@ public class ManageGameStat : MonoBehaviour
                         }else{ //if turn waiting to be taken...
                             if(!currChar.GetComponent<Attack>().clicked){
                                 currChar.GetComponent<Attack>().turn = true;
+                                options.transform.position = Camera.main.WorldToScreenPoint(currChar.transform.position + new Vector3(0, 1, 0));
                                 //its is there turn until they have clicked
                             }
                             
