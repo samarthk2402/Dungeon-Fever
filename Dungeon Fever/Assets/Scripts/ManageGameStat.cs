@@ -41,7 +41,7 @@ public class ManageGameStat : MonoBehaviour
     [SerializeField] private RectTransform goldCounter;
 
     public List<Vector3> enemyPositions = new List<Vector3>();
-    public List<GameObject> enemies = new List<GameObject>();
+    private List<GameObject> enemies = new List<GameObject>();
     public List<GameObject> enemyHealthTexts = new List<GameObject>();
     public int currentEnemyIndex;  
     private GameObject currEnemy;
@@ -396,11 +396,6 @@ public class ManageGameStat : MonoBehaviour
             xpToDrop = 10;
         }
 
-
-        item.GetComponentInChildren<LineRenderer>().startColor = rarityColours[randColour].Evaluate(0);
-        item.GetComponentInChildren<LineRenderer>().endColor = rarityColours[randColour].Evaluate(1);
-        item.GetComponentInChildren<LineRenderer>().SetPosition(1, new Vector3(0, (float)randColour/rarityColours.Count*2.5f, 0));
-
         Material material = item.GetComponentInChildren<SpriteRenderer>().material;
         //Debug.Log(material);
 
@@ -409,6 +404,17 @@ public class ManageGameStat : MonoBehaviour
 
         var mainModule = item.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
         mainModule.color = new ParticleSystem.MinMaxGradient(rarityColours[randColour]);
+
+        item.GetComponentInChildren<LineRenderer>().startColor = rarityColours[randColour].Evaluate(0);
+        item.GetComponentInChildren<LineRenderer>().endColor = rarityColours[randColour].Evaluate(1);
+        item.GetComponentInChildren<LineRenderer>().SetPosition(1, new Vector3(0, 0, 0));
+        if(randColour > 1){
+            StartCoroutine(ShowBeam(item.GetComponentInChildren<LineRenderer>(), new Vector3(0, 0, 0), new Vector3(0, (float)randColour/rarityColours.Count+0.3f, 0), 0.5f));
+        }else{
+            StartCoroutine(ShowBeam(item.GetComponentInChildren<LineRenderer>(), new Vector3(0, 0, 0), new Vector3(0, 0.6f, 0), 0.5f));
+        }
+        
+
 
         for(int i = 0; i<goldToDrop; i++){
             //Debug.Log(i);
@@ -422,9 +428,24 @@ public class ManageGameStat : MonoBehaviour
             Invoke("InstantiateXPSoul", i*0.5f/xpToDrop);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         lootFinished = true;
-        Destroy(item);
+        Destroy(item, 1);
+    }
+
+    IEnumerator ShowBeam(LineRenderer lr, Vector3 startPos, Vector3 endPos, float duration){
+        yield return new WaitForSeconds(0.5f);
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+                float t = elapsedTime / duration;
+                lr.SetPosition(1, Vector3.Lerp(startPos, endPos, t));
+                elapsedTime += Time.deltaTime;
+
+                //Debug.Log(startTransform.position);
+                yield return null;
+        }
+        lr.SetPosition(1, endPos);
     }
 
     IEnumerator NewStage(){
@@ -437,7 +458,7 @@ public class ManageGameStat : MonoBehaviour
         //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, prevEnemyPos, Quaternion.identity);
         coin.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos + new Vector3(0, 1, 0))*Random.Range(0.5f, 0.7f), ForceMode2D.Impulse);
-        StartCoroutine(LerpObject(1, coin.transform, goldDestination, 1f, true, coin));
+        StartCoroutine(LerpObject(1.5f, coin.transform, goldDestination, 1f, true, coin));
     }
 
     void InstantiateXPSoul(){
