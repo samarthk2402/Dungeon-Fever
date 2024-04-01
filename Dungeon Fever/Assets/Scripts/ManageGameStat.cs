@@ -435,19 +435,21 @@ public class ManageGameStat : MonoBehaviour
     void InstantiateCoin(){
         //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, prevEnemyPos, Quaternion.identity);
-        StartCoroutine(LerpObject(coin.transform, goldDestination, 1f, true));
-        Destroy(coin, 1.1f);
+        coin.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos + new Vector3(0, 1, 0))*Random.Range(0.5f, 0.7f), ForceMode2D.Impulse);
+        StartCoroutine(LerpObject(1, coin.transform, goldDestination, 1f, true, coin));
     }
 
     void InstantiateXPSoul(){
         //Debug.Log("Instantiating coin");
         GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
-        StartCoroutine(LerpObject(soul.transform, charUIElements[currentCharIndex][2].transform.position, 0.8f, false));
-        Destroy(soul, 1.1f);
+        StartCoroutine(LerpObject(0, soul.transform, charUIElements[currentCharIndex][2].transform.position, 0.8f, false, soul));
     }
 
-    IEnumerator LerpObject(Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin)
+    IEnumerator LerpObject(float delay, Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin, GameObject obj)
     {
+        if(isCoin){
+            yield return new WaitForSeconds(delay);
+        }
         float elapsedTime = 0f;
 
         Vector3 startingPosition = startTransform.position;
@@ -469,6 +471,8 @@ public class ManageGameStat : MonoBehaviour
         }else{
             currChar.GetComponent<Attack>().xp += 1;
         }
+        
+        Destroy(obj);
     }
 
     void InstantiateEnemyHealth(GameObject enemy){
