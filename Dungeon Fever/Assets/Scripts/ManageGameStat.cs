@@ -414,7 +414,7 @@ public class ManageGameStat : MonoBehaviour
             Invoke("InstantiateCoin", i*0.5f/goldToDrop);
         }
 
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
 
         for(int i = 0; i<xpToDrop; i++){
             //Debug.Log(i);
@@ -442,7 +442,7 @@ public class ManageGameStat : MonoBehaviour
     void InstantiateXPSoul(){
         //Debug.Log("Instantiating coin");
         GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
-        StartCoroutine(LerpObject(0, soul.transform, charUIElements[currentCharIndex][2].transform.position, 0.8f, false, soul));
+        StartCoroutine(LerpObject(0, soul.transform, charUIElements[currentCharIndex][2].transform.position, 1f, false, soul));
     }
 
     IEnumerator LerpObject(float delay, Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin, GameObject obj)
@@ -453,18 +453,50 @@ public class ManageGameStat : MonoBehaviour
         float elapsedTime = 0f;
 
         Vector3 startingPosition = startTransform.position;
+        Vector3 noiseOffset = Random.insideUnitSphere * 0.5f; // Constant noise offset
 
         while (elapsedTime < lerpDuration)
         {
             float t = elapsedTime / lerpDuration;
-            startTransform.position = Vector3.Lerp(startingPosition, endingPosition, t);
+            if(isCoin){
+                startTransform.position = Vector3.Lerp(startingPosition, endingPosition, t);
+            }else{
+                // Smoothstep function for smooth acceleration and deceleration
+                t = Mathf.SmoothStep(0f, 1f, t);
+
+                // Use Lerp without noise to calculate the position along the straight path
+                Vector3 straightPosition = Vector3.Lerp(startingPosition, endingPosition, t);
+
+                // Use Lerp with noise to create a random flight path
+                Vector3 newPosition = Vector3.Lerp(straightPosition, endingPosition + noiseOffset, t);
+
+                startTransform.position = newPosition;
+            }
+
             elapsedTime += Time.deltaTime;
+
             //Debug.Log(startTransform.position);
             yield return null;
         }
 
         // Ensure final position
-        startTransform.position = endingPosition;
+        if(isCoin){
+            startTransform.position = endingPosition;
+        }else{
+            Vector3 currPos = obj.transform.position;
+            elapsedTime = 0f;
+            while (elapsedTime < lerpDuration/4)
+            {
+                float t = elapsedTime / lerpDuration;
+                startTransform.position = Vector3.Lerp(currPos, endingPosition, t);
+                elapsedTime += Time.deltaTime;
+
+                //Debug.Log(startTransform.position);
+                yield return null;
+            }
+            startTransform.position = endingPosition;
+        }
+
         if(isCoin){
             gold += 1;
             goldIcon.GetComponent<Animator>().SetTrigger("moreGold");
