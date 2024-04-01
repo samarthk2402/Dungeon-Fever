@@ -61,6 +61,8 @@ public class ManageGameStat : MonoBehaviour
 
     public GameObject floor;
 
+    public Color energyTextColor;
+
     public enum State{
         Player,
         Enemy
@@ -205,7 +207,7 @@ public class ManageGameStat : MonoBehaviour
                         playerEnergyText.GetComponent<TMP_Text>().text = characters[i].GetComponent<Attack>().energy.ToString();
 
                         if(characters[i].GetComponent<Attack>().energy == characters[i].GetComponent<Attack>().character.energy){
-                            playerEnergyText.GetComponent<TMP_Text>().color = Color.blue;
+                            playerEnergyText.GetComponent<TMP_Text>().color = energyTextColor;
                         }else{
                             playerEnergyText.GetComponent<TMP_Text>().color = Color.white;
                         }
