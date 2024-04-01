@@ -57,6 +57,7 @@ public class ManageGameStat : MonoBehaviour
     public GameObject options;
 
     private Vector3 goldDestination;
+    private Vector3 xpDestination;
     public bool lootFinished = true;
 
     public GameObject floor;
@@ -424,13 +425,13 @@ public class ManageGameStat : MonoBehaviour
         }
 
         //yield return new WaitForSeconds(1);
-
+        xpDestination = currChar.transform.position;
         for(int i = 0; i<xpToDrop; i++){
             //Debug.Log(i);
-            Invoke("InstantiateXPSoul", i*0.5f/xpToDrop);
+            Invoke("InstantiateXPSoul", i*1f/xpToDrop);
         }
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.8f);
         lootFinished = true;
         Destroy(item, 1);
     }
@@ -466,7 +467,7 @@ public class ManageGameStat : MonoBehaviour
     void InstantiateXPSoul(){
         //Debug.Log("Instantiating coin");
         GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
-        StartCoroutine(LerpObject(0, soul.transform, charUIElements[currentCharIndex][2].transform.position, 1f, false, soul));
+        StartCoroutine(LerpObject(0, soul.transform, currChar.transform.position, 0.8f, false, soul));
     }
 
     IEnumerator LerpObject(float delay, Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin, GameObject obj)
@@ -477,7 +478,7 @@ public class ManageGameStat : MonoBehaviour
         float elapsedTime = 0f;
 
         Vector3 startingPosition = startTransform.position;
-        Vector3 noiseOffset = Random.insideUnitSphere * 0.5f; // Constant noise offset
+        Vector3 noiseOffset = Random.insideUnitSphere * 0.3f; // Constant noise offset
 
         while (elapsedTime < lerpDuration)
         {
@@ -494,7 +495,7 @@ public class ManageGameStat : MonoBehaviour
                 // Use Lerp with noise to create a random flight path
                 Vector3 newPosition = Vector3.Lerp(straightPosition, endingPosition + noiseOffset, t);
 
-                startTransform.position = newPosition;
+                startTransform.position = straightPosition+noiseOffset;
             }
 
             elapsedTime += Time.deltaTime;
@@ -504,22 +505,22 @@ public class ManageGameStat : MonoBehaviour
         }
 
         // Ensure final position
-        if(isCoin){
-            startTransform.position = endingPosition;
-        }else{
-            Vector3 currPos = obj.transform.position;
-            elapsedTime = 0f;
-            while (elapsedTime < lerpDuration/4)
-            {
-                float t = elapsedTime / lerpDuration;
-                startTransform.position = Vector3.Lerp(currPos, endingPosition, t);
-                elapsedTime += Time.deltaTime;
+        // if(isCoin){
+        //     startTransform.position = endingPosition;
+        // }else{
+        //     Vector3 currPos = obj.transform.position;
+        //     elapsedTime = 0f;
+        //     while (elapsedTime < lerpDuration/4)
+        //     {
+        //         float t = elapsedTime / lerpDuration;
+        //         startTransform.position = Vector3.Lerp(currPos, endingPosition, t);
+        //         elapsedTime += Time.deltaTime;
 
-                //Debug.Log(startTransform.position);
-                yield return null;
-            }
-            startTransform.position = endingPosition;
-        }
+        //         //Debug.Log(startTransform.position);
+        //         yield return null;
+        //     }
+        //     startTransform.position = endingPosition;
+        // }
 
         if(isCoin){
             gold += 1;

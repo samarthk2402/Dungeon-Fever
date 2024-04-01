@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1000
   m_Sprite: {fileID: 21300000, guid: 3931d0161ec7bc4478da28652de23e42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -200
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.41960785}
   m_FlipX: 0
@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 4400427194090010872}
   - component: {fileID: 2213598603081516215}
   - component: {fileID: 4465284062790446220}
+  - component: {fileID: -3693549380341988767}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: Untagged
@@ -377,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 5675824692698281603, guid: ac94444a25844944bb7a87ca08eb801c, type: 3}
-  arms: {fileID: 8546748726624028412}
+  arms: {fileID: 3707386725004783216}
   w: {fileID: 11400000, guid: ebcca91810fc90d4aafb17145cd229df, type: 2}
   enemyLayer:
     serializedVersion: 2
@@ -461,3 +462,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3693549380341988767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692644506251738564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39e06366c39d2d4fb8f5549027ced44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

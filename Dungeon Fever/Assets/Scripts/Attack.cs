@@ -6,7 +6,7 @@ public class Attack : MonoBehaviour
 {
     public GameObject weaponPrefab;
     private GameObject weapon;
-    public Transform arms;
+    public GameObject arms;
     [SerializeField]
     private Weapon w;
     private Animator weaponAnim;
@@ -82,11 +82,15 @@ public class Attack : MonoBehaviour
         weapon.transform.SetParent(arms.transform, false);
         weaponAnim = weapon.GetComponent<Animator>();
         weaponAnim.runtimeAnimatorController = w.animatorController;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        weapon.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder-1;
+        arms.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder+1;
+
         if(xp>=30){
             levelup.SetTrigger("levelup");
             level += 1;
