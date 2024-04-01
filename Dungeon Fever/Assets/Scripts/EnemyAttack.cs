@@ -13,6 +13,8 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private GameObject damageEffect;
     [SerializeField]
+    private GameObject slashEffect;
+    [SerializeField]
     public Canvas canvas;
 
     [SerializeField]
@@ -172,6 +174,7 @@ public class EnemyAttack : MonoBehaviour
 
             GameObject inst = Instantiate(damageText, player.transform.position+new Vector3(0, 1, 0), Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
+            
             if(rare){
                 inst.GetComponentInChildren<textFloat>().damage = Mathf.RoundToInt(enemy.damage*1.5f).ToString();
                 inst.GetComponentInChildren<textFloat>().colour = rareCol;
@@ -185,6 +188,17 @@ public class EnemyAttack : MonoBehaviour
                 inst.GetComponentInChildren<textFloat>().colour = Color.white;
                 player.GetComponent<Attack>().health -= enemy.damage;
             }
+
+            GameObject slash;
+            slash = Instantiate(slashEffect, player.transform.position+new Vector3(0, -0.6f, 0), Quaternion.identity);
+            Vector3 currentScale = slash.transform.localScale;
+
+            // Invert the X scale to flip horizontally
+            currentScale.x *= -1;
+
+            // Apply the new local scale
+            slash.transform.localScale = currentScale;
+            Destroy(slash, 0.3f);
 
             StartCoroutine(player.GetComponent<Attack>().ShakeCoroutine());   
     }

@@ -20,6 +20,8 @@ public class Attack : MonoBehaviour
     private GameObject damageText;
     [SerializeField]
     private GameObject damageEffect;
+    [SerializeField]
+    private GameObject slashEffect;
 
     public int health;
     public int energy;
@@ -163,6 +165,10 @@ public class Attack : MonoBehaviour
         inst.transform.SetParent(canvas.transform, false);
         inst.GetComponentInChildren<textFloat>().colour = Color.white;
         Destroy(inst, 2);
+
+        GameObject slash;
+        slash = Instantiate(slashEffect, enemy.transform.position+new Vector3(0, -0.6f, 0), Quaternion.identity);
+        Destroy(slash, 0.3f);
 
         GameObject ps = Instantiate(damageEffect, enemy.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
         Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
