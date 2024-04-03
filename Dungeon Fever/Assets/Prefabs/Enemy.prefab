@@ -83,7 +83,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.45, y: 0.44}
+  m_Size: {x: 0.9, y: 0.81}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -121,6 +121,8 @@ MonoBehaviour:
   RareMat: {fileID: 2100000, guid: 576e7461f22026a44b35d811b6eac7d7, type: 2}
   SuperRareMat: {fileID: 2100000, guid: 3a2e50b2050bff146a0871521a80e438, type: 2}
   defaultMat: {fileID: 0}
+  dissolveMat: {fileID: 2100000, guid: c613917bf352ffa4cb372e793e5c8c8d, type: 2}
+  dissolveDuration: 2
   rareCol: {r: 0.36862746, g: 1, b: 1, a: 1}
   superRareCol: {r: 1, g: 0.63529414, b: 0.63529414, a: 1}
   rareGrad:
@@ -185,6 +187,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   ps: {fileID: 9215782243214123393}
   dead: 0
+  disintegratingPS: {fileID: 9105384021138155394, guid: 68b3615e8ad88e14a85d808e934161a2, type: 3}
 --- !u!70 &7378010922596777024
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

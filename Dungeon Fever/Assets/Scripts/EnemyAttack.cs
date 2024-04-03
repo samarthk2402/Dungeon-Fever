@@ -46,6 +46,8 @@ public class EnemyAttack : MonoBehaviour
     public Material RareMat;
     public Material SuperRareMat;
     public Material defaultMat;
+    public Material dissolveMat;
+    public float dissolveDuration = 2f;
     public Color rareCol;
     public Color superRareCol;
     public Gradient rareGrad;
@@ -105,14 +107,32 @@ public class EnemyAttack : MonoBehaviour
         }
 
         if(health <= 0){
-            shadow.SetActive(false);
-            anim.SetTrigger("death");
+            //anim.SetTrigger("death");
             //Destroy(this.gameObject);
+            if(!dead){
+                dead = true;
+                StartCoroutine(Death());
+            }
         }
     }
 
-    void Death(){
-        dead = true;
+    IEnumerator Death(){
+        shadow.SetActive(false);
+        float elapsedTime = 0f;
+        Renderer enemyRenderer = GetComponent<Renderer>();
+        enemyRenderer.material = dissolveMat;
+
+        while (elapsedTime < dissolveDuration)
+        {
+            float fadeValue = Mathf.Lerp(1f, 0f, elapsedTime / dissolveDuration);
+            enemyRenderer.material.SetFloat("_Fade", fadeValue);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure fade value is fully 0 and revert material
+        enemyRenderer.material.SetFloat("_Fade", 0f);
     }
 
     IEnumerator Move(GameObject player)

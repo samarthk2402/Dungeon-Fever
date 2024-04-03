@@ -39,7 +39,7 @@ public class Attack : MonoBehaviour
     public bool turn;
     public bool turnCompleted = false;
 
-    private Vector3 originalPosition;
+    public Vector3 originalPosition;
     public GameObject player;
 
     private Animator anim;

@@ -151,7 +151,7 @@ public class ManageGameStat : MonoBehaviour
                         prevRareEnemy = false;
                         prevSuperRareEnemy = false;
                     }
-                    Destroy(enemies[i].gameObject);
+                    Destroy(enemies[i].gameObject, 2);
                     StartCoroutine(ItemDrop());
                     enemies.RemoveAt(i);
                     Destroy(enemyHealthTexts[i]);
@@ -390,7 +390,7 @@ public class ManageGameStat : MonoBehaviour
         GameObject item = Instantiate(itemPrefab, prevEnemyPos, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand].sprite;
-        item.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos)*1.5f, ForceMode2D.Impulse);
+        item.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos)*2f, ForceMode2D.Impulse);
 
         GameObject nameText = item.transform.Find("Canvas/Name").gameObject;
         GameObject levelText = item.transform.Find("Canvas/Level").gameObject;
@@ -439,7 +439,7 @@ public class ManageGameStat : MonoBehaviour
         }
 
         //yield return new WaitForSeconds(1);
-        xpDestination = currChar.transform.position;
+        xpDestination = currChar.GetComponent<Attack>().originalPosition;
         for(int i = 0; i<xpToDrop; i++){
             //Debug.Log(i);
             Invoke("InstantiateXPSoul", i*1f/xpToDrop);
@@ -474,14 +474,14 @@ public class ManageGameStat : MonoBehaviour
     void InstantiateCoin(){
         //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, prevEnemyPos, Quaternion.identity);
-        coin.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos + new Vector3(0, 1, 0))*Random.Range(0.5f, 0.7f), ForceMode2D.Impulse);
+        coin.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos + new Vector3(0, 1, 0))*Random.Range(1.5f, 1.8f), ForceMode2D.Impulse);
         StartCoroutine(LerpObject(1.5f, coin.transform, goldDestination, 1f, true, coin));
     }
 
     void InstantiateXPSoul(){
         //Debug.Log("Instantiating coin");
         GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
-        StartCoroutine(LerpObject(0, soul.transform, currChar.transform.position, 0.8f, false, soul));
+        StartCoroutine(LerpObject(0, soul.transform, xpDestination, 0.8f, false, soul));
     }
 
     IEnumerator LerpObject(float delay, Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin, GameObject obj)
@@ -509,7 +509,7 @@ public class ManageGameStat : MonoBehaviour
                 // Use Lerp with noise to create a random flight path
                 Vector3 newPosition = Vector3.Lerp(straightPosition, endingPosition + noiseOffset, t);
 
-                startTransform.position = straightPosition+noiseOffset;
+                startTransform.position = straightPosition + noiseOffset;
             }
 
             elapsedTime += Time.deltaTime;
