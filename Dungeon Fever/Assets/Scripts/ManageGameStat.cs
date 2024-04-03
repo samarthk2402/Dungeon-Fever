@@ -13,7 +13,7 @@ public class ManageGameStat : MonoBehaviour
     public GameObject characterPrefab;
     public Vector3 prevEnemyPos;
 
-    public List<Sprite> items = new List<Sprite>();
+    public List<Item> items = new List<Item>();
     public GameObject itemPrefab;
 
     public Animator transitionAnim;
@@ -137,7 +137,7 @@ public class ManageGameStat : MonoBehaviour
                 {
                     // Remove the destroyed GameObject from the list
                     prevEnemyPos = enemies[i].transform.position;
-                    floor.transform.position = enemies[i].transform.position + new Vector3(0, -1.5f, 0);
+                    floor.transform.position = enemies[i].transform.position + new Vector3(0, -1f, 0);
                     if(enemies[i].GetComponent<EnemyAttack>().superRare){
                         prevSuperRareEnemy = true;
                         prevRareEnemy = false;
@@ -381,8 +381,14 @@ public class ManageGameStat : MonoBehaviour
         lootFinished = false;
         GameObject item = Instantiate(itemPrefab, prevEnemyPos, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
-        item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand];
+        item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand].sprite;
         item.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos)*1.5f, ForceMode2D.Impulse);
+
+        GameObject nameText = item.transform.Find("Canvas/Name").gameObject;
+        GameObject levelText = item.transform.Find("Canvas/Level").gameObject;
+
+        nameText.GetComponent<TMP_Text>().text = items[rand].name;
+        levelText.GetComponent<TMP_Text>().text = "Lvl "+items[rand].level.ToString();
 
         int randColour;
         if(prevSuperRareEnemy){

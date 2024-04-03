@@ -1075,27 +1075,18 @@ MonoBehaviour:
   characterPrefab: {fileID: 0}
   prevEnemyPos: {x: 0, y: 0, z: 0}
   items:
-  - {fileID: 21300000, guid: 16bb386b859ad50458d2a839b8352902, type: 3}
-  - {fileID: 21300000, guid: 550acbd83c59abf4e90c89f7c8036a8a, type: 3}
-  - {fileID: 21300000, guid: 09b9229a90c87f24a8d048631719a710, type: 3}
-  - {fileID: 21300000, guid: 2fc0b342a1e09e64191f40334c0f7a3e, type: 3}
-  - {fileID: 21300000, guid: bfa5d80393f1235459e40fd48d11deb2, type: 3}
-  - {fileID: 21300000, guid: b1da91f4b097d364d805065ad1b91f5c, type: 3}
-  - {fileID: 21300000, guid: e6ff0bfcf3782744db1a04564034e3ce, type: 3}
-  - {fileID: 21300000, guid: 04958a677bd575940b9b83c070f4ce98, type: 3}
-  - {fileID: 21300000, guid: 96eeabd7f283086439ffe375bf05fe54, type: 3}
-  - {fileID: 21300000, guid: 18a7cfbb88647684894e7d656c1266a8, type: 3}
-  - {fileID: 21300000, guid: 2a53ffad0bcde88438f291d874d06a6f, type: 3}
-  - {fileID: 21300000, guid: 00c00f310948db8459a0f1fab33503e0, type: 3}
-  - {fileID: 21300000, guid: 00c00f310948db8459a0f1fab33503e0, type: 3}
-  - {fileID: 21300000, guid: f8ed6cedb528c96458b2e0f2bf0b101a, type: 3}
-  - {fileID: 21300000, guid: 25148f5981a6eb74da21f90de1e5bf3d, type: 3}
-  - {fileID: 21300000, guid: d0d899eaf6bd4c1479ec472876f10bb0, type: 3}
-  - {fileID: 21300000, guid: b74e5f142d8ed014ab33fa52d6ac94d7, type: 3}
-  - {fileID: 21300000, guid: 169d17e9d9d77cc4096cec9cc6253c6a, type: 3}
-  - {fileID: 21300000, guid: 4c9d0a98864440c4889ee2c4cc61cc07, type: 3}
-  - {fileID: 21300000, guid: c5efa37332b4e944ea5f9e3622c450a0, type: 3}
-  - {fileID: 21300000, guid: 21dcecbd13c33ef48b3ca674ef599ff9, type: 3}
+  - {fileID: 11400000, guid: b2a7ea23ea865304b88c45beaacb1cb0, type: 2}
+  - {fileID: 11400000, guid: 3b5ebb11f5bd3b34b95f52d6cb08adb1, type: 2}
+  - {fileID: 11400000, guid: b1ea0a7b83e434b4bbcff5fe04e33199, type: 2}
+  - {fileID: 11400000, guid: 7aa5853e35b3e6949b6bb8668be4705b, type: 2}
+  - {fileID: 11400000, guid: 77b3cd910389db44c91dbf96ebee6eec, type: 2}
+  - {fileID: 11400000, guid: b659480ce0bbca643b46d00cd6587f9c, type: 2}
+  - {fileID: 11400000, guid: a421b15db27c00342a08717d2081ad90, type: 2}
+  - {fileID: 11400000, guid: 82d7758a56a03df4887424529a9d889c, type: 2}
+  - {fileID: 11400000, guid: 3c5e3b3614940ee40b47bbcdd53d529d, type: 2}
+  - {fileID: 11400000, guid: 723b03769e7132b4c8c81ec17455c38b, type: 2}
+  - {fileID: 11400000, guid: dade021cb2de992489a5a23143609f59, type: 2}
+  - {fileID: 11400000, guid: bfe72bbf90a181a4db80f0275659300c, type: 2}
   itemPrefab: {fileID: 4418064543238339904, guid: 0b18822fa0f021e4d81ca3f57c9e4acb, type: 3}
   transitionAnim: {fileID: 994144672}
   healthText: {fileID: 7914421860480046568, guid: f956e39754673314caa31bd5c124e6fa, type: 3}
