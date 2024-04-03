@@ -22,6 +22,8 @@ public class Attack : MonoBehaviour
     private GameObject damageEffect;
     [SerializeField]
     private GameObject slashEffect;
+    [SerializeField]
+    private GameObject critSlashEffect;
 
     public int health;
     public int energy;
@@ -60,6 +62,7 @@ public class Attack : MonoBehaviour
     public bool clicked = false;
 
     public Option option;
+    public bool selected;
 
 
     // Start is called before the first frame update
@@ -111,6 +114,7 @@ public class Attack : MonoBehaviour
                     // Check if the ray hits any collider on the target layer
                     if (hit.collider != null)
                     {
+                        selected = true;
                         //turn = false;
                         // If the ray hits a collider on the target layer, do something
                         GameObject clickedObject = hit.collider.gameObject;
@@ -170,10 +174,6 @@ public class Attack : MonoBehaviour
         inst.GetComponentInChildren<textFloat>().colour = Color.white;
         Destroy(inst, 2);
 
-        GameObject slash;
-        slash = Instantiate(slashEffect, enemy.transform.position+new Vector3(0, -0.6f, 0), Quaternion.identity);
-        Destroy(slash, 0.3f);
-
         GameObject ps = Instantiate(damageEffect, enemy.transform.position + new Vector3(0, -(sb.size.y/2), 0), Quaternion.Euler(-90, 0, 0));
         Destroy(ps, ps.GetComponent<ParticleSystem>().main.duration);
 
@@ -184,6 +184,15 @@ public class Attack : MonoBehaviour
         switch(option){
             case Option.Attack:
                 d = (character.strength + w.damage) * Crit(enemy);
+                if(d>(character.strength + w.damage)){
+                    GameObject slash;
+                    slash = Instantiate(critSlashEffect, enemy.transform.position, Quaternion.identity);
+                    Destroy(slash, 0.3f);
+                }else{
+                    GameObject slash;
+                    slash = Instantiate(slashEffect, enemy.transform.position, Quaternion.identity);
+                    Destroy(slash, 0.3f);
+                }
                 inst.GetComponentInChildren<textFloat>().damage = d.ToString();
                 enemy.GetComponent<EnemyAttack>().health -= d;
                 break;

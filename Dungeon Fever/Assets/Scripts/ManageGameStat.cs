@@ -55,6 +55,7 @@ public class ManageGameStat : MonoBehaviour
     public GameObject attackButton;
     public GameObject abilityButton;
     public GameObject options;
+    private OptionsManager om;
 
     private Vector3 goldDestination;
     private Vector3 xpDestination;
@@ -73,6 +74,7 @@ public class ManageGameStat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        om = options.GetComponent<OptionsManager>();
         attackButton.SetActive(false);
         abilityButton.SetActive(false);
         gold = 0;
@@ -124,6 +126,7 @@ public class ManageGameStat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        om.player = currChar;
         attackButton.GetComponent<AttackButton>().player = currChar;
         abilityButton.GetComponent<AttackButton>().player = currChar;
         goldText.text = gold.ToString();
@@ -250,11 +253,11 @@ public class ManageGameStat : MonoBehaviour
         switch(gameState){
             case State.Player:
                 //if more than 0 players set current character to current character index
-                if(characters!=null){
+                if(characters!=null && characters.Count>0){
                     currChar = characters[currentCharIndex];
                 }
 
-                if(enemies.Count>0){
+                if(enemies.Count>0 && !currChar.GetComponent<Attack>().selected){
                     attackButton.SetActive(true);
                     abilityButton.SetActive(true);
                 }
@@ -266,6 +269,7 @@ public class ManageGameStat : MonoBehaviour
                             currChar.GetComponent<Attack>().turn = false;
                             currChar.GetComponent<Attack>().turnCompleted = false;
                             currChar.GetComponent<Attack>().clicked = false;
+                            currChar.GetComponent<Attack>().selected = false;
                             //Move onto next character
                             currentCharIndex += 1;
                             //Check if looped through all players
@@ -292,6 +296,9 @@ public class ManageGameStat : MonoBehaviour
                                     SceneManager.LoadScene(2);
                                 }else{
                                     currentCharIndex = 0;
+                                    foreach(GameObject character in characters){
+                                        character.GetComponent<Attack>().selected = false;
+                                    }
                                     StartCoroutine(NewStage());
                                 }
                             }
@@ -334,6 +341,7 @@ public class ManageGameStat : MonoBehaviour
                             foreach(GameObject character in characters){
                                 character.GetComponent<Attack>().option = Attack.Option.Attack;
                                 character.GetComponent<Attack>().clicked = false;
+                                character.GetComponent<Attack>().selected = false;
                             }
                             currentEnemyIndex = 0;
                             currentCharIndex = 0;

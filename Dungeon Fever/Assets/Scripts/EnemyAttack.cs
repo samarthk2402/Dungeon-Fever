@@ -190,7 +190,7 @@ public class EnemyAttack : MonoBehaviour
             }
 
             GameObject slash;
-            slash = Instantiate(slashEffect, player.transform.position+new Vector3(0, -0.6f, 0), Quaternion.identity);
+            slash = Instantiate(slashEffect, player.transform.position, Quaternion.identity);
             Vector3 currentScale = slash.transform.localScale;
 
             // Invert the X scale to flip horizontally

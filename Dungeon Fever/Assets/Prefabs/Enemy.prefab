@@ -105,7 +105,7 @@ MonoBehaviour:
   moveDistance: 2
   damageText: {fileID: 6244607821728056572, guid: bb9a71bc54bf680489b083820973b04a, type: 3}
   damageEffect: {fileID: 5659210261868204388, guid: 64ca95935877a3a4487dad7927a85a5e, type: 3}
-  slashEffect: {fileID: 6829016395827397634, guid: dfaf4f795a4d5d34e897718b324c912b, type: 3}
+  slashEffect: {fileID: 1131752910985358294, guid: 7d166e4d29c3d974f9ba38e9aebfbd97, type: 3}
   canvas: {fileID: 0}
   enemy: {fileID: 11400000, guid: ca5dab6788456534581eb0490b9b9ed4, type: 2}
   shadow: {fileID: 7388308614861166097}
