@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class ManageGameStat : MonoBehaviour
 {
     public List<Gradient> rarityColours = new List<Gradient>();
     public Timer timer;
     public List<Enemy> enemyTypes = new List<Enemy>();
+    public List<Enemy> bossTypes = new List<Enemy>();
     public GameObject enemyPrefab;
     public GameObject characterPrefab;
     public Vector3 prevEnemyPos;
@@ -86,7 +86,7 @@ public class ManageGameStat : MonoBehaviour
         gameState = State.Player;
         currChar.GetComponent<Attack>().turn = true;
 
-        InstantiateEnemy(enemyPositions[1]);
+        InstantiateEnemy(enemyPositions[1], false);
 
         // foreach(Vector3 pos in enemyPositions){
         //     InstantiateEnemy(pos);
@@ -282,25 +282,18 @@ public class ManageGameStat : MonoBehaviour
                                     currentCharIndex = 0;
                                     gameState = State.Enemy;
                                 }else{
-                                    if(stage>=9){
-                                        SceneManager.LoadScene(2);
-                                    }else{
-                                        currentCharIndex = 0;
-                                        StartCoroutine(NewStage());
-                                    }
+                                    currentCharIndex = 0;
+                                    StartCoroutine(NewStage());
                                 }
                             }
 
                             if(enemies.Count<=0){
-                                if(stage>=9){
-                                    SceneManager.LoadScene(2);
-                                }else{
+
                                     currentCharIndex = 0;
                                     foreach(GameObject character in characters){
                                         character.GetComponent<Attack>().selected = false;
                                     }
                                     StartCoroutine(NewStage());
-                                }
                             }
                         
                         }else{ //if turn waiting to be taken...
@@ -356,19 +349,24 @@ public class ManageGameStat : MonoBehaviour
         }
     }
 
-    public void InstantiateEnemy(Vector3 pos){
-        int rand = Random.Range(0, enemyTypes.Count);
+    public void InstantiateEnemy(Vector3 pos, bool isBoss){
         GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
         enemies.Add(enemy);
         enemy.GetComponent<EnemyAttack>().canvas = canvas;
-        enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
+        if(isBoss){
+            int rand = Random.Range(0, bossTypes.Count);
+            enemy.GetComponent<EnemyAttack>().enemy = bossTypes[rand];
+        }else{
+            int rand = Random.Range(0, enemyTypes.Count);
+            enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
+        }
 
-        rand = Random.Range(0, 100);     
+        int chance = Random.Range(0, 100);     
 
-        if(rand<=superRareEnemyChance){
+        if(chance<=superRareEnemyChance){
             enemy.GetComponent<EnemyAttack>().superRare = true;
 
-        }else if(rand<=rareEnemyChance){
+        }else if(chance<=rareEnemyChance){
             enemy.GetComponent<EnemyAttack>().rare = true;
 
         }else{

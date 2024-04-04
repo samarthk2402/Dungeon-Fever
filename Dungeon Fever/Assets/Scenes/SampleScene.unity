@@ -928,6 +928,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca5dab6788456534581eb0490b9b9ed4, type: 2}
   - {fileID: 11400000, guid: 1cc0114040c1b78418e90e0661e8162a, type: 2}
   - {fileID: 11400000, guid: d01a718bcf01f834295539ee0e825586, type: 2}
+  bossTypes:
+  - {fileID: 11400000, guid: 4585432de9302724396206a82d1447a9, type: 2}
+  - {fileID: 11400000, guid: 0e04fc36b0669fd4da0fe833c5e8b671, type: 2}
   enemyPrefab: {fileID: 5860348554480985717, guid: 50d731383b08aa34fb45f20c627785c0, type: 3}
   characterPrefab: {fileID: 0}
   prevEnemyPos: {x: 0, y: 0, z: 0}
@@ -950,7 +953,7 @@ MonoBehaviour:
   energyText: {fileID: 2503877654054072417, guid: d6571df9ec5fca8489f5acaebfdb1f17, type: 3}
   levelText: {fileID: 5506966764116795792, guid: dffd2d6f76b916f489a8c4ba618b919a, type: 3}
   stageText: {fileID: 1017966477}
-  stage: 1
+  stage: 9
   goldToDrop: 5
   goldText: {fileID: 1717927953}
   goldIcon: {fileID: 149622373}
@@ -1390,7 +1393,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

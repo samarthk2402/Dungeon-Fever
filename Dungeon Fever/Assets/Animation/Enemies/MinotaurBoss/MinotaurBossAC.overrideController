@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MinotaurBossAC
+  m_Controller: {fileID: 9100000, guid: 7ebde995229f62d46993f2d98320f2df, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e67688657aacc3b4ba51d9f03f81500b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7fe04cc0e056a0d4791bcc6a02fdeb66, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ca89d83803cbd4844aae4ab24c697135, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 95d74e3f237968c4d9dda89bde3c8d45, type: 2}
