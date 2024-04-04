@@ -27,9 +27,9 @@ public class newStage : MonoBehaviour
             gsScript.InstantiateEnemy(gsScript.enemyPositions[0], false);
             gsScript.InstantiateEnemy(gsScript.enemyPositions[1], false);
             gsScript.InstantiateEnemy(gsScript.enemyPositions[2], false);
-        }else if(stage == 10){
+        }else if(stage <= 10){
             gsScript.InstantiateEnemy(gsScript.enemyPositions[1], true);
-        }else if(stage >= 11){
+        }else{
             SceneManager.LoadScene(2);
         }
     }

@@ -285,15 +285,15 @@ public class ManageGameStat : MonoBehaviour
                                     currentCharIndex = 0;
                                     StartCoroutine(NewStage());
                                 }
-                            }
+                            }else{
+                                if(enemies.Count<=0){
 
-                            if(enemies.Count<=0){
-
-                                    currentCharIndex = 0;
-                                    foreach(GameObject character in characters){
-                                        character.GetComponent<Attack>().selected = false;
-                                    }
-                                    StartCoroutine(NewStage());
+                                        currentCharIndex = 0;
+                                        foreach(GameObject character in characters){
+                                            character.GetComponent<Attack>().selected = false;
+                                        }
+                                        StartCoroutine(NewStage());
+                                }
                             }
                         
                         }else{ //if turn waiting to be taken...

@@ -194,6 +194,8 @@ public class EnemyAttack : MonoBehaviour
 
             GameObject inst = Instantiate(damageText, player.transform.position+new Vector3(0, 1, 0), Quaternion.identity);
             inst.transform.SetParent(canvas.transform, false);
+
+            GetComponent<AudioSource>().Play();
             
             if(rare){
                 inst.GetComponentInChildren<textFloat>().damage = Mathf.RoundToInt(enemy.damage*1.5f).ToString();

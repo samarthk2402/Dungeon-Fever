@@ -183,6 +183,7 @@ public class Attack : MonoBehaviour
 
         switch(option){
             case Option.Attack:
+                weapon.GetComponent<AudioSource>().Play();
                 d = (character.strength + w.damage) * Crit(enemy);
                 if(d>(character.strength + w.damage)){
                     GameObject slash;
