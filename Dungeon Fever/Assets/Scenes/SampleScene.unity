@@ -921,6 +921,13 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  rarityNames:
+  - Common
+  - Uncommon
+  - Rare
+  - Epic
+  - Legendary
+  - Super Legendary
   timer: {fileID: 766900782}
   enemyTypes:
   - {fileID: 11400000, guid: f066a75252171224b8944cf2df1f68a2, type: 2}

@@ -6,6 +6,7 @@ using TMPro;
 public class ManageGameStat : MonoBehaviour
 {
     public List<Gradient> rarityColours = new List<Gradient>();
+    public List<string> rarityNames = new List<string>();
     public Timer timer;
     public List<Enemy> enemyTypes = new List<Enemy>();
     public List<Enemy> bossTypes = new List<Enemy>();
@@ -392,6 +393,7 @@ public class ManageGameStat : MonoBehaviour
 
         GameObject nameText = item.transform.Find("Canvas/Name").gameObject;
         GameObject levelText = item.transform.Find("Canvas/Level").gameObject;
+        GameObject rarityText = item.transform.Find("Canvas/Rarity").gameObject;
 
         nameText.GetComponent<TMP_Text>().text = items[rand].name;
         levelText.GetComponent<TMP_Text>().text = "Lvl "+items[rand].level.ToString();
@@ -410,6 +412,8 @@ public class ManageGameStat : MonoBehaviour
             goldToDrop = 5;
             xpToDrop = 15;
         }
+
+        rarityText.GetComponent<TMP_Text>().text = rarityNames[randColour];
 
         Material material = item.GetComponentInChildren<SpriteRenderer>().material;
         //Debug.Log(material);
