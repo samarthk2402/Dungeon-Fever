@@ -26,11 +26,16 @@ public class ManageGameStat : MonoBehaviour
 
     public int stage;
     public int goldToDrop;
+    public int crystalsToDrop;
     private int gold;
+    private int crystals;
     public TMP_Text goldText;
     public GameObject goldIcon;
+    public TMP_Text crystalText;
+    public GameObject crystalIcon;
     public GameObject goldCoinPrefab;
     public GameObject xpPrefab;
+    public GameObject crystalPrefab;
     public int xpToDrop;
     public int rareEnemyChance;
     public int superRareEnemyChance;
@@ -40,6 +45,7 @@ public class ManageGameStat : MonoBehaviour
 
     [SerializeField] private Canvas canvas;
     [SerializeField] private RectTransform goldCounter;
+    [SerializeField] private RectTransform crystalCounter;
 
     public List<Vector3> enemyPositions = new List<Vector3>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -59,6 +65,7 @@ public class ManageGameStat : MonoBehaviour
     private OptionsManager om;
 
     private Vector3 goldDestination;
+    private Vector3 crystalDestination;
     private Vector3 xpDestination;
     public bool lootFinished = true;
 
@@ -111,16 +118,23 @@ public class ManageGameStat : MonoBehaviour
         }
 
         // Get the position of the UI element in screen space
-        Vector3 screenPosition = goldCounter.position;
+        Vector3 goldScreenPosition = goldCounter.position;
 
         // Convert screen space position to world space
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-        goldDestination = worldPosition;
+        Vector3 goldWorldPosition = Camera.main.ScreenToWorldPoint(goldScreenPosition);
+        goldDestination = goldWorldPosition;
+
+        // Get the position of the UI element in screen space
+        Vector3 crystalScreenPosition = crystalCounter.position;
+
+        // Convert screen space position to world space
+        Vector3 crystalWorldPosition = Camera.main.ScreenToWorldPoint(crystalScreenPosition);
+        crystalDestination = crystalWorldPosition;
 
         Vector3 optionsScreenPosition = options.transform.position;
 
         Vector3 optionsWorldPosition = Camera.main.ScreenToWorldPoint(optionsScreenPosition);
-        //Debug.Log("World space position of UI element: " + worldPosition);
+        //Debug.Log("World space position of UI element: " + goldWorldPosition);
         //Debug.Log("Local pos: " + goldIcon.transform.position);
     }
 
@@ -131,6 +145,7 @@ public class ManageGameStat : MonoBehaviour
         attackButton.GetComponent<AttackButton>().player = currChar;
         abilityButton.GetComponent<AttackButton>().player = currChar;
         goldText.text = gold.ToString();
+        crystalText.text = crystals.ToString();
         stageText.GetComponent<TMP_Text>().text = "Stage: "+stage.ToString();
 
         if(enemies!= null){
@@ -399,18 +414,24 @@ public class ManageGameStat : MonoBehaviour
         levelText.GetComponent<TMP_Text>().text = "Lvl "+items[rand].level.ToString();
 
         int randColour;
+        int randNum  = Random.Range(1, 100);
         if(prevSuperRareEnemy){
             randColour = Random.Range(rarityColours.Count-2, rarityColours.Count);
             goldToDrop = 15;
             xpToDrop = 60;
+            crystalsToDrop = 10;
         }else if(prevRareEnemy){
             randColour = Random.Range(rarityColours.Count-3, rarityColours.Count);
             goldToDrop = 10;
             xpToDrop = 30;
+            if(randNum<=75){
+                crystalsToDrop = 5;
+            }
         }else{
             randColour = Random.Range(0, rarityColours.Count-3);
             goldToDrop = 5;
             xpToDrop = 15;
+            crystalsToDrop = 0;
         }
 
         rarityText.GetComponent<TMP_Text>().text = rarityNames[randColour];
@@ -433,7 +454,10 @@ public class ManageGameStat : MonoBehaviour
             StartCoroutine(ShowBeam(item.GetComponentInChildren<LineRenderer>(), new Vector3(0, 0, 0), new Vector3(0, 0.6f, 0), 0.5f));
         }
         
-
+        for(int i = 0; i<crystalsToDrop; i++){
+            //Debug.Log(i);
+            Invoke("InstantiateCrystal", i*0.5f/goldToDrop);
+        }
 
         for(int i = 0; i<goldToDrop; i++){
             //Debug.Log(i);
@@ -479,11 +503,18 @@ public class ManageGameStat : MonoBehaviour
         stage += 1;
     }
 
+    void InstantiateCrystal(){
+        //Debug.Log("Instantiating coin");
+        GameObject coin = Instantiate(crystalPrefab, prevEnemyPos, Quaternion.identity);
+        coin.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos + new Vector3(0, 1, 0))*Random.Range(1.5f, 1.8f), ForceMode2D.Impulse);
+        StartCoroutine(LerpObject(1.5f, coin.transform, crystalDestination, 1f, false, coin, null, true));
+    }
+
     void InstantiateCoin(){
         //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, prevEnemyPos, Quaternion.identity);
         coin.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos + new Vector3(0, 1, 0))*Random.Range(1.5f, 1.8f), ForceMode2D.Impulse);
-        StartCoroutine(LerpObject(1.5f, coin.transform, goldDestination, 1f, true, coin, null));
+        StartCoroutine(LerpObject(1.5f, coin.transform, goldDestination, 1f, true, coin, null, false));
     }
 
     IEnumerator InstantiateXPSoul(Vector3 xpDestination, GameObject player){
@@ -491,15 +522,14 @@ public class ManageGameStat : MonoBehaviour
         for(int i = 0; i<(xpToDrop/characters.Count); i++){
             yield return new WaitForSeconds(1f/(xpToDrop/characters.Count));
             GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
-            StartCoroutine(LerpObject(0, soul.transform, xpDestination, 0.8f, false, soul, player));
+            StartCoroutine(LerpObject(0, soul.transform, xpDestination, 0.8f, false, soul, player, false));
         }
     }
 
-    IEnumerator LerpObject(float delay, Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin, GameObject obj, GameObject player)
+    IEnumerator LerpObject(float delay, Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin, GameObject obj, GameObject player, bool isCrystal)
     {
-        if(isCoin){
-            yield return new WaitForSeconds(delay);
-        }
+        yield return new WaitForSeconds(delay);
+
         float elapsedTime = 0f;
 
         Vector3 startingPosition = startTransform.position;
@@ -508,7 +538,7 @@ public class ManageGameStat : MonoBehaviour
         while (elapsedTime < lerpDuration)
         {
             float t = elapsedTime / lerpDuration;
-            if(isCoin){
+            if(isCoin || isCrystal){
                 startTransform.position = Vector3.Lerp(startingPosition, endingPosition, t);
             }else{
                 // Smoothstep function for smooth acceleration and deceleration
@@ -532,6 +562,9 @@ public class ManageGameStat : MonoBehaviour
         if(isCoin){
             gold += 1;
             goldIcon.GetComponent<Animator>().SetTrigger("moreGold");
+        }else if(isCrystal){
+            crystals += 1;
+            crystalIcon.GetComponent<Animator>().SetTrigger("moreGold");
         }else{
             player.GetComponent<Attack>().xp += 1;
         }
