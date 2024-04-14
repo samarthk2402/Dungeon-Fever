@@ -184,7 +184,7 @@ public class Attack : MonoBehaviour
         switch(option){
             case Option.Attack:
                 weapon.GetComponent<AudioSource>().Play();
-                d = (character.strength + w.damage) * Crit(enemy);
+                d = (character.strength + w.damage+level-1) * Crit(enemy);
                 if(d>(character.strength + w.damage)){
                     GameObject slash;
                     slash = Instantiate(critSlashEffect, enemy.transform.position, Quaternion.identity);
