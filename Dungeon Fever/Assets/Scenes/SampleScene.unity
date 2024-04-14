@@ -3368,6 +3368,10 @@ PrefabInstance:
       propertyPath: transAnim
       value: 
       objectReference: {fileID: 994144672}
+    - target: {fileID: 4465284062790446220, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: e50e56332a9aa014996ad5d792b2f91d, type: 2}
     - target: {fileID: 5692644506251738564, guid: 2a38acfb79af00d4584fd28c11e2a425, type: 3}
       propertyPath: m_Name
       value: Fighter

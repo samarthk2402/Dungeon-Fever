@@ -252,13 +252,12 @@ public class Attack : MonoBehaviour
         // Wait for a short duration before returning to the original position
         switch(option){
             case Option.Attack:
+                weaponAnim.SetBool("Idle", false);
                 anim.SetTrigger("attack");
                 weaponAnim.SetTrigger("attack");
                 break;
             case Option.Ability:
                 anim.SetTrigger("ability");
-                weapon.SetActive(false);
-                StartCoroutine(ReactivateWeapon());
                 break;
         }
 
@@ -283,10 +282,18 @@ public class Attack : MonoBehaviour
         transform.position = originalPosition;
         turnCompleted = true;
     }
+
+    void DeactivateWeapon(){
+        weapon.SetActive(false);
+    }
     
-    IEnumerator ReactivateWeapon(){
-        yield return new WaitForSeconds(0.8f);
+    void ReactivateWeapon(){
+        // yield return new WaitForSeconds(0.8f);
+        // StartCoroutine(ReactivateWeaponAfterDelay());
+        // weapon.SetActive(false);
         weapon.SetActive(true);
+        weaponAnim.SetBool("Idle", true);
+        // weaponAnim.Play(weaponAnim.GetCurrentAnimatorStateInfo(0).fullPathHash, -1, 0f);
     }
 
     public void SetAttack(){
