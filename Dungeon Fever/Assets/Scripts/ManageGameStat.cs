@@ -400,15 +400,15 @@ public class ManageGameStat : MonoBehaviour
         if(prevSuperRareEnemy){
             randColour = Random.Range(rarityColours.Count-2, rarityColours.Count);
             goldToDrop = 15;
-            xpToDrop = 30;
+            xpToDrop = 60;
         }else if(prevRareEnemy){
             randColour = Random.Range(rarityColours.Count-3, rarityColours.Count);
             goldToDrop = 10;
-            xpToDrop = 20;
+            xpToDrop = 30;
         }else{
             randColour = Random.Range(0, rarityColours.Count-3);
             goldToDrop = 5;
-            xpToDrop = 10;
+            xpToDrop = 15;
         }
 
         Material material = item.GetComponentInChildren<SpriteRenderer>().material;
@@ -437,11 +437,17 @@ public class ManageGameStat : MonoBehaviour
         }
 
         //yield return new WaitForSeconds(1);
-        xpDestination = currChar.GetComponent<Attack>().originalPosition;
-        for(int i = 0; i<xpToDrop; i++){
-            //Debug.Log(i);
-            Invoke("InstantiateXPSoul", i*1f/xpToDrop);
+
+        foreach(GameObject character in characters){
+            xpDestination = character.GetComponent<Attack>().originalPosition;
+            StartCoroutine(InstantiateXPSoul(xpDestination, character));
         }
+
+        // xpDestination = currChar.GetComponent<Attack>().originalPosition;
+        // for(int i = 0; i<(xpToDrop/3); i++){
+        //         //Debug.Log(i);
+        //         Invoke("InstantiateXPSoul", i*1f/(xpToDrop/3));
+        // }
 
         yield return new WaitForSeconds(2.8f);
         lootFinished = true;
@@ -473,16 +479,19 @@ public class ManageGameStat : MonoBehaviour
         //Debug.Log("Instantiating coin");
         GameObject coin = Instantiate(goldCoinPrefab, prevEnemyPos, Quaternion.identity);
         coin.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos + new Vector3(0, 1, 0))*Random.Range(1.5f, 1.8f), ForceMode2D.Impulse);
-        StartCoroutine(LerpObject(1.5f, coin.transform, goldDestination, 1f, true, coin));
+        StartCoroutine(LerpObject(1.5f, coin.transform, goldDestination, 1f, true, coin, null));
     }
 
-    void InstantiateXPSoul(){
+    IEnumerator InstantiateXPSoul(Vector3 xpDestination, GameObject player){
         //Debug.Log("Instantiating coin");
-        GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
-        StartCoroutine(LerpObject(0, soul.transform, xpDestination, 0.8f, false, soul));
+        for(int i = 0; i<(xpToDrop/characters.Count); i++){
+            yield return new WaitForSeconds(1f/(xpToDrop/characters.Count));
+            GameObject soul = Instantiate(xpPrefab, prevEnemyPos, Quaternion.identity);
+            StartCoroutine(LerpObject(0, soul.transform, xpDestination, 0.8f, false, soul, player));
+        }
     }
 
-    IEnumerator LerpObject(float delay, Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin, GameObject obj)
+    IEnumerator LerpObject(float delay, Transform startTransform, Vector3 endingPosition, float lerpDuration, bool isCoin, GameObject obj, GameObject player)
     {
         if(isCoin){
             yield return new WaitForSeconds(delay);
@@ -516,29 +525,11 @@ public class ManageGameStat : MonoBehaviour
             yield return null;
         }
 
-        // Ensure final position
-        // if(isCoin){
-        //     startTransform.position = endingPosition;
-        // }else{
-        //     Vector3 currPos = obj.transform.position;
-        //     elapsedTime = 0f;
-        //     while (elapsedTime < lerpDuration/4)
-        //     {
-        //         float t = elapsedTime / lerpDuration;
-        //         startTransform.position = Vector3.Lerp(currPos, endingPosition, t);
-        //         elapsedTime += Time.deltaTime;
-
-        //         //Debug.Log(startTransform.position);
-        //         yield return null;
-        //     }
-        //     startTransform.position = endingPosition;
-        // }
-
         if(isCoin){
             gold += 1;
             goldIcon.GetComponent<Animator>().SetTrigger("moreGold");
         }else{
-            currChar.GetComponent<Attack>().xp += 1;
+            player.GetComponent<Attack>().xp += 1;
         }
         
         Destroy(obj);
