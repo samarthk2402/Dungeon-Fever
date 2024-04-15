@@ -56,9 +56,11 @@ public class EnemyAttack : MonoBehaviour
     private static readonly int colour = Shader.PropertyToID("_color");
     public bool dead = false;
 
+    public string special;
     // Start is called before the first frame update
     void Start()
     {
+        special = enemy.special;
         anim = GetComponent<Animator>();
         anim.runtimeAnimatorController = enemy.animatorController;
         Renderer rend = GetComponent<Renderer>();

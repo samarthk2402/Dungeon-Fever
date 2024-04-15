@@ -935,6 +935,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca5dab6788456534581eb0490b9b9ed4, type: 2}
   - {fileID: 11400000, guid: 1cc0114040c1b78418e90e0661e8162a, type: 2}
   - {fileID: 11400000, guid: d01a718bcf01f834295539ee0e825586, type: 2}
+  specialEnemyTypes:
+  - {fileID: 11400000, guid: febc8decb65715944b9d33708f688b39, type: 2}
+  - {fileID: 11400000, guid: 755a5a3cbbbc67145b2a1ccd175db086, type: 2}
+  - {fileID: 11400000, guid: b47f824f3beaefb4890265c07eb2b50b, type: 2}
+  specialEnemyChance: 2
   bossTypes:
   - {fileID: 11400000, guid: 4585432de9302724396206a82d1447a9, type: 2}
   - {fileID: 11400000, guid: 0e04fc36b0669fd4da0fe833c5e8b671, type: 2}

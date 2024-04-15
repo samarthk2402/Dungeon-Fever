@@ -9,6 +9,8 @@ public class ManageGameStat : MonoBehaviour
     public List<string> rarityNames = new List<string>();
     public Timer timer;
     public List<Enemy> enemyTypes = new List<Enemy>();
+    public List<Enemy> specialEnemyTypes = new List<Enemy>();
+    public int specialEnemyChance = 2;
     public List<Enemy> bossTypes = new List<Enemy>();
     public GameObject enemyPrefab;
     public GameObject characterPrefab;
@@ -42,6 +44,7 @@ public class ManageGameStat : MonoBehaviour
 
     private bool prevRareEnemy;
     private bool prevSuperRareEnemy;
+    private string prevEnemySpecial;
 
     [SerializeField] private Canvas canvas;
     [SerializeField] private RectTransform goldCounter;
@@ -167,8 +170,9 @@ public class ManageGameStat : MonoBehaviour
                         prevRareEnemy = false;
                         prevSuperRareEnemy = false;
                     }
+                    prevEnemySpecial = enemies[i].GetComponent<EnemyAttack>().special;
                     Destroy(enemies[i].gameObject, 2);
-                    StartCoroutine(ItemDrop());
+                    StartCoroutine(LootDrop());
                     enemies.RemoveAt(i);
                     Destroy(enemyHealthTexts[i]);
                     enemyHealthTexts.RemoveAt(i);
@@ -373,8 +377,14 @@ public class ManageGameStat : MonoBehaviour
             int rand = Random.Range(0, bossTypes.Count);
             enemy.GetComponent<EnemyAttack>().enemy = bossTypes[rand];
         }else{
-            int rand = Random.Range(0, enemyTypes.Count);
-            enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
+            int specialChance = Random.Range(0, 100);
+            if(specialChance <= specialEnemyChance){
+                int rand = Random.Range(0, specialEnemyTypes.Count);
+                enemy.GetComponent<EnemyAttack>().enemy = specialEnemyTypes[rand];
+            }else{
+                int rand = Random.Range(0, enemyTypes.Count);
+                enemy.GetComponent<EnemyAttack>().enemy = enemyTypes[rand];
+            }
         }
 
         int chance = Random.Range(0, 100);     
@@ -399,12 +409,11 @@ public class ManageGameStat : MonoBehaviour
         //stage += 1;
     }
 
-    IEnumerator ItemDrop(){
-        lootFinished = false;
+    void ItemDrop(float itemForce){
         GameObject item = Instantiate(itemPrefab, prevEnemyPos, Quaternion.identity);
         int rand = Random.Range(0, items.Count);
         item.GetComponentInChildren<SpriteRenderer>().sprite = items[rand].sprite;
-        item.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos)*2f, ForceMode2D.Impulse);
+        item.GetComponent<Rigidbody2D>().AddForce((currChar.transform.position-prevEnemyPos)*itemForce, ForceMode2D.Impulse);
 
         GameObject nameText = item.transform.Find("Canvas/Name").gameObject;
         GameObject levelText = item.transform.Find("Canvas/Level").gameObject;
@@ -417,21 +426,10 @@ public class ManageGameStat : MonoBehaviour
         int randNum  = Random.Range(1, 100);
         if(prevSuperRareEnemy){
             randColour = Random.Range(rarityColours.Count-2, rarityColours.Count);
-            goldToDrop = 15;
-            xpToDrop = 60;
-            crystalsToDrop = 10;
         }else if(prevRareEnemy){
             randColour = Random.Range(rarityColours.Count-3, rarityColours.Count);
-            goldToDrop = 10;
-            xpToDrop = 30;
-            if(randNum<=75){
-                crystalsToDrop = 5;
-            }
         }else{
             randColour = Random.Range(0, rarityColours.Count-3);
-            goldToDrop = 5;
-            xpToDrop = 15;
-            crystalsToDrop = 0;
         }
 
         rarityText.GetComponent<TMP_Text>().text = rarityNames[randColour];
@@ -453,10 +451,53 @@ public class ManageGameStat : MonoBehaviour
         }else{
             StartCoroutine(ShowBeam(item.GetComponentInChildren<LineRenderer>(), new Vector3(0, 0, 0), new Vector3(0, 0.6f, 0), 0.5f));
         }
+
+        Destroy(item, 4);
+    }
+
+    IEnumerator LootDrop(){
+        lootFinished = false;
+
+        if(prevEnemySpecial == "equipment"){
+            for(int i=0; i<=3; i++){
+                ItemDrop(Random.Range(1f, 3f));
+            }
+        }else{
+            ItemDrop(2f);
+        }
+
+        int randNum  = Random.Range(1, 100);
+        if(prevSuperRareEnemy){
+            goldToDrop = 15;
+            xpToDrop = 60;
+            crystalsToDrop = 10;
+        }else if(prevRareEnemy){
+            goldToDrop = 10;
+            xpToDrop = 30;
+            if(randNum<=75){
+                crystalsToDrop = 5;
+            }
+        }else{
+            goldToDrop = 5;
+            xpToDrop = 15;
+            crystalsToDrop = 0;
+        }
+
+        if(prevEnemySpecial=="gold"){
+            goldToDrop *= 5;
+        }
+
+        if(prevEnemySpecial=="crystals"){
+            if(crystalsToDrop>0){
+                crystalsToDrop *= 5;
+            }else{
+                crystalsToDrop = 20;
+            }
+        }
         
         for(int i = 0; i<crystalsToDrop; i++){
             //Debug.Log(i);
-            Invoke("InstantiateCrystal", i*0.5f/goldToDrop);
+            Invoke("InstantiateCrystal", i*0.5f/crystalsToDrop);
         }
 
         for(int i = 0; i<goldToDrop; i++){
@@ -479,7 +520,6 @@ public class ManageGameStat : MonoBehaviour
 
         yield return new WaitForSeconds(2.8f);
         lootFinished = true;
-        Destroy(item, 1);
     }
 
     IEnumerator ShowBeam(LineRenderer lr, Vector3 startPos, Vector3 endPos, float duration){
